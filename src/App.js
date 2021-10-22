@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import './App.css';
-import Navbar from './components/nav/Navbar';
+import NavBar from './components/navigation/NavBar';
 
 function App() {
   return (
     <Fragment>
-      <Navbar />
+      <NavBar />
     </Fragment>
   );
 }
