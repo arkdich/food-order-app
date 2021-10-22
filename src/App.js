@@ -1,10 +1,11 @@
 import { Fragment } from 'react';
-import './App.css';
+import { GlobalStyle } from './components/global/GlobalStyle';
 import NavBar from './components/navigation/NavBar';
 
 function App() {
   return (
     <Fragment>
+      <GlobalStyle />
       <NavBar />
     </Fragment>
   );

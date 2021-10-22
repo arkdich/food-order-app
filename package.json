@@ -2,6 +2,10 @@
   "name": "food-order-app",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:arkdich/food-order-app.git"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
