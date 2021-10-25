@@ -1,15 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import CartButton from './CartButton';
-import {
-  Item,
-  Menu,
-  NavBarStyled,
-  Link,
-  Logo,
-  NavContainer,
-  LogoWrapper,
-} from './NavBar.styles';
-import logo from './../../assets/logo.png';
+import { Item, Menu, NavBarStyled, Link, NavContainer } from './NavBar.styles';
 
 export default function NavBar() {
   const location = useLocation();
@@ -19,52 +10,29 @@ export default function NavBar() {
   return (
     <NavBarStyled>
       <NavContainer>
-        <LogoWrapper>
-          <Logo src={logo} alr="Company Logo" />
-        </LogoWrapper>
         <Menu>
           <Item>
-            <Link
-              to="?filter=all"
-              activeClassName={'selected'}
-              isActive={() => filterValue === 'all'}
-            >
+            <Link to="?filter=all" isActive={() => filterValue === 'all'}>
               Все
             </Link>
           </Item>
           <Item>
-            <Link
-              to="?filter=meat"
-              activeClassName={'selected'}
-              isActive={() => filterValue === 'meat'}
-            >
+            <Link to="?filter=meat" isActive={() => filterValue === 'meat'}>
               Мясные
             </Link>
           </Item>
           <Item>
-            <Link
-              to="?filter=spicy"
-              activeClassName={'selected'}
-              isActive={() => filterValue === 'spicy'}
-            >
+            <Link to="?filter=spicy" isActive={() => filterValue === 'spicy'}>
               Острые
             </Link>
           </Item>
           <Item>
-            <Link
-              to="?filter=cheese"
-              activeClassName={'selected'}
-              isActive={() => filterValue === 'cheese'}
-            >
+            <Link to="?filter=cheese" isActive={() => filterValue === 'cheese'}>
               Сырные
             </Link>
           </Item>
           <Item>
-            <Link
-              to="?filter=veg"
-              activeClassName={'selected'}
-              isActive={() => filterValue === 'veg'}
-            >
+            <Link to="?filter=veg" isActive={() => filterValue === 'veg'}>
               Овощные
             </Link>
           </Item>

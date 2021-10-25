@@ -7,8 +7,8 @@ import {
 
 export default function CartButton() {
   return (
-    <CartButtonStyled bg={'#ff6900'}>
-      <Total>1290 Р</Total>
+    <CartButtonStyled>
+      <Total>1290 ₽</Total>
       <Divider />
       <Quantity>2</Quantity>
     </CartButtonStyled>

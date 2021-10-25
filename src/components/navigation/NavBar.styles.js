@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import colors from '../globalStyle/variables/colors';
 
 export const NavBarStyled = styled.nav`
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: #fff;
+  background-color: ${colors.secondary};
 `;
 
 export const NavContainer = styled.div`
@@ -28,9 +29,11 @@ export const Item = styled.li`
   margin: 5px;
 `;
 
-export const Link = styled(NavLink)`
+export const Link = styled(NavLink).attrs({
+  activeClassName: 'selected',
+})`
   display: block;
-  padding: 8px 10px;
+  padding: 6px 10px;
   border-radius: 15px;
   background-color: #f1f1f1;
   text-decoration: none;
@@ -44,13 +47,4 @@ export const Link = styled(NavLink)`
     background-color: #282828;
     color: #fff;
   }
-`;
-export const LogoWrapper = styled.div`
-  width: 45px;
-  height: 45px;
-  margin-right: 15px;
-`;
-
-export const Logo = styled.img`
-  width: 100%;
 `;

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { GlobalStyle } from './components/global/GlobalStyle';
+import { GlobalStyle } from './components/globalStyle/GlobalStyle';
 import NavBar from './components/navigation/NavBar';
 
 function App() {
