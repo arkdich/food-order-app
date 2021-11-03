@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../globalStyle/Button.styles';
+import Button from '../globalStyle/Button.styles';
 
 export const ProfileButtonStyled = styled(Button)`
   font-size: 1.15rem;

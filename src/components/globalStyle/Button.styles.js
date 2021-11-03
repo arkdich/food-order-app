@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import colors from './variables/colors';
 
-export const Button = styled.button`
-  padding: 6px 14px;
+const Button = styled.button`
+  padding: 8px 18px;
   border-style: none;
   border-radius: 20px;
   color: inherit;
@@ -11,3 +11,5 @@ export const Button = styled.button`
   background-color: ${colors.primary};
   cursor: pointer;
 `;
+
+export default Button;

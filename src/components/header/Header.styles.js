@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Container from '../globalStyle/Container.style';
 import colors from '../globalStyle/variables/colors';
 
 export const HeaderStyled = styled.header`
@@ -7,10 +8,8 @@ export const HeaderStyled = styled.header`
   background-color: ${colors.secondary};
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1300px;
-  margin: auto;
 `;

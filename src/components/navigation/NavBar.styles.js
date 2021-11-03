@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../globalStyle/variables/colors';
+import Container from './../globalStyle/Container.style';
 
 export const NavBarStyled = styled.nav`
   position: sticky;
@@ -9,13 +10,11 @@ export const NavBarStyled = styled.nav`
   background-color: ${colors.secondary};
 `;
 
-export const NavContainer = styled.div`
+export const NavContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
   padding: 8px 30px;
-  margin: auto;
 `;
 
 export const Menu = styled.ul`
