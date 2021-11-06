@@ -4,6 +4,7 @@ import {
   ProductsWrapperStyled,
   Title,
 } from './ProductsWrapper.styles';
+import Product from './Product';
 
 export default function ProductsWrapper() {
   const products = useSelector((state) => state.products.items);
@@ -12,7 +13,11 @@ export default function ProductsWrapper() {
   return (
     <ProductsWrapperStyled as="main">
       <Title>Все пиццы</Title>
-      <ProductsContainer></ProductsContainer>
+      <ProductsContainer>
+        {products.map((product) => (
+          <Product key={product.id} {...product} />
+        ))}
+      </ProductsContainer>
     </ProductsWrapperStyled>
   );
 }

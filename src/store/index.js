@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { producsReducer } from './productsSlice';
+import { productsReducer } from './productsSlice';
 
 export default configureStore({
   reducer: {
-    products: producsReducer,
+    products: productsReducer,
   },
 });

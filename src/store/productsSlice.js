@@ -4,11 +4,19 @@ import { pizzasRef } from './firestore';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (payload, { rejectWithValue }) => {
+  async (_payload, { rejectWithValue }) => {
     try {
       const pizzasDocs = await getDocs(pizzasRef);
 
-      return pizzasDocs.docs.map((doc) => doc.data());
+      return pizzasDocs.docs.map((doc) => {
+        const data = doc.data();
+        data.id = doc.id;
+
+        const firstIng = data.ingredients[0];
+        data.ingredients[0] = firstIng[0].toUpperCase() + firstIng.slice(1);
+
+        return data;
+      });
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -38,5 +46,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const producsReducer = productsSlice.reducer;
-export const producsActions = productsSlice.actions;
+export const productsReducer = productsSlice.reducer;
+export const productsActions = productsSlice.actions;
