@@ -5,7 +5,7 @@ import ProfileButton from './ProfileButton';
 export default function Header() {
   return (
     <HeaderStyled>
-      <HeaderContainer maxWidth="1300px">
+      <HeaderContainer maxWidth="1400px">
         <Logo />
         <ProfileButton />
       </HeaderContainer>

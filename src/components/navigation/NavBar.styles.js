@@ -2,12 +2,17 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../globalStyle/variables/colors';
 import Container from './../globalStyle/Container.style';
+import breakpoints from '../globalStyle/variables/breakpoints';
 
 export const NavBarStyled = styled.nav`
   position: sticky;
   top: 0;
   width: 100%;
   background-color: ${colors.secondary};
+
+  @media only screen and (max-width: ${breakpoints.tablet}) {
+    display: none;
+  }
 `;
 
 export const NavContainer = styled(Container)`

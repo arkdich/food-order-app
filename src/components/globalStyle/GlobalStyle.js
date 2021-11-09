@@ -13,7 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Raleway', apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     font-size: 1.1rem;
     font-weight: 400;
   }

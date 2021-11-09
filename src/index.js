@@ -4,12 +4,17 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import { StyleSheetManager } from 'styled-components';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <StyleSheetManager
+          disableVendorPrefixes={process.env.NODE_ENV === 'development'}
+        >
+          <App />
+        </StyleSheetManager>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
