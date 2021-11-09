@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from './../globalStyle/Button.styles';
 import colors from './../globalStyle/variables/colors';
 import breakpoints from '../globalStyle/variables/breakpoints';
 
@@ -32,20 +31,6 @@ export const Body = styled.div`
   flex-direction: column;
   height: 100%;
   flex: 1 1 content;
-`;
-
-export const Footer = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-`;
-
-export const Price = styled.p``;
-
-export const AddButton = styled(Button)`
-  color: #fff;
-  background-color: ${colors.brand};
 `;
 
 export const ProductStyled = styled.article`
