@@ -9,7 +9,9 @@ export const Footer = styled.footer`
   margin-top: auto;
 `;
 
-export const Price = styled.p``;
+export const Price = styled.p`
+  font-size: 1.1rem;
+`;
 
 export const AddButton = styled(Button)`
   color: #fff;

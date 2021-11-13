@@ -12,6 +12,10 @@ export const Header = styled.figure`
     width: 100%;
     margin-left: 6.5%;
   }
+
+  svg {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h2`
@@ -29,14 +33,12 @@ export const Ingredients = styled.p`
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   flex: 1 1 content;
 `;
 
 export const ProductStyled = styled.article`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 15px;
   border-radius: 10px;
   background-color: ${colors.secondary};

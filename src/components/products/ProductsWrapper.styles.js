@@ -21,7 +21,7 @@ export const Title = styled.h1`
 export const ProductsContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  align-items: flex-start;
+  align-items: stretch;
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 20px;
