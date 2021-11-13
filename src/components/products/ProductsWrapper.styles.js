@@ -18,6 +18,13 @@ export const Title = styled.h1`
   margin-bottom: 25px;
 `;
 
+export const Spinner = styled.svg`
+  margin: auto;
+  width: 60px;
+  height: 60px;
+  opacity: 0.7;
+`;
+
 export const ProductsContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
