@@ -20,6 +20,14 @@ export default function NavBar() {
     dispatch(productsActions.changeFilter(value));
   };
 
+  const scrollItemHandler = (ev) => {
+    ev.target.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    });
+  };
+
   useEffect(() => {
     if (rootMatch)
       if (!filterValue) navigate('/?filter=all', { replace: true });
@@ -31,27 +39,47 @@ export default function NavBar() {
       <NavContainer>
         <Menu>
           <Item>
-            <NavLink to="/?filter=all" matches={filterValue === 'all'}>
+            <NavLink
+              to="/?filter=all"
+              matches={filterValue === 'all'}
+              onClick={scrollItemHandler}
+            >
               Все
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/?filter=meat" matches={filterValue === 'meat'}>
+            <NavLink
+              to="/?filter=meat"
+              matches={filterValue === 'meat'}
+              onClick={scrollItemHandler}
+            >
               Мясные
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/?filter=spicy" matches={filterValue === 'spicy'}>
+            <NavLink
+              to="/?filter=spicy"
+              matches={filterValue === 'spicy'}
+              onClick={scrollItemHandler}
+            >
               Острые
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/?filter=cheese" matches={filterValue === 'cheese'}>
+            <NavLink
+              to="/?filter=cheese"
+              matches={filterValue === 'cheese'}
+              onClick={scrollItemHandler}
+            >
               Сырные
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/?filter=veg" matches={filterValue === 'veg'}>
+            <NavLink
+              to="/?filter=veg"
+              matches={filterValue === 'veg'}
+              onClick={scrollItemHandler}
+            >
               Овощные
             </NavLink>
           </Item>

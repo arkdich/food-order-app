@@ -15,5 +15,10 @@ export const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     font-size: 1.1rem;
     font-weight: 400;
+    min-height: 100vh;
+  }
+
+  a, button {
+    -webkit-tap-highlight-color: transparent;
   }
 `;

@@ -15,7 +15,8 @@ export const Title = styled.h1`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  margin-left: 8px;
 `;
 
 export const LoadingError = styled.h2`

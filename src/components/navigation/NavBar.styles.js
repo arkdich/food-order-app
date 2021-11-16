@@ -7,18 +7,23 @@ export const NavBarStyled = styled.nav`
   position: sticky;
   top: 0;
   width: 100%;
+  padding: 8px 10px;
   background-color: ${colors.secondary};
-
-  @media only screen and (max-width: ${breakpoints.tablet}) {
-    display: none;
-  }
 `;
 
 export const NavContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 30px;
+  overflow: auto;
+
+  /* hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Menu = styled.ul`

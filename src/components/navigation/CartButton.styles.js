@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '../globalStyle/Button.styles';
+import breakpoints from '../globalStyle/variables/breakpoints';
 import colors from '../globalStyle/variables/colors';
 
 export const CartButtonStyled = styled(Button)`
@@ -10,6 +11,10 @@ export const CartButtonStyled = styled(Button)`
   background-color: ${colors.brand};
   font-size: 1.3rem;
   white-space: nowrap;
+
+  @media only screen and (max-width: ${breakpoints.tablet}) {
+    display: none;
+  }
 `;
 
 export const Total = styled.span``;
