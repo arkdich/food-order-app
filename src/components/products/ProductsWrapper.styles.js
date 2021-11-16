@@ -18,6 +18,13 @@ export const Title = styled.h1`
   margin-bottom: 25px;
 `;
 
+export const LoadingError = styled.h2`
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: center;
+`;
+
 export const Spinner = styled.svg`
   margin: auto;
   width: 60px;

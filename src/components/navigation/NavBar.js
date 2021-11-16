@@ -1,19 +1,29 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import CartButton from './CartButton';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from './NavLink';
+import { productsActions } from '../../store/productsSlice';
 
 export default function NavBar() {
   const rootMatch = useMatch('/');
   const location = useLocation();
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const filterValue =
     rootMatch && new URLSearchParams(location.search).get('filter');
 
+  const changeFilterHandler = (value) => {
+    dispatch(productsActions.changeFilter(value));
+  };
+
   useEffect(() => {
-    if (rootMatch && !filterValue) navigate('/?filter=all', { replace: true });
+    if (rootMatch)
+      if (!filterValue) navigate('/?filter=all', { replace: true });
+      else changeFilterHandler(filterValue);
   }, [filterValue]);
 
   return (

@@ -29,8 +29,13 @@ const productsSlice = createSlice({
     items: [],
     status: 'idle',
     error: null,
+    filter: 'all',
   },
-  reducers: {},
+  reducers: {
+    changeFilter(state, action) {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: {
     [fetchProducts.pending]: (state) => {
       state.status = 'loading';
@@ -42,6 +47,8 @@ const productsSlice = createSlice({
     [fetchProducts.rejected]: (state, action) => {
       state.status = 'error';
       state.error = action.payload;
+
+      console.log(action.payload);
     },
   },
 });
