@@ -1,13 +1,11 @@
-import { Fragment } from 'react';
-import { GlobalStyle } from './components/globalStyle/GlobalStyle';
-import NavBar from './components/navigation/NavBar';
-import Header from './components/header/Header';
-import ProductsWrapper from './components/products/ProductsWrapper';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchProducts } from './store/productsSlice';
+import { Route, Routes } from 'react-router';
+import GlobalLayout from './components/globalLayout/GlobalLayout';
+import ProductsWrapper from './components/products/ProductsWrapper';
 
-function App() {
+export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,13 +13,12 @@ function App() {
   }, []);
 
   return (
-    <Fragment>
-      <GlobalStyle />
-      <Header />
-      <NavBar />
-      <ProductsWrapper />
-    </Fragment>
+    <Routes>
+      <Route path="/" element={<GlobalLayout />}>
+        <Route index element={<ProductsWrapper />} />
+        <Route path="cart" element={<p>Cart Placeholder</p>} />
+        <Route path="profile" element={<p>Profile Placeholder</p>} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;

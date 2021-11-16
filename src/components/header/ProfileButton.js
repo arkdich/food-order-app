@@ -1,5 +1,15 @@
 import { ProfileButtonStyled } from './ProfileButton.styles';
+import { useNavigate } from 'react-router';
 
 export default function ProfileButton() {
-  return <ProfileButtonStyled>Войти</ProfileButtonStyled>;
+  const navigate = useNavigate();
+
+  const profileClickHandler = () => {
+    navigate('/profile', { replace: true });
+  };
+  return (
+    <ProfileButtonStyled onClick={profileClickHandler}>
+      Войти
+    </ProfileButtonStyled>
+  );
 }

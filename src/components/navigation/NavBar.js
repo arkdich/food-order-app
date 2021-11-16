@@ -1,40 +1,49 @@
-import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import CartButton from './CartButton';
-import { Item, Menu, NavBarStyled, Link, NavContainer } from './NavBar.styles';
+import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
+import NavLink from './NavLink';
 
 export default function NavBar() {
+  const rootMatch = useMatch('/');
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const filterValue = new URLSearchParams(location.search).get('filter');
+  const filterValue =
+    rootMatch && new URLSearchParams(location.search).get('filter');
+
+  useEffect(() => {
+    if (rootMatch && !filterValue) navigate('/?filter=all', { replace: true });
+  }, [filterValue]);
 
   return (
     <NavBarStyled>
       <NavContainer>
         <Menu>
           <Item>
-            <Link to="?filter=all" isActive={() => filterValue === 'all'}>
+            <NavLink to="/?filter=all" matches={filterValue === 'all'}>
               Все
-            </Link>
+            </NavLink>
           </Item>
           <Item>
-            <Link to="?filter=meat" isActive={() => filterValue === 'meat'}>
+            <NavLink to="/?filter=meat" matches={filterValue === 'meat'}>
               Мясные
-            </Link>
+            </NavLink>
           </Item>
           <Item>
-            <Link to="?filter=spicy" isActive={() => filterValue === 'spicy'}>
+            <NavLink to="/?filter=spicy" matches={filterValue === 'spicy'}>
               Острые
-            </Link>
+            </NavLink>
           </Item>
           <Item>
-            <Link to="?filter=cheese" isActive={() => filterValue === 'cheese'}>
+            <NavLink to="/?filter=cheese" matches={filterValue === 'cheese'}>
               Сырные
-            </Link>
+            </NavLink>
           </Item>
           <Item>
-            <Link to="?filter=veg" isActive={() => filterValue === 'veg'}>
+            <NavLink to="/?filter=veg" matches={filterValue === 'veg'}>
               Овощные
-            </Link>
+            </NavLink>
           </Item>
         </Menu>
         <CartButton />

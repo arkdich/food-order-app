@@ -3,7 +3,9 @@ import { Fragment, useRef, useState, useEffect } from 'react';
 import breakpoints from '../globalStyle/variables/breakpoints';
 import PropTypes from 'prop-types';
 
-export default function ProductFooter({ price }) {
+export default function ProductFooter(props) {
+  const { price } = props;
+
   const media = useRef(
     window.matchMedia(`only screen and (max-width: ${breakpoints.tablet})`)
   );
