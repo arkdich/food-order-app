@@ -2,12 +2,11 @@ import { useSelector } from 'react-redux';
 import {
   LoadingError,
   ProductsContainer,
-  ProductsWrapperStyled,
   Spinner,
-  Title,
 } from './ProductsWrapper.styles';
 import Product from './Product';
 import { ReactComponent as LoadingSpinner } from './../../assets/spinner.svg';
+import { Section, Title } from '../globalStyle/Section.styles';
 
 export default function ProductsWrapper() {
   const products = useSelector((state) => state.products.items);
@@ -15,7 +14,7 @@ export default function ProductsWrapper() {
   const filter = useSelector((state) => state.products.filter);
 
   return (
-    <ProductsWrapperStyled as="main">
+    <Section as="main">
       <Title>Все пиццы</Title>
       {status === 'loading' && <Spinner as={LoadingSpinner} />}
       {status === 'error' && (
@@ -31,6 +30,6 @@ export default function ProductsWrapper() {
           ))}
         </ProductsContainer>
       )}
-    </ProductsWrapperStyled>
+    </Section>
   );
 }
