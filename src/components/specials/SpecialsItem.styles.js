@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 export const SpecialsItemStyled = styled.article`
   flex: 0 0 220px;
@@ -19,6 +19,8 @@ export const ImgWrapper = styled.figure`
   height: 80px;
   overflow: hidden;
 
+  ${({ loaded }) => !loaded && PlaceholderBG}
+
   img {
     width: 100%;
     margin-left: 4px;
@@ -32,9 +34,46 @@ export const Title = styled.h3`
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 3px;
+
+  ${({ loaded }) => !loaded && PlaceholderBG}
+  ${({ loaded }) =>
+    !loaded && {
+      width: '108px',
+      height: '20px',
+    }}
 `;
 
 export const Price = styled.p`
   font-size: 0.9rem;
   font-weight: 600;
+
+  ${({ loaded }) => !loaded && PlaceholderBG}
+  ${({ loaded }) =>
+    !loaded && {
+      width: '80px',
+      height: '20px',
+    }}
+`;
+
+const PlaceholderAnim = keyframes`
+  0% {
+      background-position: 50% 0;
+    }
+    
+    100% {
+        background-position: -150% 0;
+    }
+`;
+
+const PlaceholderBG = css`
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #f5f5f5 5%,
+    #eeeeee 20%,
+    #eeeeee 30%,
+    #f5f5f5 45%
+  );
+  background-size: 200% 100%;
+  animation: ${PlaceholderAnim} 1.2s linear infinite;
 `;

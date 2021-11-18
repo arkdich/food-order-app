@@ -8,16 +8,16 @@ import {
 } from './SpecialsItem.styles';
 
 export default function SpecialsItem(props) {
-  const { img, title, price } = props;
+  const { img, title, price, loaded } = props;
 
   return (
     <SpecialsItemStyled>
-      <ImgWrapper>
-        <img src={img} alt="A picture of a pizza" />
+      <ImgWrapper loaded={loaded}>
+        {loaded && <img src={img} alt="A picture of a pizza" />}
       </ImgWrapper>
       <InfoContainer>
-        <Title>{title}</Title>
-        <Price>от {price} ₽</Price>
+        <Title loaded={loaded}>{loaded && title}</Title>
+        <Price loaded={loaded}>{loaded && `от ${price} ₽`} </Price>
       </InfoContainer>
     </SpecialsItemStyled>
   );
@@ -27,4 +27,5 @@ SpecialsItem.propTypes = {
   img: PropTypes.string,
   title: PropTypes.string,
   price: PropTypes.number,
+  loaded: PropTypes.bool,
 };
