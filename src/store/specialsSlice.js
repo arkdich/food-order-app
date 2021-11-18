@@ -18,7 +18,7 @@ export const fetchSpecials = createAsyncThunk(
 const specialsSlice = createSlice({
   name: 'specials',
   initialState: {
-    items: {},
+    item: {},
     status: 'idle',
     error: null,
   },
@@ -29,7 +29,7 @@ const specialsSlice = createSlice({
     },
     [fetchSpecials.fulfilled]: (state, action) => {
       state.status = 'success';
-      state.items = action.payload;
+      state.item = action.payload;
     },
     [fetchSpecials.rejected]: (state, action) => {
       state.status = 'error';
