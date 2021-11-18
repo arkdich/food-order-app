@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import colors from '../globalStyle/variables/colors';
 import Container from './../globalStyle/Container.style';
-import breakpoints from '../globalStyle/variables/breakpoints';
 
 export const NavBarStyled = styled.nav`
   position: sticky;
+  z-index: 10;
   top: 0;
   width: 100%;
   padding: 8px 10px;

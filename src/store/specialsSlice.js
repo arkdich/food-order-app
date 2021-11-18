@@ -18,18 +18,23 @@ export const fetchSpecials = createAsyncThunk(
 const specialsSlice = createSlice({
   name: 'specials',
   initialState: {
-    item: {},
+    info: {},
+    items: [],
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setSpecialsItems(state, action) {
+      state.items = action.payload;
+    },
+  },
   extraReducers: {
     [fetchSpecials.pending]: (state) => {
       state.status = 'loading';
     },
     [fetchSpecials.fulfilled]: (state, action) => {
       state.status = 'success';
-      state.item = action.payload;
+      state.info = action.payload;
     },
     [fetchSpecials.rejected]: (state, action) => {
       state.status = 'error';

@@ -8,10 +8,11 @@ import {
 } from './SpecialsItem.styles';
 
 export default function SpecialsItem(props) {
-  const { img, title, price, loaded } = props;
+  const { img, title, price, loaded, ...rest } = props;
 
+  //   console.log(rest);
   return (
-    <SpecialsItemStyled>
+    <SpecialsItemStyled {...rest}>
       <ImgWrapper loaded={loaded}>
         {loaded && <img src={img} alt="A picture of a pizza" />}
       </ImgWrapper>
