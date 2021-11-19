@@ -10,7 +10,6 @@ export const SpecialsItemStyled = styled.article`
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0px 4px 16px -6px rgba(0, 0, 0, 0.1);
-  scroll-snap-align: start;
 `;
 
 export const ImgWrapper = styled.figure`

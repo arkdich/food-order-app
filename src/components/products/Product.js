@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { ReactComponent as Placeholder } from './../../assets/placeholder.svg';
 
 export default function Product(props) {
+  // eslint-disable-next-line no-unused-vars
   const { id, title, style, ingredients, price, img } = props;
   const [imgLoaded, setImgLoaded] = useState(false);
 

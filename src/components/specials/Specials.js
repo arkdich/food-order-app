@@ -2,11 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Section, Title } from '../globalStyle/Section.styles';
 import { SpecialsWrapper } from './Specials.styles';
 import SpecialsItem from './SpecialsItem';
-import { Button } from './Specials.styles';
-import { ReactComponent as BtnRight } from './../../assets/btnRight.svg';
-import { ReactComponent as BtnLeft } from './../../assets/btnLeft.svg';
 import { useEffect, useRef } from 'react';
 import { specialsActions } from './../../store/specialsSlice';
+import SpecialsButton from './SpecialsButton';
 
 export default function Specials() {
   const {
@@ -16,8 +14,12 @@ export default function Specials() {
   } = useSelector((state) => state.specials);
 
   const { items: products, status: productsStatus } = useSelector(
-    (state) => state.products
+    (state) => state.products,
+    (state) => state.status !== 'success'
   );
+
+  const container = useRef();
+  const currentIndex = useRef(0);
 
   const dispatch = useDispatch();
 
@@ -34,42 +36,22 @@ export default function Specials() {
     dispatch(specialsActions.setSpecialsItems(specialsItems));
   }, [allLoaded]);
 
-  const containerRef = useRef();
-  const currentIndex = useRef(0);
-  const itemsCount = specialsItems.length;
-
-  const btnClickhandler = (ev) => {
-    const btnType = ev.nativeEvent.srcElement.dataset.type;
-
-    let nextIndex =
-      btnType === 'left' ? --currentIndex.current : ++currentIndex.current;
-
-    if (nextIndex === itemsCount) nextIndex = itemsCount - 1;
-
-    if (nextIndex === -1) nextIndex = 0;
-
-    currentIndex.current = nextIndex;
-
-    const nextElement = containerRef.current.querySelector(
-      `[data-index="${nextIndex}"]`
-    );
-
-    nextElement.scrollIntoView({
-      behavior: 'smooth',
-      inline: 'start',
-      block: 'nearest',
-    });
-
-    console.log(nextElement);
-  };
-
   return (
-    <Section as="aside" style={{ position: 'relative' }}>
+    <Section as="aside" style={{ position: 'relative', overflow: 'hidden' }}>
       <Title>{allLoaded ? specialsInfo.title : 'Особые предложения'}</Title>
-      <Button align="left" data-type="left" onClick={btnClickhandler}>
-        <BtnLeft />
-      </Button>
-      <SpecialsWrapper as="section" ref={containerRef}>
+      <SpecialsButton
+        btnType="left"
+        container={container.current}
+        itemsCount={specialsItems.length}
+        currentIndex={currentIndex}
+      />
+      <SpecialsButton
+        btnType="right"
+        container={container.current}
+        itemsCount={specialsItems.length}
+        currentIndex={currentIndex}
+      />
+      <SpecialsWrapper as="section" ref={container}>
         {specialsStatus === 'loading' &&
           [0, 1, 2, 3, 4].map((i) => <SpecialsItem key={i} loaded={false} />)}
         {allLoaded &&
@@ -84,9 +66,6 @@ export default function Specials() {
             />
           ))}
       </SpecialsWrapper>
-      <Button align="right" data-type="right" onClick={btnClickhandler}>
-        <BtnRight />
-      </Button>
     </Section>
   );
 }

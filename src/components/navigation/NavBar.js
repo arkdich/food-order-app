@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import CartButton from './CartButton';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
