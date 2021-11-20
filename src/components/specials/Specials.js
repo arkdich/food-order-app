@@ -4,7 +4,7 @@ import { SpecialsWrapper } from './Specials.styles';
 import SpecialsItem from './SpecialsItem';
 import { useEffect, useRef } from 'react';
 import { specialsActions } from './../../store/specialsSlice';
-import SpecialsButton from './SpecialsButton';
+import SpecialsControls from './SpecialsControls';
 
 export default function Specials() {
   const {
@@ -19,7 +19,6 @@ export default function Specials() {
   );
 
   const container = useRef();
-  const currentIndex = useRef(0);
 
   const dispatch = useDispatch();
 
@@ -39,17 +38,9 @@ export default function Specials() {
   return (
     <Section as="aside" style={{ position: 'relative', overflow: 'hidden' }}>
       <Title>{allLoaded ? specialsInfo.title : 'Особые предложения'}</Title>
-      <SpecialsButton
-        btnType="left"
+      <SpecialsControls
         container={container.current}
         itemsCount={specialsItems.length}
-        currentIndex={currentIndex}
-      />
-      <SpecialsButton
-        btnType="right"
-        container={container.current}
-        itemsCount={specialsItems.length}
-        currentIndex={currentIndex}
       />
       <SpecialsWrapper as="section" ref={container}>
         {specialsStatus === 'loading' &&

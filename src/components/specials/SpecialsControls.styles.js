@@ -4,7 +4,7 @@ export const Button = styled.button`
   position: absolute;
   z-index: 2;
   bottom: 22px;
-  ${(props) => (props['data-type'] === 'left' ? 'left: 5px' : 'right: 5px')};
+  ${({ type }) => (type === 'left' ? 'left: 5px' : 'right: 5px')};
   width: 100px;
   height: 100px;
   padding: 30px;
