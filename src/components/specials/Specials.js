@@ -5,6 +5,7 @@ import SpecialsItem from './SpecialsItem';
 import { useEffect, useRef } from 'react';
 import { specialsActions } from './../../store/specialsSlice';
 import SpecialsControls from './SpecialsControls';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 export default function Specials() {
   const {
@@ -17,6 +18,8 @@ export default function Specials() {
     (state) => state.products,
     (state) => state.status !== 'success'
   );
+
+  const media = useMatchMedia('only screen and (hover)');
 
   const container = useRef();
 
@@ -38,22 +41,24 @@ export default function Specials() {
   return (
     <Section as="aside" style={{ position: 'relative', overflow: 'hidden' }}>
       <Title>{allLoaded ? specialsInfo.title : 'Особые предложения'}</Title>
-      <SpecialsControls
-        container={container.current}
-        itemsCount={specialsItems.length}
-      />
-      <SpecialsWrapper as="section" ref={container}>
+      {media.matches && (
+        <SpecialsControls
+          container={container.current}
+          itemsCount={specialsItems.length}
+        />
+      )}
+      <SpecialsWrapper as="section" ref={container} isTablet={!media.matches}>
         {specialsStatus === 'loading' &&
           [0, 1, 2, 3, 4].map((i) => <SpecialsItem key={i} loaded={false} />)}
         {allLoaded &&
-          specialsItems.map((product, index) => (
+          specialsItems.map((product) => (
             <SpecialsItem
               key={product.id}
               img={product.img.classic}
               title={product.title}
               price={product.price.small}
               loaded={allLoaded}
-              data-index={index}
+              isTablet={!media.matches}
             />
           ))}
       </SpecialsWrapper>

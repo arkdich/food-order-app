@@ -8,10 +8,11 @@ export const SpecialsWrapper = styled(Container)`
   flex-direction: row;
   gap: 10px;
   min-height: 114px;
-  padding: 5px;
-  margin-left: -30px;
-  margin-right: -30px;
+  margin-left: -20px;
+  margin-right: -20px;
   transition: transform 0.4s ease-in;
+  ${({ isTablet }) =>
+    isTablet && 'overflow: auto; scroll-snap-type: x mandatory'};
 
   /* hide scrollbar */
   scrollbar-width: none;

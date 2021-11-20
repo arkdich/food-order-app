@@ -10,7 +10,6 @@ import {
 export default function SpecialsItem(props) {
   const { img, title, price, loaded, ...rest } = props;
 
-  //   console.log(rest);
   return (
     <SpecialsItemStyled {...rest}>
       <ImgWrapper loaded={loaded}>

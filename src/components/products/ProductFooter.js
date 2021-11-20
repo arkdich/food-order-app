@@ -1,23 +1,24 @@
 import { Footer, Price, AddButton } from './ProductFooter.styles';
-import { Fragment, useRef, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import breakpoints from '../globalStyle/variables/breakpoints';
 import PropTypes from 'prop-types';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 export default function ProductFooter(props) {
   const { price } = props;
 
-  const media = useRef(
-    window.matchMedia(`only screen and (max-width: ${breakpoints.tablet})`)
+  const media = useMatchMedia(
+    `only screen and (max-width: ${breakpoints.tablet})`
   );
 
-  const [isTablet, setIsTablet] = useState(media.current.matches);
+  const [isTablet, setIsTablet] = useState(media.matches);
 
   useEffect(() => {
-    const callback = () => setIsTablet(media.current.matches);
+    const callback = () => setIsTablet(media.matches);
 
-    media.current.addEventListener('change', callback);
+    media.addEventListener('change', callback);
 
-    return () => media.current.removeEventListener('change', callback);
+    return () => media.removeEventListener('change', callback);
   }, []);
 
   return (
