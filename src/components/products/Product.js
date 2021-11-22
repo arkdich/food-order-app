@@ -31,7 +31,7 @@ export default function Product(props) {
       <Body>
         <Title>{title}</Title>
         <Ingredients>{ingredients.join(', ')}</Ingredients>
-        <ProductFooter price={price} />
+        <ProductFooter id={id} price={price.small} />
       </Body>
     </ProductStyled>
   );

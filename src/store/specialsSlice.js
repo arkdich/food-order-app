@@ -19,13 +19,28 @@ const specialsSlice = createSlice({
   name: 'specials',
   initialState: {
     info: {},
-    items: [],
+    items: {},
     status: 'idle',
     error: null,
   },
   reducers: {
     setSpecialsItems(state, action) {
-      state.items = action.payload;
+      const globalDiscounts = state.info.discounts;
+      const products = action.payload;
+
+      const items = {};
+
+      products.forEach((product) => {
+        const discount = product.categories
+          .map((c) => [c, globalDiscounts[c]])
+          .filter((a) => a[1]);
+
+        const maxDiscount = discount.sort((a, b) => b[1] - a[1])[0];
+
+        if (maxDiscount) items[product.id] = maxDiscount[1];
+      });
+
+      state.items = items;
     },
   },
   extraReducers: {

@@ -3,9 +3,21 @@ import { Fragment, useState, useEffect } from 'react';
 import breakpoints from '../globalStyle/variables/breakpoints';
 import PropTypes from 'prop-types';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import { useSelector } from 'react-redux';
+import Discount from '../globalStyle/Discount.style';
+import { calcPrice } from '../../utils/formatters';
 
 export default function ProductFooter(props) {
-  const { price } = props;
+  const { price, id } = props;
+  const discount = useSelector((state) => state.specials.items[id]);
+
+  const finalPrice = discount ? (
+    <Discount price={price} place={'top'}>
+      {`от ${calcPrice(price, discount)} ₽`}
+    </Discount>
+  ) : (
+    `от ${price} ₽`
+  );
 
   const media = useMatchMedia(
     `only screen and (max-width: ${breakpoints.tablet})`
@@ -23,11 +35,11 @@ export default function ProductFooter(props) {
 
   return (
     <Footer>
-      {isTablet && <AddButton>от {price.small} ₽</AddButton>}
+      {isTablet && <AddButton>{finalPrice}</AddButton>}
       {!isTablet && (
         <Fragment>
-          <Price>от {price.small} ₽</Price>
-          <AddButton price={price.small}>Добавить</AddButton>
+          <Price>{finalPrice}</Price>
+          <AddButton>Добавить</AddButton>
         </Fragment>
       )}
     </Footer>
@@ -35,5 +47,6 @@ export default function ProductFooter(props) {
 }
 
 ProductFooter.propTypes = {
-  price: PropTypes.object,
+  id: PropTypes.string,
+  price: PropTypes.number,
 };

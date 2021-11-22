@@ -31,11 +31,7 @@ export default function Specials() {
   useEffect(() => {
     if (!allLoaded) return;
 
-    const specialsItems = products.filter((product) =>
-      product.categories.some((category) => specialsInfo.discounts?.[category])
-    );
-
-    dispatch(specialsActions.setSpecialsItems(specialsItems));
+    dispatch(specialsActions.setSpecialsItems(products));
   }, [allLoaded]);
 
   return (
@@ -44,23 +40,26 @@ export default function Specials() {
       {media.matches && (
         <SpecialsControls
           container={container.current}
-          itemsCount={specialsItems.length}
+          itemsCount={Object.keys(specialsItems).length}
         />
       )}
       <SpecialsWrapper as="section" ref={container} isTablet={!media.matches}>
         {specialsStatus === 'loading' &&
           [0, 1, 2, 3, 4].map((i) => <SpecialsItem key={i} loaded={false} />)}
         {allLoaded &&
-          specialsItems.map((product) => (
-            <SpecialsItem
-              key={product.id}
-              img={product.img.classic}
-              title={product.title}
-              price={product.price.small}
-              loaded={allLoaded}
-              isTablet={!media.matches}
-            />
-          ))}
+          products
+            .filter((product) => specialsItems[product.id])
+            .map((product) => (
+              <SpecialsItem
+                key={product.id}
+                id={product.id}
+                img={product.img.classic}
+                title={product.title}
+                price={product.price.small}
+                loaded={allLoaded}
+                isTablet={!media.matches}
+              />
+            ))}
       </SpecialsWrapper>
     </Section>
   );

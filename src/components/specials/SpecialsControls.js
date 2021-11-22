@@ -4,7 +4,7 @@ import { ReactComponent as BtnLeft } from './../../assets/btnLeft.svg';
 import PropTypes from 'prop-types';
 import { Fragment, useState, useRef, useEffect } from 'react';
 
-export default function SpecialsButton(props) {
+export default function SpecialsControls(props) {
   const { itemsCount, container } = props;
 
   const [leftDisplayed, setLeftDisplayed] = useState(false);
@@ -104,7 +104,7 @@ export default function SpecialsButton(props) {
   );
 }
 
-SpecialsButton.propTypes = {
+SpecialsControls.propTypes = {
   itemsCount: PropTypes.number,
   container: PropTypes.object,
 };

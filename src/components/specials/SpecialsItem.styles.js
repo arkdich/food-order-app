@@ -45,7 +45,7 @@ export const Title = styled.h3`
 
 export const Price = styled.p`
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
 
   ${({ loaded }) => !loaded && PlaceholderBG}
   ${({ loaded }) =>
