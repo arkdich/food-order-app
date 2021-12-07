@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchProducts } from './store/productsSlice';
+import { fetchProducts } from './store/slices/productsSlice';
 import { Route, Routes } from 'react-router';
 import GlobalLayout from './components/globalLayout/GlobalLayout';
 import HomeLayout from './components/globalLayout/HomeLayout';
-import { fetchSpecials } from './store/specialsSlice';
+import { fetchSpecials } from './store/slices/specialsSlice';
 
 export default function App() {
   const dispatch = useDispatch();

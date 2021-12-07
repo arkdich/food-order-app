@@ -23,8 +23,10 @@ export default function ProductsWrapper() {
       {status === 'success' && (
         <ProductsContainer>
           {(filter === 'all'
-            ? products
-            : products.filter((product) => product.categories.includes(filter))
+            ? products.pizzas
+            : products.pizzas.filter((product) =>
+                product.categories.includes(filter)
+              )
           ).map((product) => (
             <Product key={product.id} {...product} />
           ))}

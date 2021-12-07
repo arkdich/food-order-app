@@ -3,7 +3,7 @@ import { Section, Title } from '../globalStyle/Section.styles';
 import { SpecialsWrapper } from './Specials.styles';
 import SpecialsItem from './SpecialsItem';
 import { useEffect, useRef } from 'react';
-import { specialsActions } from './../../store/specialsSlice';
+import { specialsActions } from './../../store/slices/specialsSlice';
 import SpecialsControls from './SpecialsControls';
 import useMatchMedia from '../../hooks/useMatchMedia';
 
@@ -14,7 +14,7 @@ export default function Specials() {
     items: specialsItems,
   } = useSelector((state) => state.specials);
 
-  const { items: products, status: productsStatus } = useSelector(
+  const { items: productsItems, status: productsStatus } = useSelector(
     (state) => state.products,
     (state) => state.status !== 'success'
   );
@@ -28,10 +28,12 @@ export default function Specials() {
   const allLoaded =
     specialsStatus === 'success' && productsStatus === 'success';
 
+  const discountCategory = allLoaded && specialsInfo.discounts.category;
+
   useEffect(() => {
     if (!allLoaded) return;
 
-    dispatch(specialsActions.setSpecialsItems(products));
+    dispatch(specialsActions.setSpecialsItems(productsItems[discountCategory]));
   }, [allLoaded]);
 
   return (
@@ -47,7 +49,7 @@ export default function Specials() {
         {specialsStatus === 'loading' &&
           [0, 1, 2, 3, 4].map((i) => <SpecialsItem key={i} loaded={false} />)}
         {allLoaded &&
-          products
+          productsItems[discountCategory]
             .filter((product) => specialsItems[product.id])
             .map((product) => (
               <SpecialsItem

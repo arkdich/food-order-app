@@ -1,6 +1,6 @@
 import { getDocs } from '@firebase/firestore';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { pizzasRef } from './firestore';
+import { pizzasRef } from '../firestore';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
@@ -8,7 +8,7 @@ export const fetchProducts = createAsyncThunk(
     try {
       const pizzasDocs = await getDocs(pizzasRef);
 
-      return pizzasDocs.docs.map((doc) => {
+      const pizzas = pizzasDocs.docs.map((doc) => {
         const data = doc.data();
         data.id = doc.id;
 
@@ -17,6 +17,10 @@ export const fetchProducts = createAsyncThunk(
 
         return data;
       });
+
+      return {
+        pizzas,
+      };
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -26,7 +30,9 @@ export const fetchProducts = createAsyncThunk(
 const productsSlice = createSlice({
   name: 'products',
   initialState: {
-    items: [],
+    items: {
+      pizzas: [],
+    },
     status: 'idle',
     error: null,
     filter: 'all',
