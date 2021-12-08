@@ -7,12 +7,13 @@
     "url": "git@github.com:arkdich/food-order-app.git"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "dependencies": {
+    "@craco/craco": "^6.4.2",
     "@reduxjs/toolkit": "^1.6.2",
     "firebase": "^9.2.0",
     "react": "^17.0.2",
