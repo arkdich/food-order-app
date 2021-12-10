@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { calcPrice } from '@utils/formatters';
+import calcPrice from '@/utils/formatters/calcDiscountPrice';
 import Discount from '@components/Discount.style';
 import {
   ImgWrapper,

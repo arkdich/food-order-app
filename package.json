@@ -24,6 +24,11 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-jest-dom": "^3.9.2",
     "prettier": "^2.4.1"
   },
   "browserslist": {

@@ -1,4 +1,4 @@
-export function calcPrice(price, discount) {
+export default function calcDiscountPrice(price, discount) {
   if (typeof price !== 'number' || typeof discount !== 'number')
     throw new Error('Arguments must be of type number');
 

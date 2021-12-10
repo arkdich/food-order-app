@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import useMatchMedia from '@hooks/useMatchMedia';
 import { useSelector } from 'react-redux';
 import Discount from '@components/Discount.style';
-import { calcPrice } from '@utils/formatters';
+import calcPrice from '@/utils/formatters/calcDiscountPrice';
 
 export default function ProductFooter(props) {
   const { price, id } = props;
