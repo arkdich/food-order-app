@@ -31,7 +31,7 @@ export default function ProductFooter(props) {
     media.addEventListener('change', callback);
 
     return () => media.removeEventListener('change', callback);
-  }, []);
+  }, [media]);
 
   return (
     <Footer>

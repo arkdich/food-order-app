@@ -18,7 +18,7 @@ export default function SpecialsItem(props) {
   return (
     <SpecialsItemStyled {...rest}>
       <ImgWrapper loaded={loaded}>
-        {loaded && <img src={img} alt="A picture of a pizza" />}
+        {loaded && <img src={img} alt="Product with a special price" />}
       </ImgWrapper>
       <InfoContainer>
         <Title loaded={loaded}>{loaded && title}</Title>
@@ -27,7 +27,7 @@ export default function SpecialsItem(props) {
             <Discount price={price} place={'bottom'}>
               {`от ${calcPrice(price, discount)} ₽`}
             </Discount>
-          )}{' '}
+          )}
         </Price>
       </InfoContainer>
     </SpecialsItemStyled>

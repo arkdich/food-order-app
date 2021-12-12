@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import CartButton from '../cart/CartButton';
@@ -16,9 +16,12 @@ export default function NavBar() {
   const filterValue =
     rootMatch && new URLSearchParams(location.search).get('filter');
 
-  const changeFilterHandler = (value) => {
-    dispatch(productsActions.changeFilter(value));
-  };
+  const changeFilterHandler = useCallback(
+    (value) => {
+      dispatch(productsActions.changeFilter(value));
+    },
+    [dispatch]
+  );
 
   const scrollItemHandler = (ev) => {
     ev.target.scrollIntoView({
@@ -32,7 +35,7 @@ export default function NavBar() {
     if (rootMatch)
       if (!filterValue) navigate('/?filter=all', { replace: true });
       else changeFilterHandler(filterValue);
-  }, [filterValue]);
+  }, [changeFilterHandler, filterValue, navigate, rootMatch]);
 
   return (
     <NavBarStyled>

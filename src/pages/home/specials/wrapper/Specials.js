@@ -3,7 +3,7 @@ import { Section, Title } from '@components/Section.styles';
 import { SpecialsWrapper } from './Specials.styles';
 import SpecialsItem from '../item/SpecialsItem';
 import { useEffect, useRef } from 'react';
-import { specialsActions } from '@store/slices/specialsSlice';
+import { fetchSpecials, specialsActions } from '@store/slices/specialsSlice';
 import SpecialsControls from '../controls/SpecialsControls';
 import useMatchMedia from '@hooks/useMatchMedia';
 
@@ -15,8 +15,7 @@ export default function Specials() {
   } = useSelector((state) => state.specials);
 
   const { items: productsItems, status: productsStatus } = useSelector(
-    (state) => state.products,
-    (state) => state.status !== 'success'
+    (state) => state.products
   );
 
   const media = useMatchMedia('only screen and (hover)');
@@ -28,13 +27,22 @@ export default function Specials() {
   const allLoaded =
     specialsStatus === 'success' && productsStatus === 'success';
 
-  const discountCategory = allLoaded && specialsInfo.discounts.category;
+  const specialsProducts =
+    allLoaded && productsItems[specialsInfo.discounts.category];
+
+  useEffect(() => {
+    if (specialsStatus !== 'idle') return;
+
+    dispatch(fetchSpecials());
+  }, [dispatch, specialsStatus]);
 
   useEffect(() => {
     if (!allLoaded) return;
 
-    dispatch(specialsActions.setSpecialsItems(productsItems[discountCategory]));
-  }, [allLoaded]);
+    if (Object.keys(specialsItems).length !== 0) return;
+
+    dispatch(specialsActions.setSpecialsItems(specialsProducts));
+  }, [dispatch, allLoaded, specialsProducts, specialsItems]);
 
   return (
     <Section as="aside" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -49,7 +57,7 @@ export default function Specials() {
         {specialsStatus === 'loading' &&
           [0, 1, 2, 3, 4].map((i) => <SpecialsItem key={i} loaded={false} />)}
         {allLoaded &&
-          productsItems[discountCategory]
+          specialsProducts
             .filter((product) => specialsItems[product.id])
             .map((product) => (
               <SpecialsItem

@@ -15,6 +15,7 @@
   "dependencies": {
     "@craco/craco": "^6.4.2",
     "@reduxjs/toolkit": "^1.6.2",
+    "eslint-plugin-react": "^7.27.1",
     "firebase": "^9.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -42,5 +43,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "^@assets/(.*)$": "<rootDir>/src/assets/$1",
+      "^@components/(.*)$": "<rootDir>/src/components/$1",
+      "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
+      "^@pages/(.*)$": "<rootDir>/src/pages/$1",
+      "^@store/(.*)$": "<rootDir>/src/store/$1",
+      "^@utils/(.*)$": "<rootDir>/src/utils/$1"
+    }
   }
 }

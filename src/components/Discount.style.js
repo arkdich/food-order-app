@@ -12,6 +12,8 @@ const Discount = styled.span`
           return { top: '-6px', left: '0px' };
         case 'bottom':
           return { top: '25px', left: '0px' };
+        default:
+          return {};
       }
     }}
     content: '';
@@ -29,6 +31,8 @@ const Discount = styled.span`
           return { top: '-14px', left: '0px' };
         case 'bottom':
           return { top: '16px', left: '0px' };
+        default:
+          return {};
       }
     }}
     ${({ price }) => `content: 'от ${price} ₽'`};

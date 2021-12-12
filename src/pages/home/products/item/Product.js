@@ -21,7 +21,7 @@ export default function Product(props) {
         {
           <img
             src={img.classic}
-            alt="A picture of a pizza"
+            alt="A pizza"
             style={{ display: imgLoaded ? 'block' : 'none' }}
             onLoad={() => setImgLoaded(true)}
           />

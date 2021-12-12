@@ -8,7 +8,9 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "react-app",
+    "react-app/jest"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -19,7 +21,8 @@
   },
   "plugins": ["react", "jest"],
   "rules": {
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "jest/expect-expect": "off"
   },
   "settings": {
     "react": {
