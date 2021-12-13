@@ -22,7 +22,8 @@
   "plugins": ["react", "jest"],
   "rules": {
     "no-unused-vars": "warn",
-    "jest/expect-expect": "off"
+    "jest/expect-expect": "off",
+    "jest/no-focused-tests": "warn"
   },
   "settings": {
     "react": {

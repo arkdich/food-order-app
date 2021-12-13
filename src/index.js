@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from '@store';
+import createStore from '@store';
 import { StyleSheetManager } from 'styled-components';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={createStore()}>
         <StyleSheetManager
           disableVendorPrefixes={process.env.NODE_ENV === 'development'}
         >
