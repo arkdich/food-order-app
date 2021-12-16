@@ -25,3 +25,12 @@ export const pizzasRef = {
     },
   ],
 };
+
+export const specialsRef = {
+  data() {
+    return {
+      discounts: { category: 'pizzas', cheese: 12 },
+      title: 'Сырный день!',
+    };
+  },
+};

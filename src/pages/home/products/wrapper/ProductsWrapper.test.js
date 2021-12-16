@@ -4,17 +4,11 @@ import { getDocs } from '@firebase/firestore';
 import ProductsWrapper from './ProductsWrapper';
 import createStore from '@store/index';
 
-jest.mock('@firebase/firestore', () => ({
-  getDocs: jest.fn(),
-}));
-
 jest.mock('@hooks/useMatchMedia');
 jest.mock('@store/firestore');
 
 describe('ProductWrapper component', () => {
   test('renders loading spinner and item', async () => {
-    getDocs.mockImplementation(async (data) => data);
-
     const screen = render(
       <Provider store={createStore()}>
         <ProductsWrapper />
@@ -32,8 +26,8 @@ describe('ProductWrapper component', () => {
   });
 
   test('renders error', async () => {
-    getDocs.mockImplementation(() => {
-      throw new Error('yo');
+    getDocs.mockImplementationOnce(() => {
+      throw new Error('Test error');
     });
 
     const screen = render(

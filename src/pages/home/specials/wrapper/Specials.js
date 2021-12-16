@@ -44,6 +44,8 @@ export default function Specials() {
     dispatch(specialsActions.setSpecialsItems(specialsProducts));
   }, [dispatch, allLoaded, specialsProducts, specialsItems]);
 
+  if (specialsStatus === 'error') return null;
+
   return (
     <Section as="aside" style={{ position: 'relative', overflow: 'hidden' }}>
       <Title>{allLoaded ? specialsInfo.title : 'Особые предложения'}</Title>
@@ -55,7 +57,9 @@ export default function Specials() {
       )}
       <SpecialsWrapper as="section" ref={container} isTablet={!media.matches}>
         {specialsStatus === 'loading' &&
-          [0, 1, 2, 3, 4].map((i) => <SpecialsItem key={i} loaded={false} />)}
+          [0, 1, 2, 3, 4].map((i) => (
+            <SpecialsItem key={i} loaded={false} data-testid="loading-badge" />
+          ))}
         {allLoaded &&
           specialsProducts
             .filter((product) => specialsItems[product.id])

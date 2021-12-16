@@ -1,4 +1,4 @@
-import calcPrice from '../../utils/formatters/calcDiscountPrice';
+import calcPrice from '@utils/formatters/calcDiscountPrice';
 
 describe('Discount formatter', () => {
   describe('works', () => {

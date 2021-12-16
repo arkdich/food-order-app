@@ -53,6 +53,7 @@
       "^@pages/(.*)$": "<rootDir>/src/pages/$1",
       "^@store/(.*)$": "<rootDir>/src/store/$1",
       "^@utils/(.*)$": "<rootDir>/src/utils/$1"
-    }
+    },
+    "resetMocks": false
   }
 }
