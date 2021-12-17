@@ -81,6 +81,7 @@ export default function SpecialsControls(props) {
   return (
     <Fragment>
       <Button
+        aria-label="Previous button"
         type="left"
         ref={btnLeftRef}
         style={{ display: leftDisplayed ? 'block' : 'none' }}
@@ -91,6 +92,7 @@ export default function SpecialsControls(props) {
         <BtnLeft />
       </Button>
       <Button
+        aria-label="Next button"
         type="right"
         ref={btnRightRef}
         style={{ display: rightDisplayed ? 'block' : 'none' }}

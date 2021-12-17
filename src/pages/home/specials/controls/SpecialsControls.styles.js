@@ -14,7 +14,8 @@ export const Button = styled.button`
   opacity: 0;
   transition: opacity 0.15s ease;
 
-  &:hover {
+  &:hover,
+  &:focus {
     opacity: 1;
   }
 

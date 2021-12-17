@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { getDocs } from '@firebase/firestore';
 import ProductsWrapper from './ProductsWrapper';
@@ -15,13 +15,16 @@ describe('ProductWrapper component', () => {
       </Provider>
     );
 
-    const spinner = screen.getByText(/spinner/);
+    const spinner = screen.queryByText(/spinner/);
 
     expect(spinner).toBeInTheDocument();
 
-    const title = await screen.findByText('Пепперони');
+    await waitFor(() => {
+      const title = screen.queryByText('Пепперони');
 
-    expect(title).toBeInTheDocument();
+      expect(title).toBeInTheDocument();
+    });
+
     expect(spinner).not.toBeInTheDocument();
   });
 
@@ -36,8 +39,10 @@ describe('ProductWrapper component', () => {
       </Provider>
     );
 
-    const error = await screen.findByText(/пошло не так/);
+    await waitFor(() => {
+      const error = screen.queryByText(/пошло не так/);
 
-    expect(error).toBeInTheDocument();
+      expect(error).toBeInTheDocument();
+    });
   });
 });

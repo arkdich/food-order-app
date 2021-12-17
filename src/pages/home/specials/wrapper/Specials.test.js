@@ -15,8 +15,8 @@ describe('Specials component', () => {
       </Provider>
     );
 
-    const title = screen.getByText('Особые предложения');
-    const lodingBadges = screen.getAllByTestId('loading-badge');
+    const title = screen.queryByText('Особые предложения');
+    const lodingBadges = screen.queryAllByTestId('loading-badge');
 
     expect(title).toBeInTheDocument();
     expect(lodingBadges).toHaveLength(5);
@@ -26,12 +26,12 @@ describe('Specials component', () => {
       expect(title).not.toHaveTextContent('Особые предложения');
     });
 
-    const items = screen.getAllByText('Пепперони');
+    const items = screen.queryAllByText('Пепперони');
 
     expect(items).toHaveLength(2);
   });
 
-  test('hides error', async () => {
+  test('hides on error', async () => {
     getDoc.mockImplementation(() => {
       throw new Error('Test error');
     });
@@ -45,7 +45,7 @@ describe('Specials component', () => {
     await waitFor(() => {
       const title = screen.queryByText('Особые предложения');
 
-      expect(title).toBeNull();
+      expect(title).not.toBeInTheDocument();
     });
   });
 });
