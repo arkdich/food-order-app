@@ -3,18 +3,22 @@ import SpecialsControls from './SpecialsControls';
 import userEvent from '@testing-library/user-event';
 
 describe('SpecialsControls component', () => {
-  test('renders initial state', () => {
-    const wrapper = Object.defineProperty(
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = Object.defineProperty(
       document.createElement('div'),
       'clientWidth',
       {
         value: 800,
       }
     );
+  });
 
+  test('renders initial state', () => {
     render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
-    const btnLeft = screen.queryByRole('button', {
+    const btnLeft = screen.getByRole('button', {
       name: '',
       hidden: true,
     });
@@ -23,14 +27,6 @@ describe('SpecialsControls component', () => {
   });
 
   test('left btn click works', () => {
-    const wrapper = Object.defineProperty(
-      document.createElement('div'),
-      'clientWidth',
-      {
-        value: 800,
-      }
-    );
-
     render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnRight = screen.getByRole('button', {
@@ -52,14 +48,6 @@ describe('SpecialsControls component', () => {
   });
 
   test('right btn click works', () => {
-    const wrapper = Object.defineProperty(
-      document.createElement('div'),
-      'clientWidth',
-      {
-        value: 800,
-      }
-    );
-
     render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnRight = screen.getByRole('button', {
@@ -82,14 +70,6 @@ describe('SpecialsControls component', () => {
   });
 
   test('btns hover works', () => {
-    const wrapper = Object.defineProperty(
-      document.createElement('div'),
-      'clientWidth',
-      {
-        value: 800,
-      }
-    );
-
     render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnRight = screen.getByRole('button', {

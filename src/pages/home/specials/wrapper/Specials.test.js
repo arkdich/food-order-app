@@ -15,18 +15,17 @@ describe('Specials component', () => {
       </Provider>
     );
 
-    const title = screen.queryByText('Особые предложения');
-    const lodingBadges = screen.queryAllByTestId('loading-badge');
+    const title = screen.getByText('Особые предложения');
+    const lodingBadges = screen.getAllByTestId('loading-badge');
 
     expect(title).toBeInTheDocument();
     expect(lodingBadges).toHaveLength(5);
 
     await waitFor(() => {
-      expect(title).toHaveTextContent('Сырный день');
-      expect(title).not.toHaveTextContent('Особые предложения');
+      expect(title).toHaveTextContent(/^Сырный день!$/);
     });
 
-    const items = screen.queryAllByText('Пепперони');
+    const items = screen.getAllByText('Пепперони');
 
     expect(items).toHaveLength(2);
   });
@@ -42,10 +41,8 @@ describe('Specials component', () => {
       </Provider>
     );
 
-    await waitFor(() => {
-      const title = screen.queryByText('Особые предложения');
+    const title = screen.getByText('Особые предложения');
 
-      expect(title).not.toBeInTheDocument();
-    });
+    await waitFor(() => expect(title).not.toBeInTheDocument());
   });
 });

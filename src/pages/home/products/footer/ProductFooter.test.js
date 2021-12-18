@@ -8,7 +8,7 @@ jest.mock('@store/firestore');
 jest.mock('@hooks/useMatchMedia');
 
 describe('ProductFooter components', () => {
-  test('renders discount', async () => {
+  test('renders discount', () => {
     const store = configureStore({
       reducer: {
         specials: () => ({
@@ -25,12 +25,12 @@ describe('ProductFooter components', () => {
       </Provider>
     );
 
-    const price = screen.queryByText(/от 427/);
+    const price = screen.getByText(/от 427/);
 
     expect(price).toBeInTheDocument();
   });
 
-  test('renders initial price', async () => {
+  test('renders initial price', () => {
     const store = configureStore({
       reducer: {
         specials: () => ({
@@ -45,7 +45,7 @@ describe('ProductFooter components', () => {
       </Provider>
     );
 
-    const price = screen.queryByText(/от 485/);
+    const price = screen.getByText(/от 485/);
 
     expect(price).toBeInTheDocument();
   });
