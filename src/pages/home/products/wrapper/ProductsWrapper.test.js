@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { getDocs } from '@firebase/firestore';
 import ProductsWrapper from './ProductsWrapper';
@@ -9,7 +9,7 @@ jest.mock('@store/firestore');
 
 describe('ProductWrapper component', () => {
   test('renders loading spinner and item', async () => {
-    const screen = render(
+    render(
       <Provider store={createStore()}>
         <ProductsWrapper />
       </Provider>
@@ -33,7 +33,7 @@ describe('ProductWrapper component', () => {
       throw new Error('Test error');
     });
 
-    const screen = render(
+    render(
       <Provider store={createStore()}>
         <ProductsWrapper />
       </Provider>

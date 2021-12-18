@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import SpecialsControls from './SpecialsControls';
 import userEvent from '@testing-library/user-event';
 
@@ -12,9 +12,7 @@ describe('SpecialsControls component', () => {
       }
     );
 
-    const screen = render(
-      <SpecialsControls container={wrapper} itemsCount={5} />
-    );
+    render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnLeft = screen.queryByRole('button', {
       name: '',
@@ -33,9 +31,7 @@ describe('SpecialsControls component', () => {
       }
     );
 
-    const screen = render(
-      <SpecialsControls container={wrapper} itemsCount={5} />
-    );
+    render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnRight = screen.getByRole('button', {
       name: 'Next button',
@@ -64,9 +60,7 @@ describe('SpecialsControls component', () => {
       }
     );
 
-    const screen = render(
-      <SpecialsControls container={wrapper} itemsCount={5} />
-    );
+    render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnRight = screen.getByRole('button', {
       name: 'Next button',
@@ -96,9 +90,7 @@ describe('SpecialsControls component', () => {
       }
     );
 
-    const screen = render(
-      <SpecialsControls container={wrapper} itemsCount={5} />
-    );
+    render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
     const btnRight = screen.getByRole('button', {
       name: 'Next button',

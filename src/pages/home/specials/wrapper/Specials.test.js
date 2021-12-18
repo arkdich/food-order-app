@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import createStore from '@store/index';
 import HomeLayout from '@pages/home/page/HomeLayout';
@@ -9,7 +9,7 @@ jest.mock('@store/firestore');
 
 describe('Specials component', () => {
   test('renders loading anim and item', async () => {
-    const screen = render(
+    render(
       <Provider store={createStore()}>
         <HomeLayout />
       </Provider>
@@ -36,7 +36,7 @@ describe('Specials component', () => {
       throw new Error('Test error');
     });
 
-    const screen = render(
+    render(
       <Provider store={createStore()}>
         <HomeLayout />
       </Provider>

@@ -1,7 +1,7 @@
-export default function useMatchMedia() {
-  return {
-    mathes: false,
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-  };
-}
+const useMatchMedia = jest.fn(() => ({
+  matches: false,
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+}));
+
+export default useMatchMedia;
