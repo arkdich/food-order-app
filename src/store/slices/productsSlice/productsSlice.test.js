@@ -36,6 +36,28 @@ describe('productsSlice', () => {
             },
             title: 'Пепперони',
           },
+          {
+            id: '7gO5GkpRIXmbS6SLiZjs',
+            ingredients: [
+              'Цыпленок',
+              'ветчина',
+              'пикантная пепперони',
+              'острая чоризо',
+              'моцарелла',
+              'томатный соус',
+            ],
+            img: {
+              thin: '',
+              classic: '',
+            },
+            title: 'Мясная',
+            price: { normal: 699, large: 899, small: 575 },
+            categories: ['meat', 'spicy'],
+            style: {
+              classic: { normal: 645, large: 860, small: 450 },
+              thin: { large: 740, normal: 520 },
+            },
+          },
         ],
       });
     });

@@ -7,6 +7,7 @@ export default function ProfileButton() {
   const profileClickHandler = () => {
     navigate('/profile', { replace: true });
   };
+
   return (
     <ProfileButtonStyled onClick={profileClickHandler}>
       Войти

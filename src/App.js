@@ -9,6 +9,7 @@ export default function App() {
         <Route index element={<HomeLayout />} />
         <Route path="cart" element={<p>Cart Placeholder</p>} />
         <Route path="profile" element={<p>Profile Placeholder</p>} />
+        <Route path="*" element={<p>Упс! Кажется вы ошиблись ссылкой</p>} />
       </Route>
     </Routes>
   );
