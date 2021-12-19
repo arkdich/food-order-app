@@ -3,7 +3,10 @@ import { Section, Title } from '@components/Section.styles';
 import { SpecialsWrapper } from './Specials.styles';
 import SpecialsItem from '../item/SpecialsItem';
 import { useEffect, useRef } from 'react';
-import { fetchSpecials, specialsActions } from '@store/slices/specialsSlice';
+import {
+  fetchSpecials,
+  specialsActions,
+} from '@store/slices/specialsSlice/specialsSlice';
 import SpecialsControls from '../controls/SpecialsControls';
 import useMatchMedia from '@hooks/useMatchMedia';
 

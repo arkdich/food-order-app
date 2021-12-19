@@ -4,7 +4,7 @@ import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import CartButton from '../cart/CartButton';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from '../link/NavLink';
-import { productsActions } from '@store/slices/productsSlice';
+import { productsActions } from '@store/slices/productsSlice/productsSlice';
 
 export default function NavBar() {
   const rootMatch = useMatch('/');

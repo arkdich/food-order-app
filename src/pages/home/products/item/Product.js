@@ -8,7 +8,7 @@ import {
 } from './Product.styles';
 import ProductFooter from '../footer/ProductFooter';
 import { useState } from 'react';
-import { ReactComponent as Placeholder } from '../../../../assets/icons/placeholder.svg';
+import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 
 export default function Product(props) {
   // eslint-disable-next-line no-unused-vars

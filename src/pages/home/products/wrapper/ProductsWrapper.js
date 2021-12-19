@@ -8,7 +8,7 @@ import Product from '../item/Product';
 import { ReactComponent as LoadingSpinner } from '@assets/icons/spinner.svg';
 import { Section, Title } from '@components/Section.styles';
 import { useEffect } from 'react';
-import { fetchProducts } from '@/store/slices/productsSlice';
+import { fetchProducts } from '@store/slices/productsSlice/productsSlice';
 
 export default function ProductsWrapper() {
   const products = useSelector((state) => state.products.items);

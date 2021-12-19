@@ -1,6 +1,6 @@
 import { getDocs } from '@firebase/firestore';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { pizzasRef } from '../firestore';
+import { pizzasRef } from '../../firestore';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
