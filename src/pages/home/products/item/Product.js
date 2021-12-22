@@ -12,7 +12,7 @@ import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 
 export default function Product(props) {
   // eslint-disable-next-line no-unused-vars
-  const { id, title, style, ingredients, price, img } = props;
+  const { id, title, style, ingredients, price, img, isTablet } = props;
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
@@ -31,7 +31,7 @@ export default function Product(props) {
       <Body>
         <Title>{title}</Title>
         <Ingredients>{ingredients.join(', ')}</Ingredients>
-        <ProductFooter id={id} price={price.small} />
+        <ProductFooter id={id} price={price.small} isTablet={isTablet} />
       </Body>
     </ProductStyled>
   );
@@ -44,4 +44,5 @@ Product.propTypes = {
   ingredients: PropTypes.array,
   price: PropTypes.object,
   img: PropTypes.object,
+  isTablet: PropTypes.bool,
 };

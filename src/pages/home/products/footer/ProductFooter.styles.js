@@ -14,6 +14,7 @@ export const Price = styled.p`
 `;
 
 export const AddButton = styled(Button)`
+  margin-top: ${(props) => (props.mobile ? '12px' : '0px')};
   color: #fff;
   background-color: ${colors.brand};
 `;

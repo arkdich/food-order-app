@@ -7,13 +7,21 @@ import {
 import Product from '../item/Product';
 import { ReactComponent as LoadingSpinner } from '@assets/icons/spinner.svg';
 import { Section, Title } from '@components/Section.styles';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchProducts } from '@store/slices/productsSlice/productsSlice';
+import useMatchMedia from '@hooks/useMatchMedia';
+import breakpoints from '@utils/variables/breakpoints';
 
 export default function ProductsWrapper() {
   const products = useSelector((state) => state.products.items);
   const status = useSelector((state) => state.products.status);
   const filter = useSelector((state) => state.products.filter);
+
+  const media = useMatchMedia(
+    `only screen and (max-width: ${breakpoints.tablet})`
+  );
+
+  const [isTablet, setIsTablet] = useState(media.matches);
 
   const dispatch = useDispatch();
 
@@ -22,6 +30,14 @@ export default function ProductsWrapper() {
 
     dispatch(fetchProducts());
   }, [dispatch, status]);
+
+  useEffect(() => {
+    const callback = () => setIsTablet(media.matches);
+
+    media.addEventListener('change', callback);
+
+    return () => media.removeEventListener('change', callback);
+  }, [media]);
 
   return (
     <Section as="main">
@@ -38,7 +54,7 @@ export default function ProductsWrapper() {
                 product.categories.includes(filter)
               )
           ).map((product) => (
-            <Product key={product.id} {...product} />
+            <Product key={product.id} isTablet={isTablet} {...product} />
           ))}
         </ProductsContainer>
       )}

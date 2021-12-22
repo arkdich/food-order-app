@@ -1,45 +1,32 @@
 import { Footer, Price, AddButton } from './ProductFooter.styles';
-import { Fragment, useState, useEffect } from 'react';
-import breakpoints from '@utils/variables/breakpoints';
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import useMatchMedia from '@hooks/useMatchMedia';
 import { useSelector } from 'react-redux';
 import Discount from '@components/Discount.style';
 import calcPrice from '@utils/formatters/calcDiscountPrice';
 
 export default function ProductFooter(props) {
-  const { price, id } = props;
+  const { price, id, isTablet } = props;
+
   const discount = useSelector((state) => state.specials.items[id]);
 
   const finalPrice = discount ? (
-    <Discount price={price} place={'top'}>
+    <Discount price={price} place={isTablet ? 'mobile' : 'top'}>
       {`от ${calcPrice(price, discount)} ₽`}
     </Discount>
   ) : (
     `от ${price} ₽`
   );
 
-  const media = useMatchMedia(
-    `only screen and (max-width: ${breakpoints.tablet})`
-  );
-
-  const [isTablet, setIsTablet] = useState(media.matches);
-
-  useEffect(() => {
-    const callback = () => setIsTablet(media.matches);
-
-    media.addEventListener('change', callback);
-
-    return () => media.removeEventListener('change', callback);
-  }, [media]);
-
   return (
     <Footer>
-      {isTablet && <AddButton>{finalPrice}</AddButton>}
+      {isTablet && (
+        <AddButton mobile={discount && isTablet}>{finalPrice}</AddButton>
+      )}
       {!isTablet && (
         <Fragment>
           <Price>{finalPrice}</Price>
-          <AddButton>Добавить</AddButton>
+          <AddButton mobile={discount && isTablet}>Добавить</AddButton>
         </Fragment>
       )}
     </Footer>
@@ -49,4 +36,5 @@ export default function ProductFooter(props) {
 ProductFooter.propTypes = {
   id: PropTypes.string,
   price: PropTypes.number,
+  isTablet: PropTypes.bool,
 };
