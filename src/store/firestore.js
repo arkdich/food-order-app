@@ -16,4 +16,4 @@ const db = getFirestore(app);
 const pizzasRef = collection(db, 'pizzas');
 const specialsRef = doc(db, 'specials', 'w8gmCpqkrlYMzhfnv4Rf');
 
-export { db, pizzasRef, specialsRef };
+export { pizzasRef, specialsRef };

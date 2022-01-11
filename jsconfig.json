@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "@assets*": ["src/assets*"],

@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { getDocs } from '@firebase/firestore';
 import ProductsWrapper from './ProductsWrapper';
 import createStore from '@store/index';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('@hooks/useMatchMedia');
 jest.mock('@store/firestore');
@@ -10,9 +11,11 @@ jest.mock('@store/firestore');
 describe('ProductWrapper component', () => {
   test('renders loading spinner and item', async () => {
     render(
-      <Provider store={createStore()}>
-        <ProductsWrapper />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={createStore()}>
+          <ProductsWrapper />
+        </Provider>
+      </BrowserRouter>
     );
 
     const spinner = screen.getByText(/spinner/);

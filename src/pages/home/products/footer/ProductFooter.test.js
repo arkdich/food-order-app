@@ -3,6 +3,7 @@ import { render, screen, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import ProductFooter from './ProductFooter';
 import useMatchMedia from '@hooks/useMatchMedia';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('@store/firestore');
 jest.mock('@hooks/useMatchMedia');
@@ -20,9 +21,11 @@ describe('ProductFooter components', () => {
     });
 
     render(
-      <Provider store={store}>
-        <ProductFooter id="0tm7iWSKEY3971platI4" price={485} />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <ProductFooter id="0tm7iWSKEY3971platI4" price={485} />
+        </Provider>
+      </BrowserRouter>
     );
 
     const price = screen.getByText(/от 427/);
@@ -40,9 +43,11 @@ describe('ProductFooter components', () => {
     });
 
     render(
-      <Provider store={store}>
-        <ProductFooter id="0tm7iWSKEY3971platI4" price={485} />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <ProductFooter id="0tm7iWSKEY3971platI4" price={485} />
+        </Provider>
+      </BrowserRouter>
     );
 
     const price = screen.getByText(/от 485/);
@@ -60,12 +65,14 @@ describe('ProductFooter components', () => {
     });
 
     render(
-      <Provider store={store}>
-        <ProductFooter id="0tm7iWSKEY3971platI4" price={485} />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <ProductFooter id="0tm7iWSKEY3971platI4" price={485} />
+        </Provider>
+      </BrowserRouter>
     );
 
-    const desktopBtn = screen.getByText(/добавить/i);
+    const desktopBtn = screen.getByText(/выбрать/i);
 
     expect(desktopBtn).toBeInTheDocument();
 
@@ -78,9 +85,11 @@ describe('ProductFooter components', () => {
     cleanup();
 
     render(
-      <Provider store={store}>
-        <ProductFooter id="0tm7iWSKEY3971pla" price={85} />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <ProductFooter id="0tm7iWSKEY3971pla" price={85} />
+        </Provider>
+      </BrowserRouter>
     );
 
     expect(desktopBtn).not.toBeInTheDocument();

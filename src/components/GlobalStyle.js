@@ -16,9 +16,15 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.1rem;
     font-weight: 400;
     min-height: 100vh;
+  
   }
 
   a, button {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;

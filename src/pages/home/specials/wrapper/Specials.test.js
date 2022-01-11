@@ -3,16 +3,27 @@ import { Provider } from 'react-redux';
 import createStore from '@store/index';
 import HomeLayout from '@pages/home/page/HomeLayout';
 import { getDoc } from 'firebase/firestore';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('@hooks/useMatchMedia');
 jest.mock('@store/firestore');
 
+beforeEach(() => {
+  const div = document.createElement('div');
+
+  div.id = 'modal';
+
+  document.body.append(div);
+});
+
 describe('Specials component', () => {
   test('renders loading anim and item', async () => {
     render(
-      <Provider store={createStore()}>
-        <HomeLayout />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={createStore()}>
+          <HomeLayout />
+        </Provider>
+      </BrowserRouter>
     );
 
     const title = screen.getByText('Особые предложения');
@@ -36,9 +47,11 @@ describe('Specials component', () => {
     });
 
     render(
-      <Provider store={createStore()}>
-        <HomeLayout />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={createStore()}>
+          <HomeLayout />
+        </Provider>
+      </BrowserRouter>
     );
 
     const title = screen.getByText('Особые предложения');

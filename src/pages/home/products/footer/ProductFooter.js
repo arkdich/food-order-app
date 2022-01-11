@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Discount from '@components/Discount.style';
 import calcPrice from '@utils/formatters/calcDiscountPrice';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductFooter(props) {
   const { price, id, isTablet } = props;
 
   const discount = useSelector((state) => state.specials.items[id]);
+  const navigate = useNavigate();
 
   const finalPrice = discount ? (
     <Discount price={price} place={isTablet ? 'mobile' : 'top'}>
@@ -18,15 +20,21 @@ export default function ProductFooter(props) {
     `от ${price} ₽`
   );
 
+  const addBtnHandler = () => navigate(`/product/${id}`);
+
   return (
     <Footer>
       {isTablet && (
-        <AddButton mobile={discount && isTablet}>{finalPrice}</AddButton>
+        <AddButton mobile={discount && isTablet} onClick={addBtnHandler}>
+          {finalPrice}
+        </AddButton>
       )}
       {!isTablet && (
         <Fragment>
           <Price>{finalPrice}</Price>
-          <AddButton mobile={discount && isTablet}>Добавить</AddButton>
+          <AddButton mobile={discount && isTablet} onClick={addBtnHandler}>
+            Выбрать
+          </AddButton>
         </Fragment>
       )}
     </Footer>

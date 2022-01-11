@@ -11,6 +11,14 @@ import App from 'src/App';
 jest.mock('@store/firestore');
 jest.mock('@hooks/useMatchMedia');
 
+beforeEach(() => {
+  const div = document.createElement('div');
+
+  div.id = 'modal';
+
+  document.body.append(div);
+});
+
 describe('NavBar component', () => {
   beforeAll(() => {
     Element.prototype.scrollIntoView = () => {};
