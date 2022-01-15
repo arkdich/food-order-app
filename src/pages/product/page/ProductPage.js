@@ -14,6 +14,7 @@ import {
 } from './ProductPage.styles';
 import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 import { ReactComponent as Close } from '@assets/icons/close.svg';
+import SwitchComponent from '@components/Switch/SwitchComponent';
 
 export default function ProductPage() {
   const params = new URLSearchParams(window.location.search);
@@ -22,16 +23,18 @@ export default function ProductPage() {
     state.products.items.pizzas.find((p) => p.id === params.get('id'))
   );
 
+  const loaded = !!product;
+
   const [productParams, setProductParams] = useState({
-    id: product?.id,
+    id: params.get('id'),
     type: 'classic',
     size: 'normal',
   });
 
   const productOptions = {
     type: {
-      classic: 'традиционное тесто',
-      thin: `тонкое тесто`,
+      classic: 'традиционное',
+      thin: `тонкое`,
     },
     size: {
       small: `25 см`,
@@ -52,11 +55,22 @@ export default function ProductPage() {
     <Placeholder />
   );
 
-  const loaded = !!product;
-
   const navigate = useNavigate();
 
   const overlayClickHandler = () => navigate(-1);
+
+  const changeTypeHandler = (label) => {
+    const type = label === 'Классическая' ? 'classic' : 'thin';
+
+    setProductParams((state) => ({ ...state, type }));
+  };
+
+  const changeSizeHandler = (label) => {
+    const size =
+      label === 'Большая' ? 'large' : label === 'Средняя' ? 'normal' : 'small';
+
+    setProductParams((state) => ({ ...state, size }));
+  };
 
   return (
     <Wrapper>
@@ -69,6 +83,17 @@ export default function ProductPage() {
           <Ingredients loaded={loaded}>
             {product?.ingredients.join(`, `)}
           </Ingredients>
+          <SwitchComponent
+            labels={['Классическая', 'Тонкая']}
+            loaded={loaded}
+            clickHandler={changeTypeHandler}
+          />
+          <SwitchComponent
+            labels={['Маленькая', 'Средняя', 'Большая']}
+            offset={1}
+            loaded={loaded}
+            clickHandler={changeSizeHandler}
+          />
         </InfoWrapper>
         <CloseBtn onClick={overlayClickHandler}>
           <Close />
