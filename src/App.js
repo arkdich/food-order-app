@@ -8,7 +8,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<GlobalLayout />}>
         <Route path="/" element={<HomeLayout />}>
-          <Route path="product/:id" element={<ProductPage />} />
+          <Route path="product" element={<ProductPage />} />
         </Route>
         <Route path="cart" element={<p>Cart Placeholder</p>}></Route>
         <Route path="profile" element={<p>Profile Placeholder</p>} />

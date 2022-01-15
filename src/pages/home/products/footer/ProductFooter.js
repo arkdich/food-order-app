@@ -20,7 +20,7 @@ export default function ProductFooter(props) {
     `от ${price} ₽`
   );
 
-  const addBtnHandler = () => navigate(`/product/${id}`);
+  const addBtnHandler = () => navigate(`product?id=${id}`);
 
   return (
     <Footer>

@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
+import PlaceholderBG from '@components/Placeholder.style';
 
 export const SpecialsItemStyled = styled.article`
   flex: 0 0 220px;
@@ -53,27 +54,4 @@ export const Price = styled.p`
       width: '80px',
       height: '20px',
     }}
-`;
-
-const PlaceholderAnim = keyframes`
-  0% {
-      background-position: 50% 0;
-    }
-    
-    100% {
-        background-position: -150% 0;
-    }
-`;
-
-const PlaceholderBG = css`
-  border-radius: 10px;
-  background: linear-gradient(
-    90deg,
-    #f5f5f5 5%,
-    #eeeeee 20%,
-    #eeeeee 30%,
-    #f5f5f5 45%
-  );
-  background-size: 200% 100%;
-  animation: ${PlaceholderAnim} 1.2s linear infinite;
 `;
