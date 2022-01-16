@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
+  AddButton,
   CloseBtn,
   ImgWrapper,
   Info,
@@ -43,6 +44,30 @@ export default function ProductPage() {
     },
   };
 
+  const labels = {
+    type: [
+      {
+        label: `Классическая`,
+      },
+      {
+        label: `Тонкая`,
+        disabled: productParams.size === 'small',
+      },
+    ],
+    size: [
+      {
+        label: `Маленькая`,
+        disabled: productParams.type === 'thin',
+      },
+      {
+        label: `Средняя`,
+      },
+      {
+        label: `Большая`,
+      },
+    ],
+  };
+
   const infoOutput =
     product &&
     `${productOptions.size[productParams.size]}, ${
@@ -52,7 +77,7 @@ export default function ProductPage() {
   const imgOutput = product ? (
     <img src={product.img[productParams.type]} alt={`Пицца ${product.title}`} />
   ) : (
-    <Placeholder />
+    <Placeholder style={{ width: '100%' }} />
   );
 
   const navigate = useNavigate();
@@ -84,16 +109,19 @@ export default function ProductPage() {
             {product?.ingredients.join(`, `)}
           </Ingredients>
           <SwitchComponent
-            labels={['Классическая', 'Тонкая']}
+            labels={labels.type}
             loaded={loaded}
             clickHandler={changeTypeHandler}
           />
           <SwitchComponent
-            labels={['Маленькая', 'Средняя', 'Большая']}
+            labels={labels.size}
             offset={1}
             loaded={loaded}
             clickHandler={changeSizeHandler}
           />
+          <AddButton loaded={loaded} disabled={!loaded}>
+            {`Добавить за ${product?.price[productParams.size]} ₽`}
+          </AddButton>
         </InfoWrapper>
         <CloseBtn onClick={overlayClickHandler}>
           <Close />

@@ -7,18 +7,18 @@ import {
 } from './SwitchComponent.style';
 
 export default function SwitchComponent(props) {
-  const { labels = ['none', 'none'], offset = 0, loaded, clickHandler } = props;
+  const { labels, offset = 0, loaded, clickHandler } = props;
 
   const switchRef = useRef();
 
   const btnClickHandler = (ev) => {
     const btnIndex = +ev.target.dataset.index;
 
-    switchRef.current.style.transform = `translateX(calc(${
-      100 * btnIndex
-    }% + 4px))`;
+    switchRef.current.style.transform = `translateX(calc(${100 * btnIndex}% + ${
+      btnIndex > 1 ? btnIndex * 4 : 4
+    }px))`;
 
-    clickHandler(labels[btnIndex]);
+    clickHandler(labels[btnIndex].label);
   };
 
   return (
@@ -31,8 +31,13 @@ export default function SwitchComponent(props) {
         }}
       />
       {loaded &&
-        labels.map((label, index) => (
-          <SwitchBtn key={index} data-index={index} onClick={btnClickHandler}>
+        labels.map(({ label, disabled }, index) => (
+          <SwitchBtn
+            key={index}
+            data-index={index}
+            disabled={disabled}
+            onClick={btnClickHandler}
+          >
             {label}
           </SwitchBtn>
         ))}
@@ -41,7 +46,7 @@ export default function SwitchComponent(props) {
 }
 
 SwitchComponent.propTypes = {
-  labels: PropTypes.arrayOf(PropTypes.string),
+  labels: PropTypes.arrayOf(PropTypes.object),
   offset: PropTypes.number,
   loaded: PropTypes.bool,
   clickHandler: PropTypes.func,

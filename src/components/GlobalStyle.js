@@ -13,9 +13,13 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Raleway', apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: 400;
     min-height: 100vh;
+
+    @media only screen and (max-width: 380px) {
+      font-size: 16px;
+    }
   
   }
 

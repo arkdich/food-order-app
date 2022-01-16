@@ -9,11 +9,15 @@ import {
 import ProductFooter from '../footer/ProductFooter';
 import { useState } from 'react';
 import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Product(props) {
-  // eslint-disable-next-line no-unused-vars
-  const { id, title, style, ingredients, price, img, isTablet } = props;
+  const { id, title, ingredients, price, img, isTablet } = props;
   const [imgLoaded, setImgLoaded] = useState(false);
+
+  const navigate = useNavigate();
+
+  const openModalHandler = () => navigate(`product?id=${id}`);
 
   return (
     <ProductStyled>
@@ -24,6 +28,7 @@ export default function Product(props) {
             alt="A pizza"
             style={{ display: imgLoaded ? 'block' : 'none' }}
             onLoad={() => setImgLoaded(true)}
+            onClick={openModalHandler}
           />
         }
         {!imgLoaded && <Placeholder />}

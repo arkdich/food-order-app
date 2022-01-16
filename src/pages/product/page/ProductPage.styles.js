@@ -1,5 +1,7 @@
+import Button from '@components/Button.styles';
 import PlaceholderBG from '@components/Placeholder.style';
 import breakpoints from '@utils/variables/breakpoints';
+import colors from '@utils/variables/colors';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -8,7 +10,7 @@ export const Wrapper = styled.div`
   left: 50%;
   top: 50%;
   width: 100%;
-  height: 200%;
+  height: 100%;
   transform: translate(-50%, -50%);
 `;
 
@@ -30,6 +32,7 @@ export const ProductPageStyled = styled.div`
   transform: translate(-50%, -50%);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding: 20px;
   max-width: 900px;
   max-height: 500px;
   width: 80%;
@@ -37,19 +40,29 @@ export const ProductPageStyled = styled.div`
   background-color: #fff;
   border-radius: 15px;
 
-  @media only screen and (max-width: ${breakpoints.phone}) {
+  @media only screen and (max-width: 960px) {
     grid-template-columns: 1fr;
+    height: unset;
+    max-height: unset;
+  }
+
+  @media only screen and (max-width: ${breakpoints.phone}) {
+    width: 95%;
+    min-height: 90%;
+    padding: 10px;
   }
 `;
 
 export const ImgWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 360px;
+  margin: auto;
 
   img {
-    max-width: 85%;
-    margin-left: 6.5%;
+    margin-left: 2.5%;
+  }
+
+  @media only screen and (max-width: ${breakpoints.phone}) {
+    width: 270px;
   }
 `;
 
@@ -57,6 +70,15 @@ export const InfoWrapper = styled.div`
   padding: 40px 20px;
   border-radius: 15px;
   background-color: #fcfcfc;
+
+  @media only screen and (max-width: 960px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @media only screen and (max-width: ${breakpoints.phone}) {
+    padding: 10px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -109,4 +131,32 @@ export const CloseBtn = styled.button`
   &:hover {
     transform: scale(0.95);
   }
+
+  @media only screen and (max-width: 960px) {
+    top: 12px;
+    right: 16px;
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.15);
+    background-color: ${colors.brand};
+  }
+`;
+
+export const AddButton = styled(Button)`
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 30px auto 0px auto;
+  font-weight: 500;
+  color: #fff;
+  background-color: ${colors.brand};
+  transition: transform 200ms ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  ${({ loaded }) => !loaded && PlaceholderBG}
+  ${({ loaded }) => !loaded && { color: 'transparent' }}
 `;

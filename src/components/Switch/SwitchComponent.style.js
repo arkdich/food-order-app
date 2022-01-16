@@ -37,4 +37,9 @@ export const SwitchBtn = styled(Button)`
   padding: 8px 0px;
   font-size: 1rem;
   background-color: transparent;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 `;
