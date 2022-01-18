@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   AddButton,
@@ -16,18 +16,18 @@ import {
 import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 import { ReactComponent as Close } from '@assets/icons/close.svg';
 import SwitchComponent from '@components/Switch/SwitchComponent';
+import { cartActions } from '@store/slices/cartSlice/cartSlice';
 
 export default function ProductPage() {
-  const params = new URLSearchParams(window.location.search);
+  const id = new URLSearchParams(window.location.search).get('id');
 
-  const product = useSelector((state) =>
-    state.products.items.pizzas.find((p) => p.id === params.get('id'))
-  );
+  const product = useSelector((state) => state.products.items[id]);
+  const filter = useSelector((state) => state.products.filter);
 
   const loaded = !!product;
 
   const [productParams, setProductParams] = useState({
-    id: params.get('id'),
+    id,
     type: 'classic',
     size: 'normal',
   });
@@ -81,8 +81,9 @@ export default function ProductPage() {
   );
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const overlayClickHandler = () => navigate(-1);
+  const overlayClickHandler = () => navigate(`/?filter=${filter}`);
 
   const changeTypeHandler = (label) => {
     const type = label === 'Классическая' ? 'classic' : 'thin';
@@ -95,6 +96,10 @@ export default function ProductPage() {
       label === 'Большая' ? 'large' : label === 'Средняя' ? 'normal' : 'small';
 
     setProductParams((state) => ({ ...state, size }));
+  };
+
+  const addItemHandler = () => {
+    dispatch(cartActions.addItem(productParams));
   };
 
   return (
@@ -119,7 +124,11 @@ export default function ProductPage() {
             loaded={loaded}
             clickHandler={changeSizeHandler}
           />
-          <AddButton loaded={loaded} disabled={!loaded}>
+          <AddButton
+            loaded={loaded}
+            disabled={!loaded}
+            onClick={addItemHandler}
+          >
             {`Добавить за ${product?.price[productParams.size]} ₽`}
           </AddButton>
         </InfoWrapper>
