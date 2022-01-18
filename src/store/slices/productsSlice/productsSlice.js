@@ -8,19 +8,17 @@ export const fetchProducts = createAsyncThunk(
     try {
       const pizzasDocs = await getDocs(pizzasRef);
 
-      const pizzas = pizzasDocs.docs.map((doc) => {
-        const data = doc.data();
-        data.id = doc.id;
+      return pizzasDocs.docs.reduce((acc, curr) => {
+        const data = curr.data();
+        data.id = curr.id;
 
         const firstIng = data.ingredients[0];
         data.ingredients[0] = firstIng[0].toUpperCase() + firstIng.slice(1);
 
-        return data;
-      });
+        acc[curr.id] = data;
 
-      return {
-        pizzas,
-      };
+        return acc;
+      }, {});
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -30,9 +28,7 @@ export const fetchProducts = createAsyncThunk(
 const productsSlice = createSlice({
   name: 'products',
   initialState: {
-    items: {
-      pizzas: [],
-    },
+    items: {},
     status: 'idle',
     error: null,
     filter: 'all',

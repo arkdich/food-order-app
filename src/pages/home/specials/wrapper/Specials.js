@@ -30,9 +30,6 @@ export default function Specials() {
   const allLoaded =
     specialsStatus === 'success' && productsStatus === 'success';
 
-  const specialsProducts =
-    allLoaded && productsItems[specialsInfo.discounts.category];
-
   useEffect(() => {
     if (specialsStatus !== 'idle') return;
 
@@ -44,8 +41,8 @@ export default function Specials() {
 
     if (Object.keys(specialsItems).length !== 0) return;
 
-    dispatch(specialsActions.setSpecialsItems(specialsProducts));
-  }, [dispatch, allLoaded, specialsProducts, specialsItems]);
+    dispatch(specialsActions.setSpecialsItems(productsItems));
+  }, [dispatch, allLoaded, productsItems, specialsItems]);
 
   if (specialsStatus === 'error') return null;
 
@@ -64,7 +61,7 @@ export default function Specials() {
             <SpecialsItem key={i} loaded={false} data-testid="loading-badge" />
           ))}
         {allLoaded &&
-          specialsProducts
+          Object.values(productsItems)
             .filter((product) => specialsItems[product.id])
             .map((product) => (
               <SpecialsItem

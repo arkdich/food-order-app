@@ -30,7 +30,7 @@ const specialsSlice = createSlice({
 
       const items = {};
 
-      products.forEach((product) => {
+      Object.values(products).forEach((product) => {
         const discount = product.categories
           .map((c) => [c, globalDiscounts[c]])
           .filter((a) => a[1]);

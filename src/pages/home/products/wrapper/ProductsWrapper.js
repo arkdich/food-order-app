@@ -49,8 +49,8 @@ export default function ProductsWrapper() {
       {status === 'success' && (
         <ProductsContainer>
           {(filter === 'all'
-            ? products.pizzas
-            : products.pizzas.filter((product) =>
+            ? Object.values(products)
+            : Object.values(products).filter((product) =>
                 product.categories.includes(filter)
               )
           ).map((product) => (
