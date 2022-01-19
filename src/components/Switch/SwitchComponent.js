@@ -9,6 +9,10 @@ import {
 export default function SwitchComponent(props) {
   const { labels, offset = 0, loaded, clickHandler } = props;
 
+  if (!labels) throw new Error('Labeles property cannot be omited');
+  if (labels && labels.length < 2)
+    throw new Error('There must be at least two labels');
+
   const switchRef = useRef();
 
   const btnClickHandler = (ev) => {
@@ -18,12 +22,13 @@ export default function SwitchComponent(props) {
       btnIndex > 1 ? btnIndex * 4 : 4
     }px))`;
 
-    clickHandler(labels[btnIndex].label);
+    if (clickHandler) clickHandler(labels[btnIndex].label);
   };
 
   return (
     <SwitchComponentStyled loaded={loaded}>
       <Switch
+        data-testid={'switch-block'}
         ref={switchRef}
         style={{
           transform: `translateX(calc(${100 * offset}% + 4px))`,

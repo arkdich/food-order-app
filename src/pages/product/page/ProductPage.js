@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   AddButton,
   CloseBtn,
@@ -19,7 +19,8 @@ import SwitchComponent from '@components/Switch/SwitchComponent';
 import { cartActions } from '@store/slices/cartSlice/cartSlice';
 
 export default function ProductPage() {
-  const id = new URLSearchParams(window.location.search).get('id');
+  const location = useLocation();
+  const id = new URLSearchParams(location.search).get('id');
 
   const product = useSelector((state) => state.products.items[id]);
   const filter = useSelector((state) => state.products.filter);
@@ -47,10 +48,10 @@ export default function ProductPage() {
   const labels = {
     type: [
       {
-        label: `Классическая`,
+        label: `Классическое`,
       },
       {
-        label: `Тонкая`,
+        label: `Тонкое`,
         disabled: productParams.size === 'small',
       },
     ],
@@ -86,7 +87,7 @@ export default function ProductPage() {
   const overlayClickHandler = () => navigate(`/?filter=${filter}`);
 
   const changeTypeHandler = (label) => {
-    const type = label === 'Классическая' ? 'classic' : 'thin';
+    const type = label === 'Классическое' ? 'classic' : 'thin';
 
     setProductParams((state) => ({ ...state, type }));
   };
@@ -104,7 +105,7 @@ export default function ProductPage() {
 
   return (
     <Wrapper>
-      <Overlay onClick={overlayClickHandler} />
+      <Overlay data-testid="product-overlay" onClick={overlayClickHandler} />
       <ProductPageStyled>
         <ImgWrapper>{imgOutput}</ImgWrapper>
         <InfoWrapper>

@@ -34,7 +34,9 @@ export default function CartButton() {
     <CartButtonStyled onClick={cartClickHandler}>
       <Total>{`${info.totalCost} ₽`}</Total>
       <Divider />
-      <Quantity>{items.length === 0 ? 'Корзина' : info.totalCount}</Quantity>
+      <Quantity data-testid="cart-item-count">
+        {items.length === 0 ? 'Корзина' : info.totalCount}
+      </Quantity>
     </CartButtonStyled>
   );
 }
