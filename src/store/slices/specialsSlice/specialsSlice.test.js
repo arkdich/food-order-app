@@ -47,7 +47,7 @@ describe('specialsSlice', () => {
       ]);
 
       await store.dispatch(
-        specialsActions.setSpecialsItems(store.getState().products.items.pizzas)
+        specialsActions.setSpecialsItems(store.getState().products.items)
       );
 
       expect(store.getState().specials.items).toEqual({

@@ -19,46 +19,44 @@ describe('productsSlice', () => {
 
       expect(state.products.status).toEqual('success');
       expect(state.products.items).toEqual({
-        pizzas: [
-          {
-            categories: ['spicy', 'cheese'],
-            id: '0tm7iWSKEY3971platI4',
-            img: { classic: '', thin: '' },
-            ingredients: [
-              'Пикантная пепперони',
-              'увеличенная порция моцареллы',
-              'томатный соус',
-            ],
-            price: { large: 749, normal: 639, small: 485 },
-            style: {
-              classic: { large: 810, normal: 610, small: 400 },
-              thin: { large: 710, normal: 490 },
-            },
-            title: 'Пепперони',
+        '0tm7iWSKEY3971platI4': {
+          categories: ['spicy', 'cheese'],
+          id: '0tm7iWSKEY3971platI4',
+          img: { classic: '', thin: '' },
+          ingredients: [
+            'Пикантная пепперони',
+            'увеличенная порция моцареллы',
+            'томатный соус',
+          ],
+          price: { large: 749, normal: 639, small: 485 },
+          style: {
+            classic: { large: 810, normal: 610, small: 400 },
+            thin: { large: 710, normal: 490 },
           },
-          {
-            id: '7gO5GkpRIXmbS6SLiZjs',
-            ingredients: [
-              'Цыпленок',
-              'ветчина',
-              'пикантная пепперони',
-              'острая чоризо',
-              'моцарелла',
-              'томатный соус',
-            ],
-            img: {
-              thin: '',
-              classic: '',
-            },
-            title: 'Мясная',
-            price: { normal: 699, large: 899, small: 575 },
-            categories: ['meat', 'spicy'],
-            style: {
-              classic: { normal: 645, large: 860, small: 450 },
-              thin: { large: 740, normal: 520 },
-            },
+          title: 'Пепперони',
+        },
+        '7gO5GkpRIXmbS6SLiZjs': {
+          id: '7gO5GkpRIXmbS6SLiZjs',
+          ingredients: [
+            'Цыпленок',
+            'ветчина',
+            'пикантная пепперони',
+            'острая чоризо',
+            'моцарелла',
+            'томатный соус',
+          ],
+          img: {
+            thin: '',
+            classic: '',
           },
-        ],
+          title: 'Мясная',
+          price: { normal: 699, large: 899, small: 575 },
+          categories: ['meat', 'spicy'],
+          style: {
+            classic: { normal: 645, large: 860, small: 450 },
+            thin: { large: 740, normal: 520 },
+          },
+        },
       });
     });
 
