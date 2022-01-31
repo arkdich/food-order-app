@@ -11,8 +11,8 @@ export const Header = styled.figure`
   img {
     width: 100%;
     margin-left: 6.5%;
-    cursor: pointer;
     transition: transform 200ms ease;
+    cursor: pointer;
 
     &:hover {
       transform: translateY(5px);

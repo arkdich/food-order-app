@@ -1,3 +1,4 @@
+import calcDiscountPrice from '@utils/formatters/calcDiscountPrice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import {
@@ -10,10 +11,15 @@ import {
 export default function CartButton() {
   const items = useSelector((state) => state.cart.items);
   const products = useSelector((state) => state.products.items);
+  const discounts = useSelector((state) => state.specials.items);
 
   const info = Object.values(items).reduce(
     (acc, curr) => {
-      acc.totalCost += products[curr.id].price[curr.size] * curr.count;
+      const price = products[curr.id].price[curr.size];
+      const discount = discounts[curr.id];
+
+      acc.totalCost +=
+        (discount ? calcDiscountPrice(price, discount) : price) * curr.count;
       acc.totalCount += curr.count;
 
       return acc;
@@ -30,12 +36,17 @@ export default function CartButton() {
     navigate('/cart', { replace: true });
   };
 
+  const isEmpty = items.length === 0;
+
   return (
     <CartButtonStyled onClick={cartClickHandler}>
       <Total>{`${info.totalCost} ₽`}</Total>
       <Divider />
-      <Quantity data-testid="cart-item-count">
-        {items.length === 0 ? 'Корзина' : info.totalCount}
+      <Quantity
+        data-testid="cart-item-count"
+        style={isEmpty ? { fontSize: '1.1rem', fontWeight: '500' } : {}}
+      >
+        {isEmpty ? 'Корзина' : info.totalCount}
       </Quantity>
     </CartButtonStyled>
   );

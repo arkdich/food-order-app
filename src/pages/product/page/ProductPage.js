@@ -17,6 +17,8 @@ import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 import { ReactComponent as Close } from '@assets/icons/close.svg';
 import SwitchComponent from '@components/Switch/SwitchComponent';
 import { cartActions } from '@store/slices/cartSlice/cartSlice';
+import { useEffect } from 'react';
+import calcDiscountPrice from '@utils/formatters/calcDiscountPrice';
 
 export default function ProductPage() {
   const location = useLocation();
@@ -24,6 +26,7 @@ export default function ProductPage() {
 
   const product = useSelector((state) => state.products.items[id]);
   const filter = useSelector((state) => state.products.filter);
+  const discounts = useSelector((state) => state.specials.items);
 
   const loaded = !!product;
 
@@ -81,6 +84,11 @@ export default function ProductPage() {
     <Placeholder style={{ width: '100%' }} />
   );
 
+  const price = product?.price[productParams.size];
+  const priceOutput = discounts[id]
+    ? calcDiscountPrice(price, discounts[id])
+    : price;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -102,6 +110,12 @@ export default function ProductPage() {
   const addItemHandler = () => {
     dispatch(cartActions.addItem(productParams));
   };
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => (document.body.style.overflow = 'auto');
+  }, []);
 
   return (
     <Wrapper>
@@ -130,7 +144,7 @@ export default function ProductPage() {
             disabled={!loaded}
             onClick={addItemHandler}
           >
-            {`Добавить за ${product?.price[productParams.size]} ₽`}
+            {`Добавить за ${priceOutput} ₽`}
           </AddButton>
         </InfoWrapper>
         <CloseBtn onClick={overlayClickHandler}>

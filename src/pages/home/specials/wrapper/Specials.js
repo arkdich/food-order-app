@@ -9,6 +9,7 @@ import {
 } from '@store/slices/specialsSlice/specialsSlice';
 import SpecialsControls from '../controls/SpecialsControls';
 import useMatchMedia from '@hooks/useMatchMedia';
+import { useNavigate } from 'react-router-dom';
 
 export default function Specials() {
   const {
@@ -26,9 +27,12 @@ export default function Specials() {
   const container = useRef();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const allLoaded =
     specialsStatus === 'success' && productsStatus === 'success';
+
+  const openModalHandler = (id) => navigate(`/product?id=${id}`);
 
   useEffect(() => {
     if (specialsStatus !== 'idle') return;
@@ -72,6 +76,7 @@ export default function Specials() {
                 price={product.price.small}
                 loaded={allLoaded}
                 isTablet={!media.matches}
+                onClick={() => openModalHandler(product.id)}
               />
             ))}
       </SpecialsWrapper>

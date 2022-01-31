@@ -13,6 +13,7 @@ export const SpecialsWrapper = styled(Container)`
   transition: transform 0.4s ease-in;
   ${({ isTablet }) =>
     isTablet && 'overflow: auto; scroll-snap-type: x mandatory'};
+  cursor: pointer;
 
   /* hide scrollbar */
   scrollbar-width: none;

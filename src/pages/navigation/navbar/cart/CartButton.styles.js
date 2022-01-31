@@ -20,7 +20,7 @@ export const CartButtonStyled = styled(Button)`
 export const Total = styled.span``;
 
 export const Divider = styled.div`
-  width: 2px;
+  width: 1px;
   height: 20px;
   margin: 0px 8px;
   border-radius: 20px;
