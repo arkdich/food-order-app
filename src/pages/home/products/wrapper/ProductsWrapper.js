@@ -4,11 +4,11 @@ import {
   ProductsContainer,
   Spinner,
 } from './ProductsWrapper.styles';
-import Product from '../item/Product';
+import ProductItem from '../item/ProductItem';
 import { ReactComponent as LoadingSpinner } from '@assets/icons/spinner.svg';
-import { Section, Title } from '@components/Section.styles';
+import { Section, Title } from '@assets/styles/Section.styles';
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '@store/slices/productsSlice/productsSlice';
+import { fetchProducts } from '@store/slices/products/productsSlice';
 import useMatchMedia from '@hooks/useMatchMedia';
 import breakpoints from '@utils/variables/breakpoints';
 
@@ -54,7 +54,7 @@ export default function ProductsWrapper() {
                 product.categories.includes(filter)
               )
           ).map((product) => (
-            <Product key={product.id} isTablet={isTablet} {...product} />
+            <ProductItem key={product.id} isTablet={isTablet} {...product} />
           ))}
         </ProductsContainer>
       )}

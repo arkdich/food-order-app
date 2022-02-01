@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Button from '@components/Button.styles';
+import Button from '@assets/styles/Button.styles';
 import colors from '@utils/variables/colors';
-import PlaceholderBG from '@components/Placeholder.style';
+import PlaceholderBG from '@assets/styles/Placeholder.style';
 
 export const SwitchComponentStyled = styled.div`
   position: relative;

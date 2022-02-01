@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PlaceholderBG from '@components/Placeholder.style';
+import PlaceholderBG from '@assets/styles/Placeholder.style';
 
 export const SpecialsItemStyled = styled.article`
   flex: 0 0 220px;

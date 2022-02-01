@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '@components/Button.styles';
+import Button from '@assets/styles/Button.styles';
 import colors from '@utils/variables/colors';
 
 export const Footer = styled.footer`

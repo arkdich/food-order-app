@@ -1,0 +1,12 @@
+{
+  "javascript.suggest.paths": false,
+  "typescript.suggest.paths": false,
+  "path-intellisense.mappings": {
+    "@assets": "${workspaceRoot}/src/assets",
+    "@components": "${workspaceRoot}/src/components",
+    "@hooks": "${workspaceRoot}/src/hooks",
+    "@pages": "${workspaceRoot}/src/pages",
+    "@store": "${workspaceRoot}/src/store",
+    "@utils": "${workspaceRoot}/src/utils"
+  }
+}

@@ -2,7 +2,7 @@ import { Footer, Price, AddButton } from './ProductFooter.styles';
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import Discount from '@components/Discount.style';
+import Discount from '@assets/styles/Discount.style';
 import calcPrice from '@utils/formatters/calcDiscountPrice';
 import { useNavigate } from 'react-router-dom';
 

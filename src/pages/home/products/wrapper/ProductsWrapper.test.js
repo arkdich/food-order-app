@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { getDocs } from '@firebase/firestore';
 import ProductsWrapper from './ProductsWrapper';
-import createStore from '@store/index';
+import createStore from '@store/';
 import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('@hooks/useMatchMedia');
