@@ -29,7 +29,6 @@ export const NavContainer = styled(Container)`
 export const Menu = styled.ul`
   display: flex;
   align-items: center;
-  margin-right: auto;
   list-style: none;
 `;
 

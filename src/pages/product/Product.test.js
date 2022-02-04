@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom';
 import ProductPage from '.';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
-import CartButton from 'src/layouts/navigation/navbar/cart/CartButton';
+import CartButton from 'src/layouts/navigation/cart/CartButton';
 
 jest.mock('@store/firestore');
 

@@ -4,6 +4,7 @@ import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from '../link/NavLink';
 import { productsActions } from '@store/slices/products/productsSlice';
+import CartButton from '../cart/CartButton';
 
 export default function NavBar() {
   const rootMatch = useMatch('/');
@@ -86,6 +87,7 @@ export default function NavBar() {
             </NavLink>
           </Item>
         </Menu>
+        <CartButton />
       </NavContainer>
     </NavBarStyled>
   );
