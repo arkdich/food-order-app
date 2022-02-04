@@ -1,17 +1,23 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from '../link/NavLink';
 import { productsActions } from '@store/slices/products/productsSlice';
 import CartButton from '../cart/CartButton';
+import useMatchMedia from '@hooks/useMatchMedia';
+import breakpoints from '@utils/variables/breakpoints';
 
 export default function NavBar() {
   const rootMatch = useMatch('/');
   const location = useLocation();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
+  const media = useMatchMedia(
+    `only screen and (max-width: ${breakpoints.tablet})`
+  );
+  const [isTablet, setIsTablet] = useState(media.matches);
 
   const filterValue =
     rootMatch && new URLSearchParams(location.search).get('filter');
@@ -30,6 +36,14 @@ export default function NavBar() {
       block: 'nearest',
     });
   };
+
+  useEffect(() => {
+    const callback = () => setIsTablet(media.matches);
+
+    media.addEventListener('change', callback);
+
+    return () => media.removeEventListener('change', callback);
+  }, [media]);
 
   useEffect(() => {
     if (rootMatch)
@@ -87,7 +101,7 @@ export default function NavBar() {
             </NavLink>
           </Item>
         </Menu>
-        <CartButton />
+        {!isTablet && <CartButton />}
       </NavContainer>
     </NavBarStyled>
   );
