@@ -2,14 +2,15 @@
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "node",
-    // "baseUrl": ".",
     "paths": {
-      "@assets*": ["src/assets*"],
-      "@components*": ["src/components*"],
-      "@hooks*": ["src/hooks*"],
-      "@pages*": ["src/pages*"],
-      "@store*": ["src/store*"],
-      "@utils*": ["src/utils*"]
+      "@root*": [".*"],
+      "@assets*": ["./src/assets*"],
+      "@components*": ["./src/components*"],
+      "@hooks*": ["./src/hooks*"],
+      "@layouts*": ["./src/layouts*"],
+      "@pages*": ["./src/pages*"],
+      "@store*": ["./src/store*"],
+      "@utils*": ["./src/utils*"]
     }
   },
   "exclude": ["node_modules", "dist", "build"]

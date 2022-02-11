@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router';
-import GlobalLayout from 'src/layouts/navigation';
+import GlobalLayout from '@layouts/navigation';
 import HomeLayout from '@pages/home';
 import ProductPage from '@pages/product';
 

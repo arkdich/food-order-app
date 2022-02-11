@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import createStore from '@store/';
 import { createMemoryHistory } from 'history';
 import ProductsWrapper from '@pages/home/products/wrapper/ProductsWrapper';
-import App from 'src/App';
+import App from '@root/src/App';
 
 jest.mock('@store/firestore');
 jest.mock('@hooks/useMatchMedia');

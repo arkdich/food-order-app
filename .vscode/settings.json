@@ -2,9 +2,11 @@
   "javascript.suggest.paths": false,
   "typescript.suggest.paths": false,
   "path-intellisense.mappings": {
+    "@root": "${workspaceRoot}",
     "@assets": "${workspaceRoot}/src/assets",
     "@components": "${workspaceRoot}/src/components",
     "@hooks": "${workspaceRoot}/src/hooks",
+    "@layouts": "${workspaceRoot}/src/layouts",
     "@pages": "${workspaceRoot}/src/pages",
     "@store": "${workspaceRoot}/src/store",
     "@utils": "${workspaceRoot}/src/utils"
