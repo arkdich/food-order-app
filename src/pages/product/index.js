@@ -8,10 +8,8 @@ import {
   Info,
   InfoWrapper,
   Ingredients,
-  Overlay,
   ProductPageStyled,
   Title,
-  Wrapper,
 } from './Product.styles';
 import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 import { ReactComponent as Close } from '@assets/icons/close.svg';
@@ -19,6 +17,8 @@ import SwitchComponent from '@components/Switch/SwitchComponent';
 import { cartActions } from '@store/slices/cart/cartSlice';
 import { useEffect } from 'react';
 import calcDiscountPrice from '@utils/formatters/calcDiscountPrice';
+import { Wrapper, Overlay } from '@assets/styles/Overlay.style';
+import { createPortal } from 'react-dom';
 
 export default function ProductPage() {
   const location = useLocation();
@@ -117,7 +117,7 @@ export default function ProductPage() {
     return () => (document.body.style.overflow = 'auto');
   }, []);
 
-  return (
+  return createPortal(
     <Wrapper>
       <Overlay data-testid="product-overlay" onClick={overlayClickHandler} />
       <ProductPageStyled>
@@ -151,6 +151,7 @@ export default function ProductPage() {
           <Close />
         </CloseBtn>
       </ProductPageStyled>
-    </Wrapper>
+    </Wrapper>,
+    document.getElementById('modal')
   );
 }

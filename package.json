@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^1.6.2",
     "eslint-plugin-react": "^7.27.1",
     "firebase": "^9.2.0",
+    "framer-motion": "^6.2.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -30,7 +31,8 @@
     "@testing-library/user-event": "^13.5.0",
     "eslint-plugin-jest": "^24.7.0",
     "eslint-plugin-jest-dom": "^3.9.2",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "react-error-overlay": "^6.0.9"
   },
   "browserslist": {
     "production": [

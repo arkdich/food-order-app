@@ -4,21 +4,6 @@ import breakpoints from '@utils/variables/breakpoints';
 import colors from '@utils/variables/colors';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
-
-export const Overlay = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.55);
-`;
-
 export const ProductPageStyled = styled.div`
   position: absolute;
   left: 50%;
