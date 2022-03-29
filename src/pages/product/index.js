@@ -15,12 +15,13 @@ import { ReactComponent as Placeholder } from '@assets/icons/placeholder.svg';
 import { ReactComponent as Close } from '@assets/icons/close.svg';
 import SwitchComponent from '@components/Switch/SwitchComponent';
 import { cartActions } from '@store/slices/cart/cartSlice';
-import { useEffect } from 'react';
 import calcDiscountPrice from '@utils/formatters/calcDiscountPrice';
 import { Wrapper, Overlay } from '@assets/styles/Overlay.style';
 import { createPortal } from 'react-dom';
+import useDisableScroll from '@hooks/useDisableScroll';
+import { motion } from 'framer-motion/dist/framer-motion';
 
-export default function ProductPage() {
+export default function Product() {
   const location = useLocation();
   const id = new URLSearchParams(location.search).get('id');
 
@@ -111,16 +112,26 @@ export default function ProductPage() {
     dispatch(cartActions.addItem(productParams));
   };
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
-    return () => (document.body.style.overflow = 'auto');
-  }, []);
+  useDisableScroll();
 
   return createPortal(
     <Wrapper>
-      <Overlay data-testid="product-overlay" onClick={overlayClickHandler} />
-      <ProductPageStyled>
+      <Overlay
+        data-testid="product-overlay"
+        onClick={overlayClickHandler}
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3, ease: 'linear' }}
+      />
+      <ProductPageStyled
+        as={motion.div}
+        initial={{ opacity: 0, transform: 'translate(-50%,-50%) scale(0.5)' }}
+        animate={{ opacity: 1, transform: 'translate(-50%,-50%) scale(1)' }}
+        exit={{ opacity: 0, transform: 'translate(-50%,-50%) scale(0.5)' }}
+        transition={{ duration: 0.2, ease: 'easeIn' }}
+      >
         <ImgWrapper>{imgOutput}</ImgWrapper>
         <InfoWrapper>
           <Title loaded={loaded}>{product?.title}</Title>

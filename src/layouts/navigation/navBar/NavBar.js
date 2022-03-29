@@ -33,6 +33,14 @@ export default function NavBar() {
     });
   };
 
+  const labels = {
+    all: 'Все',
+    meat: 'Мясные',
+    spicy: 'Острые',
+    cheese: 'Сырные',
+    veg: 'Овощные',
+  };
+
   useEffect(() => {
     if (rootMatch)
       if (!filterValue) navigate('/?filter=all', { replace: true });
@@ -43,51 +51,17 @@ export default function NavBar() {
     <NavBarStyled>
       <NavContainer>
         <Menu>
-          <Item>
-            <NavLink
-              to="/?filter=all"
-              matches={filterValue === 'all'}
-              onClick={scrollItemHandler}
-            >
-              Все
-            </NavLink>
-          </Item>
-          <Item>
-            <NavLink
-              to="/?filter=meat"
-              matches={filterValue === 'meat'}
-              onClick={scrollItemHandler}
-            >
-              Мясные
-            </NavLink>
-          </Item>
-          <Item>
-            <NavLink
-              to="/?filter=spicy"
-              matches={filterValue === 'spicy'}
-              onClick={scrollItemHandler}
-            >
-              Острые
-            </NavLink>
-          </Item>
-          <Item>
-            <NavLink
-              to="/?filter=cheese"
-              matches={filterValue === 'cheese'}
-              onClick={scrollItemHandler}
-            >
-              Сырные
-            </NavLink>
-          </Item>
-          <Item>
-            <NavLink
-              to="/?filter=veg"
-              matches={filterValue === 'veg'}
-              onClick={scrollItemHandler}
-            >
-              Овощные
-            </NavLink>
-          </Item>
+          {['all', 'meat', 'spicy', 'cheese', 'veg'].map((type) => (
+            <Item key={type}>
+              <NavLink
+                to={`/?filter=${type}`}
+                matches={filterValue === type}
+                onClick={scrollItemHandler}
+              >
+                {labels[type]}
+              </NavLink>
+            </Item>
+          ))}
         </Menu>
         {!isTablet && <CartButton />}
       </NavContainer>

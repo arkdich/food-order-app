@@ -9,11 +9,10 @@ jest.mock('@hooks/useMatchMedia');
 jest.mock('@store/firestore');
 
 beforeEach(() => {
-  const div = document.createElement('div');
+  const modal = document.createElement('div');
+  modal.id = 'modal';
 
-  div.id = 'modal';
-
-  document.body.append(div);
+  document.body.append(modal);
 });
 
 describe('Specials component', () => {

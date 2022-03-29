@@ -1,3 +1,4 @@
+import colors from '@utils/variables/colors';
 import styled from 'styled-components';
 
 export const CartStyled = styled.div`
@@ -6,6 +7,6 @@ export const CartStyled = styled.div`
   right: 0;
   width: 400px;
   height: 100%;
-  background-color: #fff;
   transition: transform 200ms ease-out;
+  background-color: ${colors.primary};
 `;

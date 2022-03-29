@@ -16,6 +16,11 @@ describe('ProductPage component', () => {
   beforeEach(async () => {
     store = createStore();
     await store.dispatch(fetchProducts());
+
+    const modal = document.createElement('div');
+    modal.id = 'modal';
+
+    document.body.append(modal);
   });
 
   test('renders product correctly', () => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import breakpoints from '../../../../utils/variables/breakpoints';
+import breakpoints from '@utils/variables/breakpoints';
 
 export const LoadingError = styled.h2`
   margin-top: 15px;
