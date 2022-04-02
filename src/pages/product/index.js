@@ -33,8 +33,10 @@ export default function Product() {
 
   const [productParams, setProductParams] = useState({
     id,
+    title: product?.title,
     type: 'classic',
     size: 'normal',
+    img: product?.img['classic'],
   });
 
   const productOptions = {
@@ -98,7 +100,7 @@ export default function Product() {
   const changeTypeHandler = (label) => {
     const type = label === 'Классическое' ? 'classic' : 'thin';
 
-    setProductParams((state) => ({ ...state, type }));
+    setProductParams((state) => ({ ...state, type, img: product.img[type] }));
   };
 
   const changeSizeHandler = (label) => {

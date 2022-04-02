@@ -13,9 +13,11 @@ import {
   Summary,
   Title,
 } from './Cart.styles';
+import CartEntry from './entry/CartEntry';
 
 export default function Cart() {
   const filter = useSelector((state) => state.products.filter);
+  const items = useSelector((state) => state.cart.items);
   const totalCount = useSelector((state) => state.cart.count);
   const totalCost = useSelector((state) => state.cart.cost);
 
@@ -53,7 +55,20 @@ export default function Cart() {
         exit={{ transform: 'translateX(100%)' }}
         transition={{ duration: 0.1, ease: 'easeIn' }}
       >
-        <OrderWrapper></OrderWrapper>
+        <OrderWrapper>
+          {items.map((item, index) => (
+            <CartEntry
+              key={index}
+              id={item.id}
+              type={item.type}
+              size={item.size}
+              price={item.price}
+              img={item.img}
+              title={item.title}
+              count={item.count}
+            />
+          ))}
+        </OrderWrapper>
         <Summary>
           <Title>{title}</Title>
           <Count>

@@ -12,7 +12,6 @@ export default function CartButton() {
   const totalCount = useSelector((state) => state.cart.count);
   const totalCost = useSelector((state) => state.cart.cost);
 
-  console.log('fff');
   const navigate = useNavigate();
 
   const cartClickHandler = () => {

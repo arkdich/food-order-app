@@ -17,20 +17,23 @@ export const CartStyled = styled.div`
 export const OrderWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
   padding: 15px;
 `;
 
 export const Summary = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-top: auto;
   padding: 15px;
   background-color: ${colors.secondary};
-  box-shadow: -4px 0px 4px 4px #00000008;
+  box-shadow: -4px 0px 8px 6px #00000012;
 `;
 
 export const Title = styled.span`
-  text-align: center;
+  font-weight: 500;
   font-size: 1.2rem;
 
   &::after {
