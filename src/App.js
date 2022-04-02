@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router';
 import GlobalLayout from '@layouts/navigation';
 import HomeLayout from '@pages/home';
 import ProductPage from '@pages/product';
-import Cart from '@pages/cart/Cart';
+import Cart from '@pages/cart';
 import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 import { useLocation } from 'react-router-dom';
 import { Fragment } from 'react';

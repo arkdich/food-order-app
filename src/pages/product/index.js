@@ -109,7 +109,7 @@ export default function Product() {
   };
 
   const addItemHandler = () => {
-    dispatch(cartActions.addItem(productParams));
+    dispatch(cartActions.addItem({ ...productParams, price: priceOutput }));
   };
 
   useDisableScroll();

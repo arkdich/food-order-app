@@ -4,10 +4,32 @@ import { motion } from 'framer-motion/dist/framer-motion';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CartStyled } from './Cart.styles';
+import {
+  CartStyled,
+  Count,
+  CountEntry,
+  OrderBtn,
+  OrderWrapper,
+  Summary,
+  Title,
+} from './Cart.styles';
 
 export default function Cart() {
   const filter = useSelector((state) => state.products.filter);
+  const totalCount = useSelector((state) => state.cart.count);
+  const totalCost = useSelector((state) => state.cart.cost);
+
+  const lastDigit = totalCount % 10;
+  const title = `${totalCount} товар${
+    totalCount >= 11 && totalCount <= 19
+      ? 'ов'
+      : lastDigit === 1
+      ? ''
+      : lastDigit === 2 || lastDigit === 3 || lastDigit === 4
+      ? 'а'
+      : 'ов'
+  }`;
+
   const navigate = useNavigate();
 
   const overlayClickHandler = () => navigate(`/?filter=${filter}`);
@@ -30,7 +52,16 @@ export default function Cart() {
         animate={{ transform: 'translateX(0%)' }}
         exit={{ transform: 'translateX(100%)' }}
         transition={{ duration: 0.1, ease: 'easeIn' }}
-      ></CartStyled>
+      >
+        <OrderWrapper></OrderWrapper>
+        <Summary>
+          <Title>{title}</Title>
+          <Count>
+            Сумма заказа <CountEntry>{totalCost} ₽</CountEntry>
+          </Count>
+          <OrderBtn>Заказать</OrderBtn>
+        </Summary>
+      </CartStyled>
     </Wrapper>,
     document.getElementById('modal')
   );
