@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
+  BtnWrapper,
   CartStyled,
   Count,
   CountEntry,
@@ -14,6 +15,8 @@ import {
   Title,
 } from './Cart.styles';
 import CartEntry from './entry/CartEntry';
+import { ReactComponent as BackIcon } from '@assets/icons/btnBack.svg';
+import { ReactComponent as NextIcon } from '@assets/icons/btnNext.svg';
 
 export default function Cart() {
   const filter = useSelector((state) => state.products.filter);
@@ -74,7 +77,14 @@ export default function Cart() {
           <Count>
             Сумма заказа <CountEntry>{totalCost} ₽</CountEntry>
           </Count>
-          <OrderBtn>Заказать</OrderBtn>
+          <BtnWrapper>
+            <OrderBtn onClick={overlayClickHandler}>
+              <BackIcon /> Назад
+            </OrderBtn>
+            <OrderBtn>
+              Заказать <NextIcon />
+            </OrderBtn>
+          </BtnWrapper>
         </Summary>
       </CartStyled>
     </Wrapper>,
