@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Overlay = styled.div`
+  position: absolute;
   z-index: 15;
   width: 100%;
   height: 100%;

@@ -4,6 +4,7 @@ import Btn from '@assets/styles/Button.styles';
 
 export const CartStyled = styled.div`
   position: absolute;
+  z-index: 16;
   top: 0;
   right: 0;
   display: flex;

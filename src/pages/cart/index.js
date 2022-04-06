@@ -17,12 +17,16 @@ import {
 import CartEntry from './entry/CartEntry';
 import { ReactComponent as BackIcon } from '@assets/icons/btnBack.svg';
 import { ReactComponent as NextIcon } from '@assets/icons/btnNext.svg';
+import { useState } from 'react';
+import CartModal from './modal/CartModal';
 
 export default function Cart() {
   const filter = useSelector((state) => state.products.filter);
   const items = useSelector((state) => state.cart.items);
   const totalCount = useSelector((state) => state.cart.count);
   const totalCost = useSelector((state) => state.cart.cost);
+
+  const [modalShown, setModalShown] = useState(false);
 
   const lastDigit = totalCount % 10;
   const title = `${totalCount} товар${
@@ -38,6 +42,11 @@ export default function Cart() {
   const navigate = useNavigate();
 
   const overlayClickHandler = () => navigate(`/?filter=${filter}`);
+
+  const orderBtnHandler = () =>
+    setTimeout(() => {
+      setModalShown(true);
+    }, 500);
 
   useDisableScroll();
 
@@ -81,12 +90,13 @@ export default function Cart() {
             <OrderBtn onClick={overlayClickHandler}>
               <BackIcon /> Назад
             </OrderBtn>
-            <OrderBtn>
+            <OrderBtn onClick={orderBtnHandler}>
               Заказать <NextIcon />
             </OrderBtn>
           </BtnWrapper>
         </Summary>
       </CartStyled>
+      {modalShown && <CartModal />}
     </Wrapper>,
     document.getElementById('modal')
   );

@@ -8,7 +8,7 @@ import {
   Title,
   CartEntryStyled,
 } from './CartEntry.styles';
-import EntryControls from './controls/EntryControls';
+import EntryControls from '../controls/EntryControls';
 
 export default function CartEntry(props) {
   const { id, type, size, price, img, title, count } = props;
