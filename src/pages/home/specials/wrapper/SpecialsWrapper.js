@@ -51,8 +51,17 @@ export default function SpecialsWrapper() {
   if (specialsStatus === 'error') return null;
 
   return (
-    <Section as="aside" style={{ position: 'relative', overflow: 'hidden' }}>
-      <Title>{allLoaded ? specialsInfo.title : 'Особые предложения'}</Title>
+    <Section
+      as="aside"
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        paddingBottom: '10px',
+      }}
+    >
+      <Title style={{ marginLeft: '0px' }}>
+        {allLoaded ? specialsInfo.title : 'Особые предложения'}
+      </Title>
       {media.matches && (
         <SpecialsControls
           container={container.current}

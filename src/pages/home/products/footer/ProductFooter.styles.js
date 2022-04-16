@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@assets/styles/Button.styles';
-import colors from '@utils/variables/colors';
 
 export const Footer = styled.footer`
   display: flex;
@@ -16,5 +15,6 @@ export const Price = styled.p`
 export const AddButton = styled(Button)`
   margin-top: ${(props) => (props.mobile ? '12px' : '0px')};
   color: #fff;
-  background-color: ${colors.brand};
+  background-color: #ffcc82;
+  font-weight: 500;
 `;

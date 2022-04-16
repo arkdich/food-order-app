@@ -20,6 +20,14 @@ export default function ProductsWrapper() {
 
   const dispatch = useDispatch();
 
+  const labels = {
+    all: 'Все',
+    meat: 'Мясные',
+    spicy: 'Острые',
+    cheese: 'Сырные',
+    veg: 'Овощные',
+  };
+
   useEffect(() => {
     if (status !== 'idle') return;
 
@@ -28,7 +36,7 @@ export default function ProductsWrapper() {
 
   return (
     <Section as="main">
-      <Title>Все пиццы</Title>
+      <Title>{labels[filter]} пиццы</Title>
       {status === 'loading' && <Spinner as={LoadingSpinner} />}
       {status === 'error' && (
         <LoadingError>Что-то пошло не так, уже чиним 🏃</LoadingError>

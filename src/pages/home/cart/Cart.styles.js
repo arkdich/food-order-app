@@ -7,11 +7,11 @@ export const CartStyled = styled.button`
   right: 24px;
   width: 65px;
   height: 65px;
-  padding: 14px;
+  padding: 13px 13px 7px 12px;
   background-color: ${colors.secondary};
   border-style: none;
   border-radius: 50%;
-  box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.05);
 
   &:active {
     transform: scale(0.95);
@@ -22,8 +22,8 @@ export const Icon = styled.img``;
 
 export const Count = styled.div`
   position: absolute;
-  top: -6px;
-  right: -5px;
+  top: -5px;
+  right: -4px;
   font-size: 0.9rem;
   padding: 3px 8px;
   border-radius: 50%;
