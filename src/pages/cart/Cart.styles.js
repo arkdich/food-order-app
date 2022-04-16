@@ -9,6 +9,7 @@ export const CartStyled = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 400px;
   height: 100%;
   transition: transform 200ms ease-out;
@@ -31,7 +32,6 @@ export const Summary = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: auto;
   padding: 15px;
   background-color: ${colors.secondary};
   box-shadow: -4px 0px 8px 6px #00000012;
@@ -78,6 +78,11 @@ export const OrderBtn = styled(Btn)`
   color: #fff;
   background-color: ${colors.brand};
 
+  &:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+
   svg {
     position: absolute;
     top: 11px;
@@ -89,5 +94,20 @@ export const OrderBtn = styled(Btn)`
       right: unset;
       left: 10px;
     }
+  }
+`;
+
+export const EmptyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+
+  img {
+    margin-top: 25px;
+    width: 160px;
   }
 `;

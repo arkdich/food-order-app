@@ -9,9 +9,10 @@ import {
   CartEntryStyled,
 } from './CartEntry.styles';
 import EntryControls from '../controls/EntryControls';
+import { motion } from 'framer-motion/dist/framer-motion';
 
 export default function CartEntry(props) {
-  const { id, type, size, price, img, title, count } = props;
+  const { id, type, size, price, img, title, count, last } = props;
 
   const options = {
     type: {
@@ -26,7 +27,11 @@ export default function CartEntry(props) {
   };
 
   return (
-    <CartEntryStyled>
+    <CartEntryStyled
+      as={motion.article}
+      exit={last ? {} : { transform: 'translateX(200%)' }}
+      transition={{ duration: 0.4 }}
+    >
       <Left>
         <img src={img} alt={`Пицца ${title}`} />
       </Left>
@@ -56,4 +61,5 @@ CartEntry.propTypes = {
   img: PropTypes.string,
   price: PropTypes.number,
   count: PropTypes.number,
+  last: PropTypes.bool,
 };

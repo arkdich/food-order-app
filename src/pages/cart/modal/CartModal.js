@@ -15,7 +15,9 @@ export default function CartModal() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const overlayClickHandler = () => navigate(`/?filter=${filter}`);
+  const overlayClickHandler = () => {
+    if (isReady) navigate(`/?filter=${filter}`);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -44,7 +46,7 @@ export default function CartModal() {
       >
         {isReady ? (
           <Fragment>
-            <Text>Готово! Ожидайте заказ в течении 30 минут</Text>
+            <Text>Готово! Ожидайте доставки в течении 30 минут</Text>
             <img src={checkMark + '?' + Date.now()} alt="Check mark" />
           </Fragment>
         ) : (
