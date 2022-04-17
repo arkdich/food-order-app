@@ -13,13 +13,11 @@ export default function App() {
   return (
     <Fragment>
       <GlobalLayout />
+      <HomeLayout />
       <AnimatePresence>
         <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<HomeLayout />}>
-            <Route path="product" element={<ProductPage />} />
-            <Route path="cart" element={<Cart />} />
-          </Route>
-          <Route path="*" element={<p>Упс! Кажется вы ошиблись ссылкой</p>} />
+          <Route path="product" element={<ProductPage />} />
+          <Route path="cart" element={<Cart />} />
         </Routes>
       </AnimatePresence>
     </Fragment>

@@ -8,17 +8,16 @@ import {
 } from './CartButton.styles';
 
 export default function CartButton() {
-  const items = useSelector((state) => state.cart.items);
   const totalCount = useSelector((state) => state.cart.count);
   const totalCost = useSelector((state) => state.cart.cost);
 
   const navigate = useNavigate();
 
   const cartClickHandler = () => {
-    navigate('/cart', { replace: true });
+    navigate('/cart');
   };
 
-  const isEmpty = items.length === 0;
+  const isEmpty = totalCost === 0;
 
   return (
     <CartButtonStyled onClick={cartClickHandler}>

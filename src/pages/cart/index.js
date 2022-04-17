@@ -41,7 +41,7 @@ export default function Cart() {
       : 'ов'
   }`;
 
-  const isEmpty = items.length === 0;
+  const isEmpty = totalCount === 0;
 
   const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ export default function Cart() {
                 img={item.img}
                 title={item.title}
                 count={item.count}
-                last={items.length === 1}
+                last={totalCount === 1}
               />
             ))}
           </AnimatePresence>
