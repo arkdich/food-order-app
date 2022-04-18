@@ -19,12 +19,12 @@ export default function EntryControls(props) {
   };
 
   return (
-    <EntryControlsStyled>
-      <Button onClick={removeBtnHandler}>
+    <EntryControlsStyled data-testid="cart-items-count">
+      <Button aria-label="Remove item" onClick={removeBtnHandler}>
         <RemoveIcon />
       </Button>
       {count}
-      <Button onClick={addBtnHandler}>
+      <Button aria-label="Add item" onClick={addBtnHandler}>
         <AddIcon />
       </Button>
     </EntryControlsStyled>
