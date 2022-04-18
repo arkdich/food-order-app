@@ -21,6 +21,7 @@ beforeEach(() => {
 describe('NavBar component', () => {
   beforeAll(() => {
     Element.prototype.scrollIntoView = () => {};
+    console.warn = () => {};
   });
 
   test('appends default filter if none', () => {
@@ -100,7 +101,7 @@ describe('NavBar component', () => {
     expect(meat).not.toBeInTheDocument();
   });
 
-  test('renders 404 page', async () => {
+  test('redirects on wrong link', async () => {
     const history = createMemoryHistory({
       initialEntries: ['/nonexistingstuff'],
       initialIndex: 0,
@@ -114,12 +115,7 @@ describe('NavBar component', () => {
       </Router>
     );
 
-    const title = screen.getByText(/ошибли/);
-
-    await new Promise((r) => setTimeout(r));
-
-    expect(title).toBeInTheDocument();
-    expect(screen.queryAllByRole('article')).toHaveLength(0);
-    expect(history.location.pathname).toEqual('/nonexistingstuff');
+    expect(history.location.pathname).toEqual('/');
+    expect(history.location.search).toEqual('?filter=all');
   });
 });

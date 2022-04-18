@@ -33,7 +33,7 @@ const cartSlice = createSlice({
       if (entry.count === 0)
         state.items = state.items.filter((item) => item !== entry);
     },
-    emptyCart(state, payload) {
+    emptyCart(state) {
       state.items = [];
       state.count = 0;
       state.cost = 0;

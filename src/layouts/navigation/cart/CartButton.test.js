@@ -31,20 +31,9 @@ describe('CartButton component', () => {
   test('renders total cost and count', async () => {
     const store = createStore({
       cart: {
-        items: [
-          {
-            id: '0tm7iWSKEY3971platI4',
-            type: 'classic',
-            size: 'large',
-            count: 2,
-          },
-          {
-            id: '0tm7iWSKEY3971platI4',
-            type: 'classic',
-            size: 'normal',
-            count: 1,
-          },
-        ],
+        items: [],
+        count: 3,
+        cost: 1880,
       },
     });
 
@@ -58,7 +47,7 @@ describe('CartButton component', () => {
       </BrowserRouter>
     );
 
-    const cost = screen.getByText(/2137/);
+    const cost = screen.getByText(/1880/);
     const count = screen.getByText('3');
 
     expect(cost).toBeInTheDocument();
