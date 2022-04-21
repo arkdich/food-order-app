@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/food-order-app/static/js/main.0e03b386.chunk.js",
-    "main.js.map": "/food-order-app/static/js/main.0e03b386.chunk.js.map",
+    "main.js": "/food-order-app/static/js/main.2ca928b9.chunk.js",
+    "main.js.map": "/food-order-app/static/js/main.2ca928b9.chunk.js.map",
     "runtime-main.js": "/food-order-app/static/js/runtime-main.d8900782.js",
     "runtime-main.js.map": "/food-order-app/static/js/runtime-main.d8900782.js.map",
     "static/js/2.0f9b660c.chunk.js": "/food-order-app/static/js/2.0f9b660c.chunk.js",
@@ -24,6 +24,6 @@
   "entrypoints": [
     "static/js/runtime-main.d8900782.js",
     "static/js/2.0f9b660c.chunk.js",
-    "static/js/main.0e03b386.chunk.js"
+    "static/js/main.2ca928b9.chunk.js"
   ]
 }
