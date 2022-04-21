@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.js": "/static/js/main.0e03b386.chunk.js",
+    "main.js.map": "/static/js/main.0e03b386.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1036830f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1036830f.js.map",
+    "static/js/2.6b6362c8.chunk.js": "/static/js/2.6b6362c8.chunk.js",
+    "static/js/2.6b6362c8.chunk.js.map": "/static/js/2.6b6362c8.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.6b6362c8.chunk.js.LICENSE.txt": "/static/js/2.6b6362c8.chunk.js.LICENSE.txt",
+    "static/media/btnBack.1ccd37ab.svg": "/static/media/btnBack.1ccd37ab.svg",
+    "static/media/btnLeft.2998fdfc.svg": "/static/media/btnLeft.2998fdfc.svg",
+    "static/media/btnNext.05473598.svg": "/static/media/btnNext.05473598.svg",
+    "static/media/btnRight.6a4514d6.svg": "/static/media/btnRight.6a4514d6.svg",
+    "static/media/cartReady.f2a74747.gif": "/static/media/cartReady.f2a74747.gif",
+    "static/media/cartSpinner.e1a15b4d.svg": "/static/media/cartSpinner.e1a15b4d.svg",
+    "static/media/close.45b0e37a.svg": "/static/media/close.45b0e37a.svg",
+    "static/media/logo.98e1c607.svg": "/static/media/logo.98e1c607.svg",
+    "static/media/minus.d84fe502.svg": "/static/media/minus.d84fe502.svg",
+    "static/media/placeholder.b53287d7.svg": "/static/media/placeholder.b53287d7.svg",
+    "static/media/plus.e828acb8.svg": "/static/media/plus.e828acb8.svg",
+    "static/media/spinner.7c7cccbf.svg": "/static/media/spinner.7c7cccbf.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1036830f.js",
+    "static/js/2.6b6362c8.chunk.js",
+    "static/js/main.0e03b386.chunk.js"
+  ]
+}
