@@ -8,7 +8,7 @@ import { StyleSheetManager } from 'styled-components';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/food-order-app">
       <Provider store={createStore()}>
         <StyleSheetManager
           disableVendorPrefixes={process.env.NODE_ENV === 'development'}
