@@ -8,7 +8,7 @@ export default function GlobalLayout() {
     <Fragment>
       <GlobalStyle />
       <Header />
-      <NavBar />
+      {/* <NavBar /> */}
     </Fragment>
   );
 }

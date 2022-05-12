@@ -4,7 +4,7 @@ import {
   LogoStyled,
   Phone,
 } from './Header.styles';
-import { ReactComponent as Logo } from '@assets/icons/logo.svg';
+import Logo from '@assets/icons/logo.svg';
 
 export default function Header() {
   return (
