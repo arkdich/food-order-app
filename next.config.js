@@ -2,15 +2,25 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: false,
   // basePath: '/food-order-app',
-  compiler: {
-    styledComponents: true,
+  // compiler: {
+  //   styledComponents: true,
+  // },
+  images: {
+    domains: ['dodopizza-a.akamaihd.net'],
   },
   webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
+    config.module.rules.push(
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.test.js$/,
+        loader: 'ignore-loader',
+      }
+    );
 
     return config;
   },

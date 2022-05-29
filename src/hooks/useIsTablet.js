@@ -7,9 +7,13 @@ export default function useIsTablet() {
     `only screen and (max-width: ${breakpoints.tablet})`
   );
 
-  const [isTablet, setIsTablet] = useState(media.matches);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
+    if (!media) return;
+
+    setIsTablet(media.matches);
+
     const callback = () => setIsTablet(media.matches);
 
     media.addEventListener('change', callback);

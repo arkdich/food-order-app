@@ -1,4 +1,4 @@
-import createStore from '@store/';
+import createStore from '@store/index';
 import { fetchProducts } from './productsSlice';
 import { getDocs } from '@firebase/firestore';
 

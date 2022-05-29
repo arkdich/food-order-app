@@ -5,10 +5,10 @@
     "es2021": true
   },
   "extends": [
+    "next",
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:jest/recommended"
+    "plugin:react/jsx-runtime"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -19,8 +19,7 @@
   },
   "rules": {
     "no-unused-vars": "warn",
-    "jest/expect-expect": "off",
-    "jest/no-focused-tests": "warn"
+    "no-undef": "error"
   },
   "settings": {
     "react": {

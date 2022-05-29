@@ -1,26 +1,48 @@
-import GlobalLayout from '@layouts/navigation';
-import { Fragment, useEffect } from 'react';
-import HomeLayout from './home';
 import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { productsActions } from '@store/slices/products/productsSlice';
+import { specialsActions } from '@store/slices/specials/specialsSlice';
 import Head from 'next/head';
+import RootPage from '@components/elements/root';
+import GlobalLayout from '@layouts/global';
+import useIsTablet from '@hooks/useIsTablet';
 
-export default function HomePage(props) {
+export const IndexCtx = React.createContext({ isTablet: false });
+
+export default function IndexPage(props) {
   const { products, specials } = props;
 
+  console.log('HOME');
+
+  const dispatch = useDispatch();
+  const isTablet = useIsTablet();
+
+  useEffect(() => {
+    if (products && specials) {
+      dispatch(productsActions.setItems(products));
+      dispatch(specialsActions.setItems({ products, specials }));
+      console.log('DISPATCH');
+    }
+  }, [dispatch, products, specials]);
+
   return (
-    <Fragment>
+    <IndexCtx.Provider value={{ isTablet }}>
       <Head>
         <title>Доставка еды в вашем городе!</title>
       </Head>
       <GlobalLayout />
-      <HomeLayout />
-    </Fragment>
+      <RootPage />
+    </IndexCtx.Provider>
   );
 }
 
 export async function getStaticProps() {
   const admin = require('firebase-admin');
   const serviceAccount = require('../../firebaseAdminSDK.json');
+  const { store } = require('../store');
+
+  console.log(store);
 
   if (admin.apps.length === 0) {
     admin.initializeApp({
@@ -49,6 +71,7 @@ export async function getStaticProps() {
 
   const specials = specialsRef.docs[0].data();
 
+  console.log('SERVER');
   return {
     props: {
       products,
@@ -56,8 +79,7 @@ export async function getStaticProps() {
     },
   };
 }
-
-HomePage.propTypes = {
+IndexPage.propTypes = {
   products: PropTypes.object,
   specials: PropTypes.object,
 };

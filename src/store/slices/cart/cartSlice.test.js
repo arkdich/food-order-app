@@ -1,4 +1,4 @@
-import createStore from '@store/';
+import createStore from '@store/index';
 import { cartActions } from './cartSlice';
 
 jest.mock('@store/firestore');

@@ -1,32 +1,15 @@
-import { getDoc } from '@firebase/firestore';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { specialsRef } from '../../firestore';
-
-export const fetchSpecials = createAsyncThunk(
-  'products/fetchSpecials',
-  async (_payload, { rejectWithValue }) => {
-    try {
-      const specialsDoc = await getDoc(specialsRef);
-
-      return specialsDoc.data();
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
+import { createSlice } from '@reduxjs/toolkit';
 
 const specialsSlice = createSlice({
   name: 'specials',
   initialState: {
     info: {},
     items: {},
-    status: 'idle',
     error: null,
   },
   reducers: {
-    setSpecialsItems(state, action) {
-      const globalDiscounts = state.info.discounts;
-      const products = action.payload;
+    setItems(state, { payload: { specials, products } }) {
+      const globalDiscounts = specials.discounts;
 
       const items = {};
 
@@ -41,21 +24,7 @@ const specialsSlice = createSlice({
       });
 
       state.items = items;
-    },
-  },
-  extraReducers: {
-    [fetchSpecials.pending]: (state) => {
-      state.status = 'loading';
-    },
-    [fetchSpecials.fulfilled]: (state, action) => {
-      state.status = 'success';
-      state.info = action.payload;
-    },
-    [fetchSpecials.rejected]: (state, action) => {
-      state.status = 'error';
-      state.error = action.payload;
-
-      console.log(action.payload);
+      state.info = specials;
     },
   },
 });
