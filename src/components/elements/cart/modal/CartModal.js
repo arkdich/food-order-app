@@ -20,9 +20,6 @@ export default function CartModal() {
     if (isReady) router.push(`/?filter=${filter}`);
   };
 
-  console.log(checkMark);
-  console.log(LoadingSpinner);
-
   useEffect(() => {
     setTimeout(() => {
       setIsReady(true);

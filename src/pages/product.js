@@ -22,13 +22,12 @@ import useDisableScroll from '@hooks/useDisableScroll';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import getURLSearch from '@utils/formatters/getURLSearch';
 
 export default function ProductPage() {
   const router = useRouter();
 
-  const id = new URLSearchParams(
-    router.asPath.substring(router.asPath.indexOf('?'))
-  ).get('id');
+  const id = getURLSearch(router.asPath, 'id');
 
   const product = useSelector((state) => state.products.items[id]);
   const filter = useSelector((state) => state.products.filter);

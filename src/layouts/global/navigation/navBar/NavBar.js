@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from '../navLink/NavLink';
 import { productsActions } from '@store/slices/products/productsSlice';
@@ -8,17 +8,17 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { IndexCtx } from '@pages/index';
+import getURLSearch from '@utils/formatters/getURLSearch';
 
 export default function NavBar() {
   const context = useContext(IndexCtx);
+  const storedFilter = useSelector((state) => state.products.filter);
 
   const dispatch = useDispatch();
   const router = useRouter();
 
   const isRoot = router.pathname === '/';
-  const filterValue =
-    isRoot &&
-    new URLSearchParams(router.asPath.split('/').at(-1)).get('filter');
+  const currentFilter = isRoot && getURLSearch(router.asPath, 'filter');
 
   console.log(router);
 
@@ -41,11 +41,13 @@ export default function NavBar() {
   useEffect(() => {
     if (!isRoot) return;
 
-    if (!filterValue) router.replace('/?filter=all', null, { shallow: true });
-    else dispatch(productsActions.changeFilter(filterValue));
+    if (!currentFilter)
+      router.replace(`/?filter=${storedFilter}`, null, { shallow: true });
+    else if (currentFilter === storedFilter) return;
+    else dispatch(productsActions.changeFilter(currentFilter));
 
-    console.log(isRoot, filterValue);
-  }, [dispatch, filterValue, isRoot, router.pathname, router]);
+    console.log(isRoot, currentFilter);
+  }, [dispatch, currentFilter, storedFilter, isRoot, router.pathname, router]);
 
   return (
     <NavBarStyled>
@@ -55,7 +57,7 @@ export default function NavBar() {
             <Item key={type}>
               <Link href={`/?filter=${type}`} passHref shallow={true}>
                 <NavLink
-                  matches={filterValue === type}
+                  matches={currentFilter === type}
                   onClick={scrollItemHandler}
                 >
                   {labels[type]}

@@ -1,6 +1,6 @@
 import calcPrice from '@utils/formatters/calcDiscountPrice';
 
-describe('Discount formatter', () => {
+describe('calcDiscountPrice', () => {
   describe('works', () => {
     test('with ints', () => {
       expect(calcPrice(100, 10)).toEqual(90);
