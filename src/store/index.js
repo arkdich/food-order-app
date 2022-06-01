@@ -12,6 +12,7 @@ const combined = combineReducers({
 
 function reducer(state, action) {
   if (action.type === HYDRATE) {
+    return action.payload;
   } else return combined(state, action);
 }
 

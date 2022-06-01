@@ -39,7 +39,9 @@ export default function ProductsWrapper(props) {
           <ProductItem
             key={product.id}
             isTablet={isTablet}
-            onClick={() => router.push(`/product?id=${product.id}`)}
+            onClick={() =>
+              router.push(`/?id=${product.id}`, null, { shallow: true })
+            }
             {...product}
           />
         ))}

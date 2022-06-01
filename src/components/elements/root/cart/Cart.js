@@ -10,7 +10,8 @@ export default function Cart() {
 
   const count = Object.values(items).reduce((acc, curr) => acc + curr.count, 0);
 
-  const btnClickHandler = () => router.push('/cart');
+  const btnClickHandler = () =>
+    router.push('/?cart=shown', null, { shallow: true });
 
   return (
     <CartStyled onClick={btnClickHandler}>

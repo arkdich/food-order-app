@@ -13,12 +13,12 @@ import {
   OrderWrapper,
   Summary,
   Title,
-} from '../components/elements/cart/Cart.styles';
-import CartEntry from '../components/elements/cart/entry/CartEntry';
+} from './Cart.styles';
+import CartEntry from './entry/CartEntry';
 import BackIcon from '@assets/icons/btnBack.svg';
 import NextIcon from '@assets/icons/btnNext.svg';
 import { useEffect, useState } from 'react';
-import CartModal from '../components/elements/cart/modal/CartModal';
+import CartModal from './modal/CartModal';
 import cartIcon from '@assets/icons/basket.png';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -47,7 +47,8 @@ export default function CartPage() {
 
   const router = useRouter();
 
-  const overlayClickHandler = () => router.push(`/?filter=${filter}`);
+  const overlayClickHandler = () =>
+    router.push(`/?filter=${filter}`, null, { shallow: true });
 
   const orderBtnHandler = () => {
     if (isEmpty) return;

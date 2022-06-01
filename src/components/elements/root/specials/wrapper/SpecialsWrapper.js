@@ -21,7 +21,8 @@ export default function SpecialsWrapper() {
   const container = useRef();
   const router = useRouter();
 
-  const openModalHandler = (id) => router.push(`/product?id=${id}`);
+  const openModalHandler = (id) =>
+    router.push(`/?id=${id}`, null, { shallow: true });
 
   if (specialsError) return null;
 

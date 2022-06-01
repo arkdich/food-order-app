@@ -3,7 +3,7 @@ import createStore from '@store/index';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 // import { Router } from 'react-router-dom';
-import ProductPage from '../../../pages/product';
+import ProductPage from '.';
 // import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 import CartButton from '@layouts/navigation/cart/CartButton';

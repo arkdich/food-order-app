@@ -4,13 +4,11 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Discount from '@assets/styles/Discount.style';
 import calcPrice from '@utils/formatters/calcDiscountPrice';
-import { useRouter } from 'next/router';
 
 export default function ProductFooter(props) {
-  const { price, id, isTablet } = props;
+  const { price, id, isTablet, onAdd } = props;
 
   const discount = useSelector((state) => state.specials.items[id]);
-  const router = useRouter();
 
   const finalPrice = discount ? (
     <Discount price={price} place={isTablet ? 'mobile' : 'top'}>
@@ -19,20 +17,17 @@ export default function ProductFooter(props) {
   ) : (
     `от ${price} ₽`
   );
-
-  const addBtnHandler = () => router.push(`product?id=${id}`);
-
   return (
     <Footer>
       {isTablet && (
-        <AddButton mobile={discount && isTablet} onClick={addBtnHandler}>
+        <AddButton mobile={discount && isTablet} onClick={onAdd}>
           {finalPrice}
         </AddButton>
       )}
       {!isTablet && (
         <Fragment>
           <Price>{finalPrice}</Price>
-          <AddButton mobile={discount && isTablet} onClick={addBtnHandler}>
+          <AddButton mobile={discount && isTablet} onClick={onAdd}>
             Выбрать
           </AddButton>
         </Fragment>
@@ -45,4 +40,5 @@ ProductFooter.propTypes = {
   id: PropTypes.string,
   price: PropTypes.number,
   isTablet: PropTypes.bool,
+  onAdd: PropTypes.func,
 };

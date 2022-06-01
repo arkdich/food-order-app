@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 import {
   Body,
@@ -7,29 +8,24 @@ import {
   Ingredients,
 } from './ProductItem.styles';
 import ProductFooter from '../footer/ProductFooter';
-import { useState } from 'react';
-import Placeholder from '@assets/icons/placeholder.svg';
 
 export default function ProductItem(props) {
   const { id, title, ingredients, price, img, isTablet, onClick } = props;
-  const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <ProductStyled>
+    <ProductStyled onClick={onClick}>
       <Header>
-        <img
-          src={img.classic}
-          alt="Пицца"
-          style={{ display: imgLoaded ? 'block' : 'none' }}
-          onLoad={() => setImgLoaded(true)}
-          onClick={onClick}
-        />
-        {!imgLoaded && <Placeholder />}
+        <img src={img.classic} alt="Пицца" />
       </Header>
       <Body>
         <Title>{title}</Title>
         <Ingredients>{ingredients.join(', ')}</Ingredients>
-        <ProductFooter id={id} price={price.small} isTablet={isTablet} />
+        <ProductFooter
+          id={id}
+          price={price.small}
+          isTablet={isTablet}
+          onAdd={onClick}
+        />
       </Body>
     </ProductStyled>
   );

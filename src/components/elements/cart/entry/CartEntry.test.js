@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 // import { BrowserRouter } from 'react-router-dom';
-import Cart from '../../../../pages/cart';
+import Cart from '..';
 
 jest.mock('@store/firestore');
 

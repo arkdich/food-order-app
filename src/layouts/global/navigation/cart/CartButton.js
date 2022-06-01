@@ -13,7 +13,8 @@ export default function CartButton() {
 
   const router = useRouter();
 
-  const cartClickHandler = () => router.push('/cart');
+  const cartClickHandler = () =>
+    router.push('/?cart=shown', null, { shallow: true });
 
   const isEmpty = totalCost === 0;
 

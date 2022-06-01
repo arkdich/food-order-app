@@ -1,8 +1,6 @@
-import { useContext, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useContext } from 'react';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from '../navLink/NavLink';
-import { productsActions } from '@store/slices/products/productsSlice';
 import CartButton from '../cart/CartButton';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -12,15 +10,9 @@ import getURLSearch from '@utils/formatters/getURLSearch';
 
 export default function NavBar() {
   const context = useContext(IndexCtx);
-  const storedFilter = useSelector((state) => state.products.filter);
-
-  const dispatch = useDispatch();
   const router = useRouter();
 
-  const isRoot = router.pathname === '/';
-  const currentFilter = isRoot && getURLSearch(router.asPath, 'filter');
-
-  console.log(router);
+  const currentFilter = getURLSearch(router.asPath, 'filter');
 
   const labels = {
     all: 'Все',
@@ -37,17 +29,6 @@ export default function NavBar() {
       block: 'nearest',
     });
   };
-
-  useEffect(() => {
-    if (!isRoot) return;
-
-    if (!currentFilter)
-      router.replace(`/?filter=${storedFilter}`, null, { shallow: true });
-    else if (currentFilter === storedFilter) return;
-    else dispatch(productsActions.changeFilter(currentFilter));
-
-    console.log(isRoot, currentFilter);
-  }, [dispatch, currentFilter, storedFilter, isRoot, router.pathname, router]);
 
   return (
     <NavBarStyled>

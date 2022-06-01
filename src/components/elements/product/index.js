@@ -10,7 +10,7 @@ import {
   Ingredients,
   ProductPageStyled,
   Title,
-} from '../components/elements/product/Product.styles';
+} from './Product.styles';
 import Placeholder from '@assets/icons/placeholder.svg';
 import Close from '@assets/icons/close.svg';
 import SwitchComponent from '@components/shared/Switch/SwitchComponent';
@@ -100,7 +100,8 @@ export default function ProductPage() {
     ? calcDiscountPrice(price, discounts[id])
     : price;
 
-  const overlayClickHandler = () => router.push(`/?filter=${filter}`);
+  const overlayClickHandler = () =>
+    router.push(`/?filter=${filter}`, null, { shallow: true });
 
   const changeTypeHandler = (label) => {
     const type = label === 'Классическое' ? 'classic' : 'thin';

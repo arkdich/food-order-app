@@ -17,7 +17,7 @@ export default function CartModal() {
   const dispatch = useDispatch();
 
   const overlayClickHandler = () => {
-    if (isReady) router.push(`/?filter=${filter}`);
+    if (isReady) router.push(`/?filter=${filter}`, null, { shallow: true });
   };
 
   useEffect(() => {
