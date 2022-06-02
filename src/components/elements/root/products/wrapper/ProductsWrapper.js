@@ -10,6 +10,7 @@ export default function ProductsWrapper(props) {
 
   const products = useSelector((state) => state.products.items);
   const filter = useSelector((state) => state.products.filter);
+  const error = useSelector((state) => state.products.error);
 
   const router = useRouter();
 
@@ -26,26 +27,27 @@ export default function ProductsWrapper(props) {
   return (
     <Section as="main">
       <Title>{labels[filter]} пиццы</Title>
-      {/* {status === 'error' && (
+      {error ? (
         <LoadingError>Что-то пошло не так, уже чиним 🏃</LoadingError>
-      )} */}
-      <ProductsContainer>
-        {(filter === 'all'
-          ? Object.values(products)
-          : Object.values(products).filter((product) =>
-              product.categories.includes(filter)
-            )
-        ).map((product) => (
-          <ProductItem
-            key={product.id}
-            isTablet={isTablet}
-            onClick={() =>
-              router.push(`/?id=${product.id}`, null, { shallow: true })
-            }
-            {...product}
-          />
-        ))}
-      </ProductsContainer>
+      ) : (
+        <ProductsContainer>
+          {(filter === 'all'
+            ? Object.values(products)
+            : Object.values(products).filter((product) =>
+                product.categories.includes(filter)
+              )
+          ).map((product) => (
+            <ProductItem
+              key={product.id}
+              isTablet={isTablet}
+              onClick={() =>
+                router.push(`/?id=${product.id}`, null, { shallow: true })
+              }
+              {...product}
+            />
+          ))}
+        </ProductsContainer>
+      )}
     </Section>
   );
 }

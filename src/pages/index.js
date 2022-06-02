@@ -65,24 +65,34 @@ export const getStaticProps = storeWrapper.getStaticProps(
       db.collection('specials').get(),
     ]);
 
-    const products = productsRef.docs.reduce((acc, curr) => {
-      const data = curr.data();
-      data.id = curr.id;
+    let specials, products;
 
-      const firstIng = data.ingredients[0];
-      data.ingredients[0] = firstIng[0].toUpperCase() + firstIng.slice(1);
+    if (productsRef.empty || specialsRef.empty) {
+      specials = {};
+      products = {};
 
-      acc[curr.id] = data;
+      store.dispatch(productsActions.setError('sth went wrong'));
+      store.dispatch(specialsActions.setError('sth went wrong'));
+    } else {
+      products = productsRef.docs.reduce((acc, curr) => {
+        const data = curr.data();
+        data.id = curr.id;
 
-      return acc;
-    }, {});
+        const firstIng = data.ingredients[0];
+        data.ingredients[0] = firstIng[0].toUpperCase() + firstIng.slice(1);
 
-    const specials = specialsRef.docs[0].data();
+        acc[curr.id] = data;
+
+        return acc;
+      }, {});
+
+      specials = specialsRef.docs[0].data();
+
+      store.dispatch(productsActions.setItems(products));
+      store.dispatch(specialsActions.setItems({ products, specials }));
+    }
 
     console.log('SERVER');
-
-    store.dispatch(productsActions.setItems(products));
-    store.dispatch(specialsActions.setItems({ products, specials }));
 
     return {
       props: {},

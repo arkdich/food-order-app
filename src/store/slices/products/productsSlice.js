@@ -14,7 +14,7 @@ const productsSlice = createSlice({
       console.log('AAAA BLYAT');
     },
     setError(state, action) {
-      // state.error =
+      state.error = { message: action.payload };
     },
     changeFilter(state, action) {
       state.filter = action.payload;

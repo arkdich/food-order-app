@@ -26,6 +26,9 @@ const specialsSlice = createSlice({
       state.items = items;
       state.info = specials;
     },
+    setError(state, action) {
+      state.error = { message: action.payload };
+    },
   },
 });
 
