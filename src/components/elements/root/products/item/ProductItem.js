@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 import {
   Body,
@@ -8,6 +7,8 @@ import {
   Ingredients,
 } from './ProductItem.styles';
 import ProductFooter from '../footer/ProductFooter';
+import Image from 'next/image';
+import placeholder from '@assets/icons/placeholder.txt';
 
 export default function ProductItem(props) {
   const { id, title, ingredients, price, img, isTablet, onClick } = props;
@@ -15,7 +16,14 @@ export default function ProductItem(props) {
   return (
     <ProductStyled onClick={onClick}>
       <Header>
-        <img src={img.classic} alt="Пицца" />
+        <Image
+          src={img.classic}
+          alt="Пицца"
+          width={270}
+          height={270}
+          placeholder="blur"
+          blurDataURL={placeholder}
+        />
       </Header>
       <Body>
         <Title>{title}</Title>

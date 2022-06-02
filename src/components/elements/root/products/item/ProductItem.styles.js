@@ -10,8 +10,7 @@ export const Header = styled.figure`
   flex: 0 0 auto;
 
   img {
-    width: 100%;
-    margin-left: 6.5%;
+    margin-left: 2.5% !important;
     transition: transform 200ms ease;
     cursor: pointer;
 
@@ -61,7 +60,7 @@ export const ProductStyled = styled.article`
       height: 135px;
 
       img {
-        margin-left: 0;
+        margin-left: 0 !important;
       }
     }
 

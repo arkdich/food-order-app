@@ -21,7 +21,6 @@ import { createPortal } from 'react-dom';
 import useDisableScroll from '@hooks/useDisableScroll';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import getURLSearch from '@utils/formatters/getURLSearch';
 
 export default function ProductPage() {
@@ -130,9 +129,6 @@ export default function ProductPage() {
     mounted &&
     createPortal(
       <Fragment>
-        <Head>
-          <title>Пицца {productParams.title}</title>
-        </Head>
         <Wrapper>
           <Overlay
             data-testid="product-overlay"

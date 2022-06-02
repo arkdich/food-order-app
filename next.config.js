@@ -17,6 +17,10 @@ const nextConfig = {
         use: ['@svgr/webpack'],
       },
       {
+        test: /\.txt$/,
+        loader: 'raw-loader',
+      },
+      {
         test: /\.test.js$/,
         loader: 'ignore-loader',
       }
