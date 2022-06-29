@@ -7,7 +7,9 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ['./jest.setup.js'],
   moduleNameMapper: {
+    '\\.(png|jpg|svg|gif|txt)$': '<rootDir>/__mocks__/assetsMock.js',
     '^@root/(.*)$': '<rootDir>/$1',
     '^@assets/(.*)$': '<rootDir>/src/assets/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',

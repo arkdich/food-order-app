@@ -3,10 +3,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: false,
-  // basePath: '/food-order-app',
-  // compiler: {
-  //   styledComponents: true,
-  // },
   images: {
     domains: ['dodopizza-a.akamaihd.net'],
   },
@@ -19,10 +15,6 @@ const nextConfig = {
       {
         test: /\.txt$/,
         loader: 'raw-loader',
-      },
-      {
-        test: /\.test.js$/,
-        loader: 'ignore-loader',
       }
     );
 

@@ -37,7 +37,6 @@
     "eslint-plugin-jest": "^24.7.0",
     "eslint-plugin-jest-dom": "^3.9.2",
     "eslint-plugin-react": "^7.29.4",
-    "ignore-loader": "^0.1.2",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "prettier": "^2.4.1",
