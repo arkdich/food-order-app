@@ -96,6 +96,7 @@ export const getStaticProps = storeWrapper.getStaticProps(
 
     return {
       props: {},
+      revalidate: 300,
     };
   }
 );

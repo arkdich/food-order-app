@@ -25,3 +25,4 @@ function createStore(preloadedState) {
 const storeWrapper = createWrapper(createStore);
 
 export default storeWrapper;
+export { createStore };

@@ -10,6 +10,7 @@ import {
 } from './CartEntry.styles';
 import EntryControls from '../controls/EntryControls';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function CartEntry(props) {
   const { id, type, size, price, img, title, count, last } = props;
@@ -33,7 +34,7 @@ export default function CartEntry(props) {
       transition={{ duration: 0.4 }}
     >
       <Left>
-        <img src={img} alt={`Пицца ${title}`} />
+        <Image src={img} alt={`Пицца ${title}`} width={120} height={120} />
       </Left>
       <Right>
         <Title>{title}</Title>

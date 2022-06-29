@@ -10,8 +10,6 @@ const productsSlice = createSlice({
   reducers: {
     setItems(state, action) {
       state.items = action.payload;
-
-      console.log('AAAA BLYAT');
     },
     setError(state, action) {
       state.error = { message: action.payload };

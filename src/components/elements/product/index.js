@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   AddButton,
@@ -33,8 +33,6 @@ export default function ProductPage() {
   const discounts = useSelector((state) => state.specials.items);
 
   const dispatch = useDispatch();
-
-  const [mounted, setMounted] = useState(false);
 
   const loaded = !!product;
 
@@ -121,67 +119,60 @@ export default function ProductPage() {
 
   useDisableScroll();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  return (
-    mounted &&
-    createPortal(
-      <Fragment>
-        <Wrapper>
-          <Overlay
-            data-testid="product-overlay"
-            onClick={overlayClickHandler}
-            as={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'linear' }}
-          />
-          <ProductPageStyled
-            as={motion.div}
-            initial={{
-              opacity: 0,
-              transform: 'translate(-50%,-50%) scale(0.5)',
-            }}
-            animate={{ opacity: 1, transform: 'translate(-50%,-50%) scale(1)' }}
-            exit={{ opacity: 0, transform: 'translate(-50%,-50%) scale(0.5)' }}
-            transition={{ duration: 0.2, ease: 'easeIn' }}
-          >
-            <ImgWrapper>{imgOutput}</ImgWrapper>
-            <InfoWrapper>
-              <Title loaded={loaded}>{product?.title}</Title>
-              <Info loaded={loaded}>{infoOutput}</Info>
-              <Ingredients loaded={loaded}>
-                {product?.ingredients.join(`, `)}
-              </Ingredients>
-              <SwitchComponent
-                labels={labels.type}
-                loaded={loaded}
-                clickHandler={changeTypeHandler}
-              />
-              <SwitchComponent
-                labels={labels.size}
-                offset={1}
-                loaded={loaded}
-                clickHandler={changeSizeHandler}
-              />
-              <AddButton
-                loaded={loaded}
-                disabled={!loaded}
-                onClick={addItemHandler}
-              >
-                {`Добавить за ${priceOutput} ₽`}
-              </AddButton>
-            </InfoWrapper>
-            <CloseBtn onClick={overlayClickHandler}>
-              <Close />
-            </CloseBtn>
-          </ProductPageStyled>
-        </Wrapper>
-      </Fragment>,
-      document.getElementById('modal')
-    )
+  return createPortal(
+    <Fragment>
+      <Wrapper>
+        <Overlay
+          data-testid="product-overlay"
+          onClick={overlayClickHandler}
+          as={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: 'linear' }}
+        />
+        <ProductPageStyled
+          as={motion.div}
+          initial={{
+            opacity: 0,
+            transform: 'translate(-50%,-50%) scale(0.5)',
+          }}
+          animate={{ opacity: 1, transform: 'translate(-50%,-50%) scale(1)' }}
+          exit={{ opacity: 0, transform: 'translate(-50%,-50%) scale(0.5)' }}
+          transition={{ duration: 0.2, ease: 'easeIn' }}
+        >
+          <ImgWrapper>{imgOutput}</ImgWrapper>
+          <InfoWrapper>
+            <Title loaded={loaded}>{product?.title}</Title>
+            <Info loaded={loaded}>{infoOutput}</Info>
+            <Ingredients loaded={loaded}>
+              {product?.ingredients.join(`, `)}
+            </Ingredients>
+            <SwitchComponent
+              labels={labels.type}
+              loaded={loaded}
+              clickHandler={changeTypeHandler}
+            />
+            <SwitchComponent
+              labels={labels.size}
+              offset={1}
+              loaded={loaded}
+              clickHandler={changeSizeHandler}
+            />
+            <AddButton
+              loaded={loaded}
+              disabled={!loaded}
+              onClick={addItemHandler}
+            >
+              {`Добавить за ${priceOutput} ₽`}
+            </AddButton>
+          </InfoWrapper>
+          <CloseBtn onClick={overlayClickHandler}>
+            <Close />
+          </CloseBtn>
+        </ProductPageStyled>
+      </Wrapper>
+    </Fragment>,
+    document.getElementById('modal')
   );
 }

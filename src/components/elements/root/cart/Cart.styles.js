@@ -12,6 +12,7 @@ export const CartStyled = styled.button`
   border-style: none;
   border-radius: 50%;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 
   &:active {
     transform: scale(0.95);
