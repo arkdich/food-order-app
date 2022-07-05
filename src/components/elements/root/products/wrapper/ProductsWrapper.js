@@ -38,12 +38,12 @@ export default function ProductsWrapper(props) {
               )
           ).map((product) => (
             <ProductItem
+              {...product}
               key={product.id}
               isTablet={isTablet}
               onClick={() =>
                 router.push(`/?id=${product.id}`, null, { shallow: true })
               }
-              {...product}
             />
           ))}
         </ProductsContainer>

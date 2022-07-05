@@ -1,46 +1,78 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-// import { getDocs } from '@firebase/firestore';
 import ProductsWrapper from './ProductsWrapper';
-import createStore from '@store/index';
-// import { BrowserRouter } from 'react-router-dom';
+import { createStore } from '@store/index';
+import { productsMock } from 'src/tests/variables';
 
 jest.mock('@hooks/useMatchMedia');
-// jest.mock('@store/firestore');
 
 describe('ProductWrapper component', () => {
-  test('renders loading spinner and item', async () => {
-    render(
-      // <BrowserRouter>
-      <Provider store={createStore()}>
-        <ProductsWrapper />
-      </Provider>
-      // <BrowserRouter>
-    );
-
-    const spinner = screen.getByText(/spinner/);
-
-    expect(spinner).toBeInTheDocument();
-
-    const title = await screen.findByText('Пепперони');
-
-    expect(title).toBeInTheDocument();
-    expect(spinner).not.toBeInTheDocument();
-  });
-
-  test('renders error', async () => {
-    getDocs.mockImplementationOnce(() => {
-      throw new Error('Test error');
+  test('renders filter', () => {
+    let store = createStore({
+      products: {
+        items: productsMock,
+        filter: 'cheese',
+      },
     });
 
     render(
-      <Provider store={createStore()}>
+      <Provider store={store}>
         <ProductsWrapper />
       </Provider>
     );
 
-    const error = await screen.findByText(/пошло не так/);
+    expect(screen.getByText(/Сырные/)).toBeInTheDocument();
 
-    expect(error).toBeInTheDocument();
+    cleanup();
+
+    store = createStore({
+      products: {
+        items: productsMock,
+        filter: 'veg',
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <ProductsWrapper />
+      </Provider>
+    );
+
+    expect(screen.getByText(/Овощные/)).toBeInTheDocument();
+  });
+
+  test('renders items', () => {
+    const store = createStore({
+      products: {
+        items: productsMock,
+        filter: 'all',
+        error: null,
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <ProductsWrapper />
+      </Provider>
+    );
+
+    expect(screen.getByText(/Пепперони/)).toBeInTheDocument();
+    expect(screen.getByText(/Мясная/)).toBeInTheDocument();
+  });
+
+  test('renders error', () => {
+    const store = createStore({
+      products: {
+        error: 'sth went wrong',
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <ProductsWrapper />
+      </Provider>
+    );
+
+    expect(screen.getByText(/пошло не так/)).toBeInTheDocument();
   });
 });

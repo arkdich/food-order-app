@@ -17,6 +17,7 @@ export default function ProductFooter(props) {
   ) : (
     `от ${price} ₽`
   );
+
   return (
     <Footer>
       {isTablet && (

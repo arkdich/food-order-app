@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -113,9 +112,8 @@ export default function ProductPage() {
     setProductParams((state) => ({ ...state, size }));
   };
 
-  const addItemHandler = () => {
+  const addItemHandler = () =>
     dispatch(cartActions.addItem({ ...productParams, price: priceOutput }));
-  };
 
   useDisableScroll();
 

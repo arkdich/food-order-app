@@ -1,65 +1,62 @@
-import createStore from '@store/index';
-// import { fetchProducts } from '@store/slices/products/productsSlice';
+import { createStore } from '@store/index';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-// import { Router } from 'react-router-dom';
 import ProductPage from '.';
-// import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
-import CartButton from '@layouts/navigation/cart/CartButton';
-
-jest.mock('@store/firestore');
+import CartButton from '@layouts/global/navigation/cart/CartButton';
+import { useRouter } from 'next/router';
+import { productsMock, specialsMock } from 'src/tests/variables';
 
 describe('ProductPage component', () => {
   let store;
 
-  beforeEach(async () => {
-    store = createStore();
-    // await store.dispatch(fetchProducts());
+  beforeEach(() => {
+    store = createStore({
+      products: {
+        items: productsMock,
+        filter: 'all',
+      },
+      specials: {
+        items: specialsMock,
+      },
+    });
 
     const modal = document.createElement('div');
     modal.id = 'modal';
-
     document.body.append(modal);
+
+    useRouter.mockImplementation(() => ({
+      asPath: '/?id=0tm7iWSKEY3971platI4',
+    }));
+  });
+
+  afterEach(() => {
+    document.getElementById('modal').remove();
   });
 
   test('renders product correctly', () => {
-    // const history = createMemoryHistory({
-    //   initialEntries: ['/product?id=0tm7iWSKEY3971platI4'],
-    //   initialIndex: 0,
-    // });
-
     render(
-      // <Router navigator={history} location={history.location}>
       <Provider store={store}>
         <ProductPage />
       </Provider>
-      // </Router>
     );
 
-    // expect(screen.getByRole('heading', { level: 4 }).innerHTML).toEqual(
-    //   '30 см, традиционное, 610 г'
-    // );
+    expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent(
+      '30 см, традиционное, 610 г'
+    );
 
-    // userEvent.click(screen.getByRole('button', { name: /Тонкое/ }));
+    userEvent.click(screen.getByRole('button', { name: /Тонкое/ }));
 
-    // expect(screen.getByRole('heading', { level: 4 }).innerHTML).toEqual(
-    //   '30 см, тонкое, 490 г'
-    // );
+    expect(screen.getByRole('heading', { level: 4 })).toHaveTextContent(
+      '30 см, тонкое, 490 г'
+    );
   });
 
   test("wrong combinations aren't allowed", () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/product?id=0tm7iWSKEY3971platI4'],
-      initialIndex: 0,
-    });
-
     render(
-      // <Router navigator={history} location={history.location}>
       <Provider store={store}>
         <ProductPage />
       </Provider>
-      // </Router>
     );
 
     const btnThin = screen.getByRole('button', { name: /Тонкое/ });
@@ -76,49 +73,20 @@ describe('ProductPage component', () => {
     expect(btnThin).toBeDisabled();
   });
 
-  test('overlay navigates back', async () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/product?id=0tm7iWSKEY3971platI4'],
-      initialIndex: 0,
-    });
-
+  test('adds product to cart', () => {
     render(
-      // <Router navigator={history} location={history.location}>
-      <Provider store={store}>
-        <ProductPage />
-      </Provider>
-      // </Router>
-    );
-
-    userEvent.click(screen.getByTestId('product-overlay'));
-
-    expect(history.location.pathname).toEqual('/');
-    expect(history.location.search).toEqual('?filter=all');
-  });
-
-  test('adds product to cart', async () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/product?id=0tm7iWSKEY3971platI4'],
-      initialIndex: 0,
-    });
-
-    render(
-      // <Router navigator={history} location={history.location}>
       <Provider store={store}>
         <CartButton />
         <ProductPage />
       </Provider>
-      // </Router>
     );
 
-    const btn = screen.getByRole('button', { name: /Добавить/ });
+    const addBtn = screen.getByRole('button', { name: /Добавить/ });
 
-    userEvent.click(btn);
-
+    userEvent.click(addBtn);
     userEvent.click(screen.getByRole('button', { name: /Большая/ }));
+    userEvent.click(addBtn);
 
-    userEvent.click(btn);
-
-    expect(screen.getByTestId('cart-item-count').innerHTML).toEqual('2');
+    expect(screen.getByTestId('cart-item-count')).toHaveTextContent('2');
   });
 });

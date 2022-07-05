@@ -42,7 +42,6 @@ export default function ProductItem(props) {
 ProductItem.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-  style: PropTypes.object,
   ingredients: PropTypes.array,
   price: PropTypes.object,
   img: PropTypes.object,
