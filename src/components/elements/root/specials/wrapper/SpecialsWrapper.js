@@ -36,14 +36,9 @@ export default function SpecialsWrapper() {
         overflow: 'hidden',
         paddingBottom: '10px',
       }}
+      data-testid="specials-cont"
     >
       <Title style={{ marginLeft: '0px' }}>{specialsInfo.title}</Title>
-      {media?.matches && (
-        <SpecialsControls
-          container={container.current}
-          itemsCount={Object.keys(specialsItems).length}
-        />
-      )}
       <SpecialsStyled as="section" ref={container} isTablet={!media?.matches}>
         {Object.values(productsItems)
           .filter((product) => specialsItems[product.id])
@@ -59,6 +54,12 @@ export default function SpecialsWrapper() {
             />
           ))}
       </SpecialsStyled>
+      {media?.matches && (
+        <SpecialsControls
+          container={container.current}
+          itemsCount={Object.keys(specialsItems).length}
+        />
+      )}
     </Section>
   );
 }

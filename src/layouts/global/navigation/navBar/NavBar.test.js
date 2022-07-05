@@ -1,121 +1,111 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter, Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import NavBar from './NavBar';
 import { Provider } from 'react-redux';
-import createStore from '@store/index';
-import { createMemoryHistory } from 'history';
-import ProductsWrapper from '@pages/index/products/wrapper/ProductsWrapper';
-import App from '@root/src/App';
+import { createStore } from '@store/index';
+import { useRouter } from 'next/router';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 
-jest.mock('@store/firestore');
 jest.mock('@hooks/useMatchMedia');
 
-beforeEach(() => {
-  const modal = document.createElement('div');
-  modal.id = 'modal';
-
-  document.body.append(modal);
-});
-
 describe('NavBar component', () => {
+  let store;
+
   beforeAll(() => {
     Element.prototype.scrollIntoView = () => {};
-    console.warn = () => {};
   });
 
-  test('appends default filter if none', () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/'],
-      initialIndex: 0,
+  beforeEach(() => {
+    store = createStore({
+      products: {
+        filter: 'all',
+      },
+    });
+
+    const modal = document.createElement('div');
+    modal.id = 'modal';
+    document.body.append(modal);
+  });
+
+  afterEach(() => {
+    document.getElementById('modal').remove();
+  });
+
+  test('redirects with no search', () => {
+    useRouter.mockImplementation(() => ({
+      asPath: '/',
+      replace: jest.fn(),
+    }));
+
+    Object.defineProperty(window, 'location', {
+      value: {
+        search: '',
+      },
+      configurable: true,
+      writable: true,
     });
 
     render(
-      <Router navigator={history} location={history.location}>
-        <Provider store={createStore()}>
-          <NavBar />
-        </Provider>
-      </Router>
-    );
-
-    expect(history.location.search).toEqual('?filter=all');
-  });
-
-  test('loads with existing filter', async () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/?filter=cheese'],
-      initialIndex: 0,
-    });
-
-    render(
-      <Router navigator={history} location={history.location}>
-        <Provider store={createStore()}>
-          <NavBar />
-          <ProductsWrapper />
-        </Provider>
-      </Router>
-    );
-
-    const cheese = await screen.findByText('Пепперони');
-    const meat = screen.queryByText('Мясная');
-
-    expect(cheese).toBeInTheDocument();
-    expect(meat).not.toBeInTheDocument();
-    expect(history.location.search).toEqual('?filter=cheese');
-  });
-
-  test('filter switching works', async () => {
-    render(
-      // <BrowserRouter>
-      <Provider store={createStore()}>
-        <App />
+      <Provider store={store}>
+        <NavBar />
       </Provider>
-      // <BrowserRouter>
     );
 
-    const meatLink = screen.getByRole('link', { name: 'Мясные' });
-    const cheeseLink = screen.getByRole('link', { name: 'Сырные' });
-
-    const cheese = await screen.findByRole('heading', {
-      level: 2,
-      name: 'Пепперони',
+    const { replace } = useRouter.mock.results.at(0).value;
+    expect(replace).toHaveBeenCalledWith('/?filter=all', null, {
+      shallow: true,
     });
-    const meat = screen.getByRole('heading', { level: 2, name: 'Мясная' });
-
-    expect(cheese).toBeInTheDocument();
-    expect(meat).toBeInTheDocument();
-
-    userEvent.click(meatLink);
-
-    expect(cheese).not.toBeInTheDocument();
-    expect(meat).toBeInTheDocument();
-
-    userEvent.click(cheeseLink);
-
-    expect(
-      screen.getByRole('heading', {
-        level: 2,
-        name: 'Пепперони',
-      })
-    ).toBeInTheDocument();
-    expect(meat).not.toBeInTheDocument();
   });
 
-  test('redirects on wrong link', async () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/nonexistingstuff'],
-      initialIndex: 0,
+  test('no redirect with another search', () => {
+    useRouter.mockImplementation(() => ({
+      asPath: '/?id=0tm7iWSKEY3971platI4',
+      replace: jest.fn(),
+    }));
+
+    Object.defineProperty(window, 'location', {
+      value: {
+        search: '?id=0tm7iWSKEY3971platI4',
+      },
+      configurable: true,
+      writable: true,
     });
 
     render(
-      <Router navigator={history} location={history.location}>
-        <Provider store={createStore()}>
-          <App />
-        </Provider>
-      </Router>
+      <Provider store={store}>
+        <NavBar />
+      </Provider>
     );
 
-    expect(history.location.pathname).toEqual('/');
-    expect(history.location.search).toEqual('?filter=all');
+    const { replace } = useRouter.mock.results.at(0).value;
+    expect(replace).toBeCalledTimes(0);
+  });
+
+  test('filter switching works', () => {
+    useRouter.mockImplementation(() => ({
+      asPath: '/?filter=meat',
+      push: jest.fn(),
+      prefetch: jest.fn(() => ({ catch: () => {} })),
+    }));
+
+    render(
+      <RouterContext.Provider value={useRouter()}>
+        <Provider store={store}>
+          <NavBar />
+        </Provider>
+      </RouterContext.Provider>
+    );
+
+    expect(screen.getByText('Мясные')).toHaveClass('active');
+
+    userEvent.click(screen.getByRole('link', { name: 'Сырные' }));
+
+    const { push } = useRouter.mock.results.at(0).value;
+
+    expect(push).toHaveBeenCalledWith('/?filter=cheese', '/?filter=cheese', {
+      shallow: true,
+      locale: undefined,
+      scroll: undefined,
+    });
   });
 });

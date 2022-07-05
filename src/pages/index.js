@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { productsActions } from '@store/slices/products/productsSlice';
 import { specialsActions } from '@store/slices/specials/specialsSlice';
 import Head from 'next/head';
@@ -9,7 +8,6 @@ import useIsTablet from '@hooks/useIsTablet';
 import { useRouter } from 'next/router';
 import CartPage from '@components/elements/cart';
 import ProductPage from '@components/elements/product';
-import getURLSearch from '@utils/formatters/getURLSearch';
 import { AnimatePresence } from 'framer-motion';
 import storeWrapper from '@store/index';
 
@@ -20,19 +18,6 @@ export default function IndexPage() {
 
   const router = useRouter();
   const isTablet = useIsTablet();
-  const dispatch = useDispatch();
-
-  const storedFilter = useSelector((state) => state.products.filter);
-
-  useEffect(() => {
-    const currentFilter = getURLSearch(router.asPath, 'filter');
-
-    if (location.search === '')
-      router.replace(`/?filter=${storedFilter}`, null, { shallow: true });
-    else if (!currentFilter) return;
-    else if (currentFilter === storedFilter) return;
-    else dispatch(productsActions.changeFilter(currentFilter));
-  }, [dispatch, storedFilter, router]);
 
   return (
     <IndexCtx.Provider value={{ isTablet }}>
@@ -68,9 +53,6 @@ export const getStaticProps = storeWrapper.getStaticProps(
     let specials, products;
 
     if (productsRef.empty || specialsRef.empty) {
-      specials = {};
-      products = {};
-
       store.dispatch(productsActions.setError('sth went wrong'));
       store.dispatch(specialsActions.setError('sth went wrong'));
     } else {

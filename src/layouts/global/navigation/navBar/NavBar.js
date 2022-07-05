@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Item, Menu, NavBarStyled, NavContainer } from './NavBar.styles';
 import NavLink from '../navLink/NavLink';
 import CartButton from '../cart/CartButton';
@@ -7,11 +7,15 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { IndexCtx } from '@pages/index';
 import getURLSearch from '@utils/formatters/getURLSearch';
+import { useDispatch, useSelector } from 'react-redux';
+import { productsActions } from '@store/slices/products/productsSlice';
 
 export default function NavBar() {
   const context = useContext(IndexCtx);
   const router = useRouter();
+  const dispatch = useDispatch();
 
+  const storedFilter = useSelector((state) => state.products.filter);
   const currentFilter = getURLSearch(router.asPath, 'filter');
 
   const labels = {
@@ -29,6 +33,14 @@ export default function NavBar() {
       block: 'nearest',
     });
   };
+
+  useEffect(() => {
+    if (location.search === '')
+      router.replace(`/?filter=${storedFilter}`, null, { shallow: true });
+    else if (!currentFilter) return;
+    else if (currentFilter === storedFilter) return;
+    else dispatch(productsActions.changeFilter(currentFilter));
+  }, [dispatch, storedFilter, router, currentFilter]);
 
   return (
     <NavBarStyled>

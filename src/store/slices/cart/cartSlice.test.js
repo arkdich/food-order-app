@@ -1,7 +1,5 @@
-import createStore from '@store/index';
+import { createStore } from '@store/index';
 import { cartActions } from './cartSlice';
-
-jest.mock('@store/firestore');
 
 describe('cartSlice', () => {
   let store;

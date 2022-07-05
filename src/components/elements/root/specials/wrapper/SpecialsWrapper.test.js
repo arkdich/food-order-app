@@ -1,60 +1,51 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import createStore from '@store/index';
-import HomeLayout from '@pages/index';
-// import { getDoc } from 'firebase/firestore';
-// import { BrowserRouter } from 'react-router-dom';
+import { createStore } from '@store/index';
+import { productsMock, specialsMock } from 'src/tests/variables';
+import SpecialsWrapper from './SpecialsWrapper';
 
 jest.mock('@hooks/useMatchMedia');
-// jest.mock('@store/firestore');
 
-beforeEach(() => {
-  const modal = document.createElement('div');
-  modal.id = 'modal';
-
-  document.body.append(modal);
-});
-
-describe('Specials component', () => {
-  test('renders loading anim and item', async () => {
-    render(
-      // <BrowserRouter>
-      <Provider store={createStore()}>
-        <HomeLayout />
-      </Provider>
-      // <BrowserRouter>
-    );
-
-    const title = screen.getByText('Особые предложения');
-    const lodingBadges = screen.getAllByTestId('loading-badge');
-
-    expect(title).toBeInTheDocument();
-    expect(lodingBadges).toHaveLength(5);
-
-    await waitFor(() => {
-      expect(title).toHaveTextContent(/^Сырный день!$/);
+describe('SpecialsWrapper component', () => {
+  test('renders items and title', () => {
+    const store = createStore({
+      products: {
+        items: productsMock,
+        filter: 'all',
+      },
+      specials: {
+        info: specialsMock,
+        items: {
+          '0tm7iWSKEY3971platI4': 12,
+        },
+      },
     });
 
-    const items = screen.getAllByText('Пепперони');
+    render(
+      <Provider store={store}>
+        <SpecialsWrapper />
+      </Provider>
+    );
 
-    expect(items).toHaveLength(2);
+    expect(screen.getByText(/Сырный день/)).toBeInTheDocument();
+    expect(screen.getByText(/Пепперони/)).toBeInTheDocument();
   });
 
-  test('hides on error', async () => {
-    getDoc.mockImplementation(() => {
-      throw new Error('Test error');
+  test('hides on error', () => {
+    const store = createStore({
+      specials: {
+        error: 'sth went wrong',
+      },
     });
 
     render(
-      // <BrowserRouter>
-      <Provider store={createStore()}>
-        <HomeLayout />
+      <Provider store={store}>
+        <SpecialsWrapper />
       </Provider>
-      // <BrowserRouter>
     );
 
-    const title = screen.getByText('Особые предложения');
-
-    await waitFor(() => expect(title).not.toBeInTheDocument());
+    expect(() => {
+      screen.getByTestId('specials-cont');
+    }).toThrow();
   });
 });

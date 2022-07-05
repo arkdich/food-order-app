@@ -1,9 +1,6 @@
-import createStore from '@store/index';
-import { getDoc } from '@firebase/firestore';
-import { fetchSpecials, specialsActions } from './specialsSlice';
-import { fetchProducts } from '../products/productsSlice';
-
-jest.mock('@store/firestore');
+import { createStore } from '@store/index';
+import { productsMock, specialsMock } from 'src/tests/variables';
+import { specialsActions } from './specialsSlice';
 
 describe('specialsSlice', () => {
   let store;
@@ -12,42 +9,13 @@ describe('specialsSlice', () => {
     store = createStore();
   });
 
-  describe('thunk', () => {
-    test('fetches items', async () => {
-      await store.dispatch(fetchSpecials());
-
-      const state = store.getState();
-
-      expect(state.specials.status).toEqual('success');
-      expect(state.specials.info).toEqual({
-        discounts: { category: 'pizzas', cheese: 12 },
-        title: 'Сырный день!',
-      });
-    });
-
-    test("doesn't crash on error", async () => {
-      getDoc.mockImplementationOnce(() => {
-        throw new Error('Test error');
-      });
-
-      await store.dispatch(fetchSpecials());
-
-      const state = store.getState();
-
-      expect(state.specials.status).toEqual('error');
-      expect(state.specials.error).toEqual('Test error');
-    });
-  });
-
   describe('reducer', () => {
-    test('sets items', async () => {
-      await Promise.all([
-        store.dispatch(fetchSpecials()),
-        store.dispatch(fetchProducts()),
-      ]);
-
-      await store.dispatch(
-        specialsActions.setSpecialsItems(store.getState().products.items)
+    test('sets items', () => {
+      store.dispatch(
+        specialsActions.setItems({
+          specials: specialsMock,
+          products: productsMock,
+        })
       );
 
       expect(store.getState().specials.items).toEqual({

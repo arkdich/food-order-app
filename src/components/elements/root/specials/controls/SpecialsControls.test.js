@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import SpecialsControls from './SpecialsControls';
 import userEvent from '@testing-library/user-event';
 
@@ -15,15 +15,22 @@ describe('SpecialsControls component', () => {
     );
   });
 
-  test('renders initial state', () => {
+  test('renders initial state correctly', () => {
     render(<SpecialsControls container={wrapper} itemsCount={5} />);
 
-    const btnLeft = screen.getByRole('button', {
-      name: '',
-      hidden: true,
-    });
+    let btns = screen.getAllByRole('button', { hidden: true });
 
-    expect(btnLeft).toHaveStyle('display: none');
+    expect(btns[0]).toHaveStyle('display: none'); // left btn
+    expect(btns[1]).toHaveStyle('display: block'); // right btn
+
+    cleanup();
+
+    render(<SpecialsControls container={wrapper} itemsCount={2} />);
+
+    btns = screen.getAllByRole('button', { hidden: true });
+
+    expect(btns[0]).toHaveStyle('display: none');
+    expect(btns[1]).toHaveStyle('display: none');
   });
 
   test('left btn click works', () => {
