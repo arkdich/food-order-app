@@ -1,10 +1,10 @@
+import Cart from '..';
 import { createStore } from '@store/index';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import Cart from '..';
 
-describe('Cart component', () => {
+describe('EntryControls component', () => {
   let store;
 
   beforeEach(() => {
@@ -19,17 +19,9 @@ describe('Cart component', () => {
             price: 250,
             count: 1,
           },
-          {
-            id: '2',
-            type: 'thin',
-            size: 'normal',
-            title: 'Мясная',
-            price: 300,
-            count: 2,
-          },
         ],
-        count: 3,
-        cost: 850,
+        count: 1,
+        cost: 250,
       },
     });
 
@@ -42,20 +34,26 @@ describe('Cart component', () => {
     document.getElementById('modal').remove();
   });
 
-  test('cart gets empty', async () => {
+  test('controls works', async () => {
     render(
       <Provider store={store}>
         <Cart />
       </Provider>
     );
 
-    expect(screen.getByText('3 товара')).toBeInTheDocument();
+    const addBtn = screen.getByRole('button', { name: 'Add item' });
+    const removeBtn = screen.getByRole('button', {
+      name: 'Remove item',
+    });
+    const count = screen.getByTestId('cart-items-count');
 
-    userEvent.click(screen.getByRole('button', { name: 'Заказать' }));
+    userEvent.click(addBtn);
 
-    await waitFor(
-      () => expect(screen.getByText('0 товаров')).toBeInTheDocument(),
-      { timeout: 4000 }
-    );
+    expect(count).toHaveTextContent(2);
+
+    userEvent.click(removeBtn);
+    userEvent.click(removeBtn);
+
+    await waitFor(() => expect(count).not.toBeInTheDocument());
   });
 });

@@ -1,11 +1,7 @@
-import createStore from '@store/index';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { createStore } from '@store/index';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-// import { BrowserRouter } from 'react-router-dom';
 import Cart from '..';
-
-jest.mock('@store/firestore');
 
 describe('CartEntry component', () => {
   let store;
@@ -38,17 +34,18 @@ describe('CartEntry component', () => {
 
     const modal = document.createElement('div');
     modal.id = 'modal';
-
     document.body.append(modal);
+  });
+
+  afterEach(() => {
+    document.getElementById('modal').remove();
   });
 
   test('renders correctly', () => {
     render(
-      // <BrowserRouter>
       <Provider store={store}>
         <Cart />
       </Provider>
-      // <BrowserRouter>
     );
 
     expect(screen.getByText('Пепперони')).toBeInTheDocument();
@@ -59,26 +56,5 @@ describe('CartEntry component', () => {
 
     expect(screen.getByText(/300/)).toBeInTheDocument();
     expect(screen.getByText(/250/)).toBeInTheDocument();
-  });
-
-  test('controls works', async () => {
-    render(
-      // <BrowserRouter>
-      <Provider store={store}>
-        <Cart />
-      </Provider>
-      // <BrowserRouter>
-    );
-
-    const addBtn = screen.getAllByRole('button', { name: 'Add item' })[0];
-    const removeBtn = screen.getAllByRole('button', { name: 'Remove item' })[0];
-    const count = screen.getAllByTestId('cart-items-count')[0];
-
-    userEvent.click(addBtn);
-    expect(count).toHaveTextContent(2);
-
-    userEvent.click(removeBtn);
-    userEvent.click(removeBtn);
-    await waitFor(() => expect(count).not.toBeInTheDocument());
   });
 });

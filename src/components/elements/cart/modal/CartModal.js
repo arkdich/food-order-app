@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Overlay } from '@assets/styles/Overlay.style';
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

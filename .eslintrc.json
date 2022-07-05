@@ -20,7 +20,8 @@
   },
   "rules": {
     "no-unused-vars": "warn",
-    "no-undef": "error"
+    "no-undef": "error",
+    "@next/next/no-img-element": "off"
   },
   "settings": {
     "react": {

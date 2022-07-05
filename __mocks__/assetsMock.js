@@ -1,5 +1,6 @@
-const Stub = 'div';
-const ReactComponent = 'div';
+const Stub = () => <div className="STATIC ASSET MOCK" />;
+
+const ReactComponent = () => <div className="STATIC ASSET MOCK" />;
 
 export default Stub;
 export { ReactComponent };

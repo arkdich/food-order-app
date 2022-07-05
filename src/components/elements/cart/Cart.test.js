@@ -1,15 +1,24 @@
-import createStore from '@store/index';
+import { createStore } from '@store/index';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-// import { BrowserRouter } from 'react-router-dom';
 import Cart from '.';
-
-jest.mock('@store/firestore');
 
 describe('Cart component', () => {
   let store;
 
   beforeEach(() => {
+    store = createStore();
+
+    const modal = document.createElement('div');
+    modal.id = 'modal';
+    document.body.append(modal);
+  });
+
+  afterEach(() => {
+    document.getElementById('modal').remove();
+  });
+
+  test('renders summary', () => {
     store = createStore({
       cart: {
         items: [
@@ -35,52 +44,24 @@ describe('Cart component', () => {
       },
     });
 
-    const modal = document.createElement('div');
-    modal.id = 'modal';
-
-    document.body.append(modal);
-  });
-
-  test('renders empty cart', () => {
-    store = createStore();
-
     render(
-      // <BrowserRouter>
       <Provider store={store}>
         <Cart />
       </Provider>
-      // </BrowserRouter>
-    );
-
-    expect(screen.getByText(/корзина пуста/)).toBeInTheDocument();
-  });
-
-  test('renders summary', async () => {
-    render(
-      // <BrowserRouter>
-      <Provider store={store}>
-        <Cart />
-      </Provider>
-      // </BrowserRouter>
     );
 
     expect(screen.getByText(/3 товара/)).toBeInTheDocument();
     expect(screen.getByText(/850/)).toBeInTheDocument();
   });
 
-  test('order btn disabled if empty', async () => {
-    store = createStore();
-
+  test('renders empty cart', () => {
     render(
-      // <BrowserRouter>
       <Provider store={store}>
         <Cart />
       </Provider>
-      // </BrowserRouter>
     );
 
-    expect(
-      screen.getByRole('button', { name: new RegExp('Заказать') })
-    ).toBeDisabled();
+    expect(screen.getByText(/корзина пуста/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Заказать' })).toBeDisabled();
   });
 });

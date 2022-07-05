@@ -5,10 +5,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 export default function Cart() {
-  const items = useSelector((state) => state.cart.items);
   const router = useRouter();
-
-  const count = Object.values(items).reduce((acc, curr) => acc + curr.count, 0);
+  const count = useSelector((state) => state.cart.count);
 
   const btnClickHandler = () =>
     router.push('/?cart=shown', null, { shallow: true });
