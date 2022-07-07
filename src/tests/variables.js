@@ -6,8 +6,8 @@ export const productsRef = {
         return {
           title: 'Пепперони',
           img: {
-            thin: '',
-            classic: '',
+            thin: '/stub',
+            classic: '/stub',
           },
           categories: ['spicy', 'cheese'],
           ingredients: [
@@ -23,42 +23,20 @@ export const productsRef = {
         };
       },
     },
-    {
-      id: '7gO5GkpRIXmbS6SLiZjs',
-      data() {
-        return {
-          ingredients: [
-            'Цыпленок',
-            'ветчина',
-            'пикантная пепперони',
-            'острая чоризо',
-            'моцарелла',
-            'томатный соус',
-          ],
-          img: {
-            thin: '',
-            classic: '',
-          },
-          title: 'Мясная',
-          price: { normal: 699, large: 899, small: 575 },
-          categories: ['meat', 'spicy'],
-          style: {
-            classic: { normal: 645, large: 860, small: 450 },
-            thin: { large: 740, normal: 520 },
-          },
-        };
-      },
-    },
   ],
 };
 
 export const specialsRef = {
-  data() {
-    return {
-      discounts: { category: 'pizzas', cheese: 12 },
-      title: 'Сырный день!',
-    };
-  },
+  docs: [
+    {
+      data() {
+        return {
+          discounts: { category: 'pizzas', cheese: 12 },
+          title: 'Сырный день!',
+        };
+      },
+    },
+  ],
 };
 
 export const productsMock = {
