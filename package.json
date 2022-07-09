@@ -2,7 +2,6 @@
   "name": "food-order-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://arkdich.github.io/food-order-app/",
   "repository": {
     "type": "git",
     "url": "git@github.com:arkdich/food-order-app.git"

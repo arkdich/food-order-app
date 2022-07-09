@@ -14,8 +14,6 @@ import storeWrapper from '@store/index';
 export const IndexCtx = React.createContext({ isTablet: false });
 
 export default function IndexPage() {
-  console.log('HOME');
-
   const router = useRouter();
   const isTablet = useIsTablet();
 
@@ -26,8 +24,11 @@ export default function IndexPage() {
       </Head>
       <GlobalLayout />
       <RootPage />
-      <AnimatePresence>{router.query.id && <ProductPage />}</AnimatePresence>
-      <AnimatePresence>{router.query.cart && <CartPage />}</AnimatePresence>
+      <AnimatePresence>
+        {router.query.id && <ProductPage />}
+
+        {router.query.cart && <CartPage />}
+      </AnimatePresence>
     </IndexCtx.Provider>
   );
 }
@@ -74,10 +75,7 @@ export const getStaticProps = storeWrapper.getStaticProps(
       store.dispatch(specialsActions.setItems({ products, specials }));
     }
 
-    console.log('SERVER');
-
     return {
-      props: {},
       revalidate: 300,
     };
   }

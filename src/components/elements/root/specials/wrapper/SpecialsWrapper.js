@@ -26,8 +26,6 @@ export default function SpecialsWrapper() {
 
   if (specialsError) return null;
 
-  console.log('SPECIALS');
-
   return (
     <Section
       as="aside"

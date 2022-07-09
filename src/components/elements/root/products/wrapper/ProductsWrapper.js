@@ -22,8 +22,6 @@ export default function ProductsWrapper(props) {
     veg: 'Овощные',
   };
 
-  console.log('PRODUCTS');
-
   return (
     <Section as="main">
       <Title>{labels[filter]} пиццы</Title>

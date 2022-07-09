@@ -33,7 +33,7 @@ export default function ProductPage() {
 
   const dispatch = useDispatch();
 
-  const loaded = !!product;
+  const loaded = !!id;
 
   const [productParams, setProductParams] = useState({
     id,
