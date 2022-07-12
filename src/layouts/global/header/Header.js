@@ -4,13 +4,13 @@ import {
   LogoStyled,
   Phone,
 } from './Header.styles';
-import Logo from '@assets/icons/logo.svg';
+import Logo from '@assets/icons/logo.png';
 
 export default function Header() {
   return (
     <HeaderStyled>
       <HeaderContainer maxWidth="1400px">
-        <LogoStyled as={Logo} />
+        <LogoStyled src={Logo.src} alt="Логотип" />
         <Phone>+7 800 555 3535</Phone>
       </HeaderContainer>
     </HeaderStyled>

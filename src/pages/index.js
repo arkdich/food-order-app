@@ -6,10 +6,12 @@ import RootPage from '@components/elements/root';
 import GlobalLayout from '@layouts/global';
 import useIsTablet from '@hooks/useIsTablet';
 import { useRouter } from 'next/router';
-import CartPage from '@components/elements/cart';
-import ProductPage from '@components/elements/product';
 import { AnimatePresence } from 'framer-motion';
 import storeWrapper from '@store/index';
+import dynamic from 'next/dynamic';
+
+const ProductPage = dynamic(() => import('@components/elements/product'));
+const CartPage = dynamic(() => import('@components/elements/cart'));
 
 export const IndexCtx = React.createContext({ isTablet: false });
 
@@ -26,7 +28,6 @@ export default function IndexPage() {
       <RootPage />
       <AnimatePresence>
         {router.query.id && <ProductPage />}
-
         {router.query.cart && <CartPage />}
       </AnimatePresence>
     </IndexCtx.Provider>

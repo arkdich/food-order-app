@@ -20,11 +20,11 @@ export const HeaderContainer = styled(Container)`
   align-items: center;
 `;
 
-export const LogoStyled = styled.svg`
-  flex: 0 1 240px;
+export const LogoStyled = styled.img`
+  width: 240px;
 
   @media only screen and (max-width: ${breakpoints.phone}) {
-    flex-basis: 220px;
+    width: 210px;
   }
 `;
 
