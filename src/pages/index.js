@@ -37,11 +37,10 @@ export default function IndexPage() {
 export const getStaticProps = storeWrapper.getStaticProps(
   (store) => async () => {
     const admin = require('firebase-admin');
-    const serviceAccount = require('../../firebaseAdminSDK.json');
 
     if (admin.apps.length === 0) {
       admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
+        credential: admin.credential.cert(JSON.parse(process.env.DB_SECRET)),
       });
     }
 
