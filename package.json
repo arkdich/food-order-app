@@ -8,7 +8,7 @@
     "url": "git@github.com:arkdich/food-order-app.git"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
