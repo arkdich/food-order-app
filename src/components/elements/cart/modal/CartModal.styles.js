@@ -12,11 +12,12 @@ export const CartModalStyled = styled.div`
   background-color: #fff;
   border-radius: 30px;
   text-align: center;
+  overflow: hidden;
 
   img {
     display: block;
     width: 130px;
-    margin: 12px auto 0px auto;
+    margin: auto;
   }
 
   @media only screen and (max-width: 510px) {

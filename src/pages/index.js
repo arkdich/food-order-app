@@ -38,9 +38,12 @@ export const getStaticProps = storeWrapper.getStaticProps(
   (store) => async () => {
     const admin = require('firebase-admin');
 
+    const secret = JSON.parse(process.env.DB_SECRET);
+    secret.private_key = process.env.PRIVATE_KEY;
+
     if (admin.apps.length === 0) {
       admin.initializeApp({
-        credential: admin.credential.cert(JSON.parse(process.env.DB_SECRET)),
+        credential: admin.credential.cert(secret),
       });
     }
 
