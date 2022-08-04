@@ -1,10 +1,15 @@
+### [Read in English](/README.en.md)
 # About
 
-Next.js version of this app. The subtle differences are absence of some loading animations due to server-side data fetching (SSG) and lazy loading of modal components
+В этой ветке находится `Next.js` версия проекта. Отличия заключаются в:
+
+- отсутствии большинства загрузочных анимаций из-за того что запрос в БД осуществляется на сервере, используя SSG, и на клиент приходит готовая разметка с данными
+- ленивой загрузке модальных компонентов
+- показатели Core Web Vitals в 2 раза лучше на десктопе и в 2.5 раза в мобильной версии
 
 # Installation
 
-Project uses admin SDK to connect to the database and requires credentials, if you need them then contact me lmao (i know nobody ever needs this). When you got credentials clone this repo, switch branch and install dependencies. 
+Проект использует node.js admin SDK для запроса в БД и требует ключи доступа. Свяжитесь со мной если они вам понадобятся (ну а вдруг). Когда они будут у вас склонируйте репозиторий, смените ветку на `next` и установите зависимости
 
 ```
 git clone git@github.com:arkdich/food-order-app.git
@@ -15,7 +20,7 @@ git checkout next
 ```
 npm i
 ```
-Create `.env.local` file in the root of the project and put credentials in then start dev server
+Создайте файл `.env.local` в корне проекта и поместите в него ключи. Запустите dev сервер
 
 ```
 npm run dev
