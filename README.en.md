@@ -4,6 +4,7 @@
 
 Next.js version of this app. The subtle differences are absence of some loading animations due to server-side data fetching (SSG) and lazy loading of modal components
 
+## [Live Demo](https://food-order-app-arkdich.vercel.app/?filter=all)
 # Installation
 
 Project uses admin SDK to connect to the database and requires credentials, if you need them then contact me lmao (i know nobody ever needs this). When you got credentials clone this repo, switch branch and install dependencies. 
